@@ -1,6 +1,6 @@
 using System;
 
-namespace SiacWeb.Models
+namespace SiacWeb.Models.ViewModels
 {
     public class ErrorViewModel
     {
