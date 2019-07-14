@@ -19,7 +19,7 @@
                     <form class="navbar-form navbar-right" role="search">
 
                         <div class="form-group">
-                            <input type="text" class="form-group-sm" placeholder="Informe sua pesquisa" style="font-style:italic">
+                            <input type="text" class="form-group-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
                         </div>
                         <button type="submit" class="btn btn-success btn-xs">Consultar</button>
                     </form>
@@ -40,6 +40,9 @@
     <thead>
         <tr class="active">
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th></th>
@@ -49,6 +52,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
@@ -64,3 +70,13 @@
         }
     </tbody>
 </table>
+
+<!--
+<ul class="pagination">
+    <li class="disabled"><a href="#">Anterior</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">Próximo</a></li>
+</ul>
+-->
