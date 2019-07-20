@@ -1,14 +1,15 @@
-﻿@model IEnumerable<SiacWeb.Models.Perfil>
+﻿@model IEnumerable<SiacWeb.Models.Empresa>
 
 @{
-    ViewData["Title"] = "Perfil de Usuário";
+    ViewData["Title"] = "Empresas";
 }
 <br />
+
 <table class="table table-condensed table-condensed">
     <tr>
         <td>
             <div class="text-success">
-                <h4>Perfil de usuário</h4>
+                <h4>@ViewData["Title"]</h4>
             </div>
         </td>
 
@@ -30,7 +31,7 @@
 
         <td>
             <div class="navbar-form navbar-right">
-                <a asp-action="Create" class="btn btn-info btn-xs">Novo Perfil de Usuário</a>
+                <a asp-action="Create" class="btn btn-info btn-xs">Nova Empresa</a>
             </div>
         </td>
     </tr>

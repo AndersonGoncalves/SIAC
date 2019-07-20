@@ -9,7 +9,7 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190711020421_Start")]
+    [Migration("20190720172906_Start")]
     partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,17 +20,34 @@ namespace SiacWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SiacWeb.Models.Perfil", b =>
+            modelBuilder.Entity("SiacWeb.Models.Empresa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Descricao");
+                    b.Property<string>("CnpjBase")
+                        .IsRequired()
+                        .HasMaxLength(8);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("NomeFantasia")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Site")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Perfil");
+                    b.ToTable("Empresa");
                 });
 #pragma warning restore 612, 618
         }

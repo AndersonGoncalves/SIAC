@@ -47,7 +47,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Venda</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a></li>
                             <li class="divider"></li>
                             <li><a asp-area="" asp-controller="PedidoVenda" asp-action="Index">Pedido de Venda</a></li>
                             <li><a asp-area="" asp-controller="CotacaoVenda" asp-action="Index">Cotação de Venda</a></li>
@@ -87,17 +87,20 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerência</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="" asp-controller="Perfils" asp-action="Index">Perfil de Usuário</a></li>
+                            <li><a asp-area="" asp-controller="Empresas" asp-action="Index">Empresa</a></li>
+                            <li><a asp-area="" asp-controller="CentrosDeCustos" asp-action="Index">Centro de Custo</a></li>
                             <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
-                            <li><a asp-area="" asp-controller="Funcionarios" asp-action="Index">Funcionários</a></li>
+                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuário</a></li>
+                            <li><a asp-area="" asp-controller="Funcionarios" asp-action="Index">Funcionário</a></li>
+                            <li class="divider"></li>
+                            <li><a asp-area="" asp-controller="Configuracao" asp-action="Index">Configuração</a></li>
                         </ul>
                     </li>
 
                     <!--Menu Ajuda-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ajuda</a>
-                        <ul class="dropdown-menu" role="">
+                        <ul class="dropdown-menu" role="">                            
                             <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
                             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
                             <li class="divider"></li>

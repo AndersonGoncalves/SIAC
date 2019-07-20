@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Data;
+using SiacWeb.Services;
 
 namespace SiacWeb
 {
@@ -40,8 +41,9 @@ namespace SiacWeb
             services.AddDbContext<SiacWebContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SiacWebContext")));
 
-            //Registrando o serviços no sistema de injeção de dependência da aplicação
+            //Registrando os serviços no sistema de injeção de dependência da aplicação
             services.AddScoped<SeedingService>();
+            services.AddScoped<EmpresaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

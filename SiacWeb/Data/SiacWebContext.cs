@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SiacWeb.Models;
 
 namespace SiacWeb.Models
 {
@@ -13,6 +14,6 @@ namespace SiacWeb.Models
         {
         }
 
-        public DbSet<SiacWeb.Models.Perfil> Perfil { get; set; }
+        public DbSet<SiacWeb.Models.Empresa> Empresa { get; set; }
     }
 }
