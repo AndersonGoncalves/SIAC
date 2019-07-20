@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SiacWeb</a>
+                <!--<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SiacWeb</a>-->
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -100,6 +100,8 @@
                         <ul class="dropdown-menu" role="">
                             <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
                             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
+                            <li class="divider"></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                         </ul>
                     </li>
 
@@ -111,10 +113,9 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
-        @RenderBody()
-        <hr />
+        @RenderBody()        
         <footer>
-            <p>&copy; 2019 - SiacWeb</p>
+            <!--<p>&copy; 2019 - Siac</p>-->
         </footer>
     </div>
 
