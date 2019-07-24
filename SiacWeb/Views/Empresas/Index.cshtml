@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Empresas";
 }
-<br />
 
+
+
+<br />
 <table class="table table-condensed table-condensed">
     <tr>
         <td>
@@ -32,6 +34,7 @@
         <td>
             <div class="navbar-form navbar-right">
                 <a asp-action="Create" class="btn btn-info btn-xs">Nova Empresa</a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-xs">Sair</a>
             </div>
         </td>
     </tr>

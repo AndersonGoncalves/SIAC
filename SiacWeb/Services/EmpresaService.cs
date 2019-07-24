@@ -18,5 +18,10 @@ namespace SiacWeb.Services
         {
             return _context.Empresa.ToList();
         }
+        public void Insert(Empresa obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
