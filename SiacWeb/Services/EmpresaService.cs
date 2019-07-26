@@ -23,5 +23,15 @@ namespace SiacWeb.Services
             _context.Add(obj);
             _context.SaveChanges();
         }
+        public Empresa FindById(int id)
+        {
+            return _context.Empresa.FirstOrDefault(obj => obj.Id == id);
+        }
+        public void Remove(int id)
+        {
+            var obj = _context.Empresa.Find(id);
+            _context.Empresa.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }
