@@ -7,40 +7,48 @@
 <h2>@ViewData["Title"]</h2>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label" for="inputSmall"></label>
-                <input asp-for="Descricao" class="form-control input-sm" id="inputSmall" />
+<form asp-action="Create" class="form-horizontal">
+    <fieldset>
+        <div class="form-group">
+            <label asp-for="Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="Descricao" class="form-control input-sm" id="inputSmall" placeholder="Descrição" />
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="NomeFantasia" class="control-label" for="inputSmall"></label>
-                <input asp-for="NomeFantasia" class="form-control input-sm" id="inputSmall" />
+        <div class="form-group">
+            <label asp-for="NomeFantasia" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="NomeFantasia" class="form-control input-sm" id="inputSmall" placeholder="Nome Fantasia" />
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="RazaoSocial" class="control-label" for="inputSmall"></label>
-                <input asp-for="RazaoSocial" class="form-control input-sm" id="inputSmall" />
+        <div class="form-group">
+            <label asp-for="RazaoSocial" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="RazaoSocial" class="form-control input-sm" id="inputSmall" placeholder="Razão Social" />
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="CnpjBase" class="control-label" for="inputSmall"></label>
-                <input asp-for="CnpjBase" class="form-control input-sm" id="inputSmall" />
+        <div class="form-group">
+            <label asp-for="CnpjBase" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="CnpjBase" class="form-control input-sm" id="inputSmall" placeholder="CNPJ Base" />
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Site" class="control-label" for="inputSmall"></label>
-                <input asp-for="Site" class="form-control input-sm" id="inputSmall" />
+        <div class="form-group">
+            <label asp-for="Site" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="Site" class="form-control input-sm" id="inputSmall" placeholder="Site" />
             </div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
                 <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">                
+                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
             </div>
-
-        </form>
-    </div>
-</div>
+        </div>
+    </fieldset>
+</form>
