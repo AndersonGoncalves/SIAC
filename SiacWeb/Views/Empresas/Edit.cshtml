@@ -7,8 +7,9 @@
 <h2>@ViewData["Title"]</h2>
 
 <hr />
-<form asp-action="Create" class="form-horizontal">
+<form asp-action="Edit" class="form-horizontal">
     <fieldset>
+        <input type="hidden" asp-for="Empresa.Id"/>
         <div class="form-group">
             <label asp-for="Empresa.Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">

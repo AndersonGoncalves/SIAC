@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Services;
 using SiacWeb.Models;
+using SiacWeb.Models.ViewModels;
+using SiacWeb.Services.Exceptions;
 
 namespace SiacWeb.Controllers
 {
@@ -23,7 +25,8 @@ namespace SiacWeb.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new EmpresaFormViewModel();
+            return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -35,14 +38,12 @@ namespace SiacWeb.Controllers
         public IActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+
             var obj = _empresaService.FindById(id.Value);
             if (obj == null)
-            {
                 return NotFound();
-            }
+
             return View(obj);
         }
         [HttpPost]
@@ -55,6 +56,17 @@ namespace SiacWeb.Controllers
         public IActionResult Details(int? id)
         {
             if (id == null)
+                return NotFound();
+
+            var obj = _empresaService.FindById(id.Value);
+            if (obj == null)
+                return NotFound();
+
+            return View(obj);
+        }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
             {
                 return NotFound();
             }
@@ -63,7 +75,31 @@ namespace SiacWeb.Controllers
             {
                 return NotFound();
             }
-            return View(obj);
+
+            EmpresaFormViewModel viewModel = new EmpresaFormViewModel { Empresa = obj };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Empresa empresa)
+        {
+            if (id != empresa.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _empresaService.Update(empresa);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
