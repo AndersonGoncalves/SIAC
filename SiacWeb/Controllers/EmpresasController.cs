@@ -7,6 +7,8 @@ using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
+using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace SiacWeb.Controllers
 {
@@ -18,16 +20,19 @@ namespace SiacWeb.Controllers
         {
             _empresaService = empresaService;
         }
+
         public IActionResult Index()
         {
             var List = _empresaService.FindAll();
             return View(List);
         }
+
         public IActionResult Create()
         {
             var viewModel = new EmpresaFormViewModel();
             return View(viewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Empresa empresa)
@@ -35,17 +40,19 @@ namespace SiacWeb.Controllers
             _empresaService.Insert(empresa);
             return RedirectToAction(nameof(Index));
         }
+
         public IActionResult Delete(int? id)
         {
             if (id == null)
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não informado!"});
 
             var obj = _empresaService.FindById(id.Value);
             if (obj == null)
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
             return View(obj);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -53,32 +60,35 @@ namespace SiacWeb.Controllers
             _empresaService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+
         public IActionResult Details(int? id)
         {
             if (id == null)
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
             var obj = _empresaService.FindById(id.Value);
             if (obj == null)
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
             return View(obj);
         }
+
         public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
             var obj = _empresaService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             EmpresaFormViewModel viewModel = new EmpresaFormViewModel { Empresa = obj };
             return View(viewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Empresa empresa)
@@ -92,14 +102,20 @@ namespace SiacWeb.Controllers
                 _empresaService.Update(empresa);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

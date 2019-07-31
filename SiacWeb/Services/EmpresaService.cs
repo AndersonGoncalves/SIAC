@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Services.Exceptions;
@@ -16,25 +14,30 @@ namespace SiacWeb.Services
         {
             _context = context;
         }
+
         public List<Empresa> FindAll()
         {
             return _context.Empresa.ToList();
         }
+
+        public Empresa FindById(int id)
+        {
+            return _context.Empresa.FirstOrDefault(obj => obj.Id == id);
+        }
+
         public void Insert(Empresa obj)
         {
             _context.Add(obj);
             _context.SaveChanges();
         }
-        public Empresa FindById(int id)
-        {
-            return _context.Empresa.FirstOrDefault(obj => obj.Id == id);
-        }
+
         public void Remove(int id)
         {
             var obj = _context.Empresa.Find(id);
             _context.Empresa.Remove(obj);
             _context.SaveChanges();
         }
+
         public void Update(Empresa obj)
         {
             if (!_context.Empresa.Any(x => x.Id == obj.Id))
