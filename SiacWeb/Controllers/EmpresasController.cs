@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
-using SiacWeb.Services.Exceptions;
 using System.Diagnostics;
-using System.Data.SqlClient;
 
 namespace SiacWeb.Controllers
 {
@@ -44,13 +39,14 @@ namespace SiacWeb.Controllers
         public IActionResult Delete(int? id)
         {
             if (id == null)
-                return RedirectToAction(nameof(Error), new { message = "Id não informado!"});
+                return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
             var obj = _empresaService.FindById(id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            return View(obj);
+            EmpresaFormViewModel viewModel = new EmpresaFormViewModel { Empresa = obj };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -70,7 +66,8 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            return View(obj);
+            EmpresaFormViewModel viewModel = new EmpresaFormViewModel { Empresa = obj };
+            return View(viewModel);
         }
 
         public IActionResult Edit(int? id)

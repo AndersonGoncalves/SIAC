@@ -1,4 +1,4 @@
-﻿@model SiacWeb.Models.Empresa
+﻿@model SiacWeb.Models.ViewModels.EmpresaFormViewModel
 
 @{
     ViewData["Title"] = "Empresa";
@@ -12,36 +12,43 @@
     <div class="col-md-4">
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Descricao):
+                @Html.DisplayNameFor(model => model.Empresa.Descricao):
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Descricao)
+                @Html.DisplayFor(model => model.Empresa.Descricao)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.NomeFantasia):
+                @Html.DisplayNameFor(model => model.Empresa.NomeFantasia):
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.NomeFantasia)
+                @Html.DisplayFor(model => model.Empresa.NomeFantasia)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.RazaoSocial):
+                @Html.DisplayNameFor(model => model.Empresa.RazaoSocial):
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.RazaoSocial)
+                @Html.DisplayFor(model => model.Empresa.RazaoSocial)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Site):
+                @Html.DisplayNameFor(model => model.Empresa.CnpjBase):
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Site)
+                @Html.DisplayFor(model => model.Empresa.CnpjBase)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Empresa.Site):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Empresa.Site)
             </dd>
         </dl>
 
         <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Empresa.Id" />
             <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
             <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
         </form>
