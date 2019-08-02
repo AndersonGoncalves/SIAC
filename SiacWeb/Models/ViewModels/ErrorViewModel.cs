@@ -1,5 +1,3 @@
-using System;
-
 namespace SiacWeb.Models.ViewModels
 {
     public class ErrorViewModel

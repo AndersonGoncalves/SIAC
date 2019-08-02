@@ -32,6 +32,11 @@ namespace SiacWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Empresa empresa)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new EmpresaFormViewModel();
+                return View(viewModel);
+            }
             _empresaService.Insert(empresa);
             return RedirectToAction(nameof(Index));
         }
@@ -90,6 +95,11 @@ namespace SiacWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Empresa empresa)
         {
+            if (!ModelState.IsValid)
+            {
+                EmpresaFormViewModel viewModel = new EmpresaFormViewModel { Empresa = empresa };
+                View(viewModel);
+            }
             if (id != empresa.Id)
             {
                 return BadRequest();

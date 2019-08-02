@@ -9,11 +9,12 @@
 <hr />
 <form asp-action="Edit" class="form-horizontal">
     <fieldset>
-        <input type="hidden" asp-for="Empresa.Id"/>
+        <input type="hidden" asp-for="Empresa.Id" />
         <div class="form-group">
             <label asp-for="Empresa.Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Empresa.Descricao" class="form-control input-sm" id="inputSmall" placeholder="Descrição" />
+                <span asp-validation-for="Empresa.Descricao" class="text-danger"></span>
             </div>
         </div>
 
@@ -21,6 +22,7 @@
             <label asp-for="Empresa.NomeFantasia" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Empresa.NomeFantasia" class="form-control input-sm" id="inputSmall" placeholder="Nome Fantasia" />
+                <span asp-validation-for="Empresa.NomeFantasia" class="text-danger"></span>
             </div>
         </div>
 
@@ -28,6 +30,7 @@
             <label asp-for="Empresa.RazaoSocial" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Empresa.RazaoSocial" class="form-control input-sm" id="inputSmall" placeholder="Razão Social" />
+                <span asp-validation-for="Empresa.RazaoSocial" class="text-danger"></span>
             </div>
         </div>
 
@@ -35,6 +38,7 @@
             <label asp-for="Empresa.CnpjBase" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Empresa.CnpjBase" class="form-control input-sm" id="inputSmall" placeholder="CNPJ Base" />
+                <span asp-validation-for="Empresa.CnpjBase" class="text-danger"></span>
             </div>
         </div>
 
@@ -42,6 +46,7 @@
             <label asp-for="Empresa.Site" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Empresa.Site" class="form-control input-sm" id="inputSmall" placeholder="Site" />
+                <span asp-validation-for="Empresa.Site" class="text-danger"></span>
             </div>
         </div>
 
@@ -53,3 +58,7 @@
         </div>
     </fieldset>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
