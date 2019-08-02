@@ -4,6 +4,7 @@ using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SiacWeb.Controllers
 {
@@ -16,13 +17,13 @@ namespace SiacWeb.Controllers
             _empresaService = empresaService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var List = _empresaService.FindAll();
+            var List = await _empresaService.FindAllAsync();
             return View(List);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var viewModel = new EmpresaFormViewModel();
             return View(viewModel);
@@ -30,23 +31,23 @@ namespace SiacWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Empresa empresa)
+        public async Task<IActionResult> Create(Empresa empresa)
         {
             if (!ModelState.IsValid)
             {
                 var viewModel = new EmpresaFormViewModel();
                 return View(viewModel);
             }
-            _empresaService.Insert(empresa);
+            await _empresaService.InsertAsync(empresa);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
-            var obj = _empresaService.FindById(id.Value);
+            var obj = await _empresaService.FindByIdAsync(id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -56,18 +57,18 @@ namespace SiacWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _empresaService.Remove(id);
+            await _empresaService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
-            var obj = _empresaService.FindById(id.Value);
+            var obj = await _empresaService.FindByIdAsync(id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -75,13 +76,13 @@ namespace SiacWeb.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
-            var obj = _empresaService.FindById(id.Value);
+            var obj = await _empresaService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
@@ -93,7 +94,7 @@ namespace SiacWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Empresa empresa)
+        public async Task<IActionResult> Edit(int id, Empresa empresa)
         {
             if (!ModelState.IsValid)
             {
@@ -106,7 +107,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
-                _empresaService.Update(empresa);
+                await _empresaService.UpdateAsync(empresa);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

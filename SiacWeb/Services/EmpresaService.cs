@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Services.Exceptions;
@@ -15,32 +16,33 @@ namespace SiacWeb.Services
             _context = context;
         }
 
-        public List<Empresa> FindAll()
+        public async Task<List<Empresa>> FindAllAsync()
         {
-            return _context.Empresa.ToList();
+            return await _context.Empresa.ToListAsync();
         }
 
-        public Empresa FindById(int id)
+        public async Task<Empresa> FindByIdAsync(int id)
         {
-            return _context.Empresa.FirstOrDefault(obj => obj.Id == id);
+            return await _context.Empresa.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Insert(Empresa obj)
+        public async Task InsertAsync(Empresa obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Empresa.Find(id);
+            var obj = await _context.Empresa.FindAsync(id);
             _context.Empresa.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Empresa obj)
+        public async Task UpdateAsync(Empresa obj)
         {
-            if (!_context.Empresa.Any(x => x.Id == obj.Id))
+            bool TemAlgum = await _context.Empresa.AnyAsync(x => x.Id == obj.Id);
+            if (!TemAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");
             }
@@ -48,7 +50,7 @@ namespace SiacWeb.Services
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {
