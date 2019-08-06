@@ -11,17 +11,17 @@
 <div class="navbar-btn">
     <div class="navbar-left navbar-left">
         <div class="form-group">
-            <a asp-action="Create" class="btn btn-info btn-sm">@ViewData["Create"]</a>
+            <a asp-action="Create" class="btn btn-primary btn-sm">@ViewData["Create"]</a>
         </div>
     </div>
 </div>
 
 <div class="navbar-form">
-    <form asp-action="Consultar" class="navbar-right navbar-right">
+    <form class="navbar-right navbar-right">
         <div class="input-group">
-            <input type="text" class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
+            <input type="text" name="consulta" value=@ViewData["Consulta"] class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-success btn-sm" type="button">Consultar</button>
+                <button type="submit" class="btn btn-success btn-sm">Consultar</button>
             </span>
         </div>
     </form>

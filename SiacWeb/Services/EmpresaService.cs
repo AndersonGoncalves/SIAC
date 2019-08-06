@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,18 @@ namespace SiacWeb.Services
         public async Task<Empresa> FindByIdAsync(int id)
         {
             return await _context.Empresa.FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
+        public async Task<List<Empresa>> FindAsync(string consulta)
+        {
+            var result = from obj in _context.Empresa select obj;
+            
+            if (consulta.All(char.IsDigit))
+                result = result.Where(x => x.Id == int.Parse(consulta));
+            else
+                result = result.Where(x => x.Descricao.Contains(consulta));
+
+            return await result.ToListAsync();
         }
 
         public async Task InsertAsync(Empresa obj)
