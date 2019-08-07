@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Services.Exceptions;
+using X.PagedList;
 
 namespace SiacWeb.Services
 {
     public class EmpresaService
     {
         private readonly SiacWebContext _context;
+        private readonly int _quantidadePorPagina = 10;
 
         public EmpresaService(SiacWebContext context)
         {
             _context = context;
-        }
-
-        public async Task<List<Empresa>> FindAllAsync()
-        {
-            return await _context.Empresa.ToListAsync();
         }
 
         public async Task<Empresa> FindByIdAsync(int id)
@@ -27,7 +22,12 @@ namespace SiacWeb.Services
             return await _context.Empresa.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<List<Empresa>> FindAsync(string consulta)
+        public async Task<IPagedList<Empresa>> FindAllAsync(int pagina)
+        {
+            return await _context.Empresa.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+        }
+
+        public async Task<IPagedList<Empresa>> FindAsync(int pagina, string consulta)
         {
             var result = from obj in _context.Empresa select obj;
             
@@ -36,7 +36,7 @@ namespace SiacWeb.Services
             else
                 result = result.Where(x => x.Descricao.Contains(consulta));
 
-            return await result.ToListAsync();
+            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
         }
 
         public async Task InsertAsync(Empresa obj)

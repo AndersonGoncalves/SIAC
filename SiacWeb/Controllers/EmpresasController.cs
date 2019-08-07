@@ -18,22 +18,22 @@ namespace SiacWeb.Controllers
             _empresaService = empresaService;
         }
 
-        public async Task<IActionResult> Index(string consulta)
+        public async Task<IActionResult> Index(string consulta, int pagina = 1)
         {
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _empresaService.FindAllAsync();
+                var List = await _empresaService.FindAllAsync(pagina);
                 return View(List);
             }
             else
             {
-                var List = await _empresaService.FindAsync(consulta);
+                var List = await _empresaService.FindAsync(pagina, consulta);
                 return View(List);
             }
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var viewModel = new EmpresaFormViewModel();
             return View(viewModel);
