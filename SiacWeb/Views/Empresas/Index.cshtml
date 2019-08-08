@@ -3,14 +3,13 @@
 @{
     ViewData["Title"] = "Empresas";
     ViewData["Create"] = "Nova Empresa";
-    ViewData["Bottom"] = "Empresa(s)";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 @(await Html.PartialAsync("_IndexTopPartial"))
 
-<table class="table table-striped table-striped bo">
+<table class="table table-striped">
     <thead>
         <tr class="active">
             <th>
@@ -35,11 +34,7 @@
                 </td>
 
                 <td>
-                    <div class="text-right">
-                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id="@item.Id">Visualizar</a>
-                        <a asp-action="Edit" class="btn btn-warning btn-xs" asp-route-id="@item.Id">Alterar</a>
-                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id="@item.Id">Excluir</a>
-                    </div>
+                    @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
                 </td>
             </tr>
         }

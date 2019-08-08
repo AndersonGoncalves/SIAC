@@ -10,7 +10,9 @@
     </div>
     <div class="col-md-4">
         <span class="pull-right">
-            <p class="text-primary">@((Model as IPagedList).FirstItemOnPage) a @((Model as IPagedList).LastItemOnPage) de @((Model as IPagedList).TotalItemCount) @ViewData["Bottom"]</p>
+            <a class="text-primary">
+                @((Model as IPagedList).FirstItemOnPage) a @((Model as IPagedList).LastItemOnPage) de @((Model as IPagedList).TotalItemCount) Registro(s)               
+            </a>
         </span>
     </div>
 </div>
