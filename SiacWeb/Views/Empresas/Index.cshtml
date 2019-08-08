@@ -1,6 +1,7 @@
-﻿@using X.PagedList.Mvc.Core;
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
-@model X.PagedList.IPagedList<SiacWeb.Models.Empresa>
+@model IEnumerable<SiacWeb.Models.Empresa>
 
 @{
     ViewData["Title"] = "Empresas";
@@ -35,10 +36,10 @@
     <thead>
         <tr class="active">
             <th>
-                @Html.DisplayName("Código")
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayName("Descrição")
+                @Html.DisplayNameFor(model => model.Descricao)
             </th>
 
             <th></th>
@@ -71,11 +72,11 @@
 <hr />
 <div class="row">
     <div class="col-md-8">
-        @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, consulta = ViewData["Consulta"] }))
+        @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, consulta = ViewData["Consulta"] }))
     </div>
     <div class="col-md-4">
         <span class="pull-right">
-            <p class="text-primary">@Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount @ViewData["Rodape"]</p>           
+            <p class="text-primary">@((Model as IPagedList).FirstItemOnPage) a @((Model as IPagedList).LastItemOnPage) de @((Model as IPagedList).TotalItemCount) @ViewData["Rodape"]</p>
         </span>
     </div>
 </div>
