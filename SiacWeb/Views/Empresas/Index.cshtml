@@ -1,38 +1,16 @@
-﻿@using X.PagedList;
-@using X.PagedList.Mvc.Core;
-
-@model IEnumerable<SiacWeb.Models.Empresa>
+﻿@model IEnumerable<SiacWeb.Models.Empresa>
 
 @{
     ViewData["Title"] = "Empresas";
     ViewData["Create"] = "Nova Empresa";
-    ViewData["Rodape"] = "Empresa(s)";
+    ViewData["Bottom"] = "Empresa(s)";
 }
 
 <h2>@ViewData["Title"]</h2>
 
+@(await Html.PartialAsync("_IndexTopPartial"))
 
-<hr />
-<div class="navbar-btn">
-    <div class="navbar-left navbar-left">
-        <div class="form-group">
-            <a asp-action="Create" class="btn btn-primary btn-sm">@ViewData["Create"]</a>
-        </div>
-    </div>
-</div>
-<div class="navbar-form">
-    <form class="navbar-right navbar-right">
-        <div class="input-group">
-            <input type="text" name="consulta" value=@ViewData["Consulta"] class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-success btn-sm">Consultar</button>
-            </span>
-        </div>
-    </form>
-</div>
-
-
-<table class="table table-striped table-striped">
+<table class="table table-striped table-striped bo">
     <thead>
         <tr class="active">
             <th>
@@ -68,15 +46,4 @@
     </tbody>
 </table>
 
-
-<hr />
-<div class="row">
-    <div class="col-md-8">
-        @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, consulta = ViewData["Consulta"] }))
-    </div>
-    <div class="col-md-4">
-        <span class="pull-right">
-            <p class="text-primary">@((Model as IPagedList).FirstItemOnPage) a @((Model as IPagedList).LastItemOnPage) de @((Model as IPagedList).TotalItemCount) @ViewData["Rodape"]</p>
-        </span>
-    </div>
-</div>
+@(await Html.PartialAsync("_IndexBottomPartial", Model))

@@ -1,0 +1,16 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IEnumerable<object>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, consulta = ViewData["Consulta"] }))
+    </div>
+    <div class="col-md-4">
+        <span class="pull-right">
+            <p class="text-primary">@((Model as IPagedList).FirstItemOnPage) a @((Model as IPagedList).LastItemOnPage) de @((Model as IPagedList).TotalItemCount) @ViewData["Bottom"]</p>
+        </span>
+    </div>
+</div>
