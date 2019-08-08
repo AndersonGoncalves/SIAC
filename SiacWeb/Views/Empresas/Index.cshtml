@@ -34,7 +34,9 @@
                 </td>
 
                 <td>
-                    @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    <div class="text-right">
+                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    </div>
                 </td>
             </tr>
         }
