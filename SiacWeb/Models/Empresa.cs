@@ -1,9 +1,10 @@
-﻿using SiacWeb.Models.BaseModels;
+﻿using SiacWeb.Models.Comum;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SiacWeb.Models
 {
-    public class Empresa : Base
+    public class Empresa : Identificador
     {
         [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(80, ErrorMessage = "Tamanho máximo {1} caracteres")]
@@ -28,5 +29,7 @@ namespace SiacWeb.Models
         [MaxLength(100, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Site")]
         public string Site { get; set; }
+
+        public ICollection<CentroDeCusto> CentroDeCustos { get; set; } = new List<CentroDeCusto>();
     }
 }
