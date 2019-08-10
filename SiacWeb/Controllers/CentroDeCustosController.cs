@@ -12,11 +12,12 @@ namespace SiacWeb.Controllers
     public class CentroDeCustosController : Controller
     {
         private readonly CentroDeCustoService _centroDeCustoService;
+        private readonly EmpresaService _empresaService;
 
-        public CentroDeCustosController(CentroDeCustoService centroDeCustoService)
+        public CentroDeCustosController(CentroDeCustoService centroDeCustoService, EmpresaService empresaService)
         {
             _centroDeCustoService = centroDeCustoService;
-
+            _empresaService = empresaService;
         }
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
@@ -34,9 +35,10 @@ namespace SiacWeb.Controllers
             }
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var viewModel = new CentroDeCustoFormViewModel();
+            var empresas = await _empresaService.FindAllAsync();
+            CentroDeCustoFormViewModel viewModel = new CentroDeCustoFormViewModel { Empresas = empresas};
             return View(viewModel);
         }
 
@@ -106,7 +108,8 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            CentroDeCustoFormViewModel viewModel = new CentroDeCustoFormViewModel { CentroDeCusto = obj };
+            var empresas = await _empresaService.FindAllAsync();
+            CentroDeCustoFormViewModel viewModel = new CentroDeCustoFormViewModel { CentroDeCusto = obj, Empresas = empresas };
             return View(viewModel);
         }
 

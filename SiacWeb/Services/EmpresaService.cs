@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Services.Exceptions;
@@ -25,6 +26,11 @@ namespace SiacWeb.Services
         public async Task<IPagedList<Empresa>> FindAllAsync(int pagina)
         {
             return await _context.Empresa.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+        }
+
+        public async Task<List<Empresa>> FindAllAsync()
+        {
+            return await _context.Empresa.OrderBy(x => x.Id).ToListAsync();
         }
 
         public async Task<IPagedList<Empresa>> FindAsync(int pagina, string consulta)
