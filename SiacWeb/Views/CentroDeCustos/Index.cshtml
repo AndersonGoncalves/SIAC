@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SiacWeb.Models.CentroDeCusto>
 
 @{
-    ViewData["Title"]  = "Centros de Custos";
+    ViewData["Title"] = "Centros de Custos";
     ViewData["Create"] = "Novo Centro de Custo";
 }
 
@@ -16,9 +16,6 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayName("Empresa")
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.RazaoSocial)
             </th>
 
@@ -28,23 +25,20 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpresaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RazaoSocial)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RazaoSocial)
+                </td>
 
-            <td>
-                <div class="text-right">
-                    @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
-                </div>
-            </td>
-        </tr>
+                <td>
+                    <div class="text-right">
+                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    </div>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
