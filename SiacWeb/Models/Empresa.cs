@@ -21,13 +21,17 @@ namespace SiacWeb.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(8, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "CNPJ Base")]
         public string CnpjBase { get; set; }
 
+        [MaxLength(11, ErrorMessage = "Tamanho máximo {1} caracteres")]
+        public string CPF { get; set; }
+
+        [MaxLength(12, ErrorMessage = "Tamanho máximo {1} caracteres")]
+        public string CEI { get; set; }
+
         [MaxLength(100, ErrorMessage = "Tamanho máximo {1} caracteres")]
-        [Display(Name = "Site")]
         public string Site { get; set; }
 
         public ICollection<CentroDeCusto> CentroDeCustos { get; set; } = new List<CentroDeCusto>();

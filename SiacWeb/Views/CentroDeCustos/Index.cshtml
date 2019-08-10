@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SiacWeb.Models.CentroDeCusto>
+
+@{
+    ViewData["Title"]  = "Centros de Custos";
+    ViewData["Create"] = "Novo Centro de Custo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@(await Html.PartialAsync("_IndexTopPartial"))
+
+:TODO
+
+@(await Html.PartialAsync("_IndexBottomPartial", Model))
