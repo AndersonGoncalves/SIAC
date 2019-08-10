@@ -9,6 +9,39 @@
 
 @(await Html.PartialAsync("_IndexTopPartial"))
 
-:TODO
+<table class="table table-striped">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazaoSocial)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RazaoSocial)
+                </td>
+
+                <td>
+                    <div class="text-right">
+                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 @(await Html.PartialAsync("_IndexBottomPartial", Model))

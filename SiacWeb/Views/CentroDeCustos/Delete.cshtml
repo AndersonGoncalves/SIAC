@@ -1,0 +1,48 @@
+﻿@model SiacWeb.Models.ViewModels.CentroDeCustoFormViewModel
+
+@{
+    ViewData["Title"] = "Centro de Custo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3 class="text-danger">Deseja excluir o registro?</h3>
+<div class="row">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CentroDeCusto.Id):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CentroDeCusto.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CentroDeCusto.RazaoSocial):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CentroDeCusto.RazaoSocial)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CentroDeCusto.NomeFantasia):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CentroDeCusto.NomeFantasia)
+            </dd>            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CentroDeCusto.CNPJ):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CentroDeCusto.CNPJ)
+            </dd>            
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="CentroDeCusto.Id" />
+    <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+    <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+</form>

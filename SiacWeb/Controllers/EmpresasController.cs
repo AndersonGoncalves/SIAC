@@ -18,7 +18,7 @@ namespace SiacWeb.Controllers
             _empresaService = empresaService;
         }
 
-        public async Task<IActionResult> Index(string consulta, int? pagina)
+        public async Task<IActionResult> Index(int? pagina, string consulta)
         {
             int page = pagina ?? 1;
             ViewData["Consulta"] = consulta;

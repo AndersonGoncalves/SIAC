@@ -6,9 +6,12 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<hr />
-<form asp-action="Create" class="form-horizontal">
+<form asp-action="Create" class="form-horizontal jumbotron">
     <fieldset>
+        <div class="form-group has-success">
+            <label class="col-lg-2 control-label">Dados Cadastrais</label>
+        </div>
+
         <div class="form-group">
             <label asp-for="Empresa.Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">

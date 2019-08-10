@@ -6,7 +6,6 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<hr />
 <h3 class="text-danger">Deseja excluir o registro?</h3>
 <div class="row">
     <div class="col-md-4">
@@ -53,12 +52,11 @@
                 @Html.DisplayFor(model => model.Empresa.Site)
             </dd>
         </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Empresa.Id" />
-            <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
-            <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
-        </form>
     </div>
 </div>
 
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Empresa.Id" />
+    <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+    <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+</form>

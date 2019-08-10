@@ -44,6 +44,7 @@ namespace SiacWeb
             //Registrando os serviços no sistema de injeção de dependência da aplicação
             services.AddScoped<SeedingService>();
             services.AddScoped<EmpresaService>();
+            services.AddScoped<CentroDeCustoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
