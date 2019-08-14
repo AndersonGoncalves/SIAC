@@ -9,6 +9,11 @@ namespace SiacWeb.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<CentroDeCusto> CentroDeCusto { get; set; }
     }

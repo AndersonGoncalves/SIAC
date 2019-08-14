@@ -6,9 +6,11 @@ using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
 {
+    [Authorize]
     public class EmpresasController : Controller
     {
         private readonly EmpresaService _empresaService;

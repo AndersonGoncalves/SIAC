@@ -11,6 +11,5 @@ namespace SiacWeb.Models.Comum
 
         [ForeignKey("EmpresaId")]
         public Empresa Empresa { get; set; }
-        
     }
 }
