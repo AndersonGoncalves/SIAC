@@ -41,6 +41,7 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Senha")]
             public string Password { get; set; }
 
             [Display(Name = "Lembre me?")]

@@ -17,7 +17,7 @@ namespace SiacWeb.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<SiacWebIdentityContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("SiacWebIdentityContextConnection")));
+                        context.Configuration.GetConnectionString("SiacWebContext")));
 
                 services.AddDefaultIdentity<IdentityUser>()
                     .AddEntityFrameworkStores<SiacWebIdentityContext>();
