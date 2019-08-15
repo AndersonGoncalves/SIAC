@@ -47,14 +47,12 @@ namespace SiacWeb
             services.AddScoped<EmpresaService>();
             services.AddScoped<CentroDeCustoService>();
 
-
-
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = true;
+                options.Password.RequireDigit = false;// true;
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false; // true;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredUniqueChars = 6;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
