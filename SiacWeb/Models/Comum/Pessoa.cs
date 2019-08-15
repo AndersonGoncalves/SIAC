@@ -61,12 +61,10 @@ namespace SiacWeb.Models.Comum
         [MaxLength(100, ErrorMessage = "Tamanho máximo {1} caracteres")]
         public string Instagram { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(80, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Nome da mãe")]
         public string NomeMae { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(80, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Nome do pai")]
         public string NomePai { get; set; }
