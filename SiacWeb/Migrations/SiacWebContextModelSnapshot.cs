@@ -50,6 +50,9 @@ namespace SiacWeb.Migrations
                     b.Property<string>("IM")
                         .HasMaxLength(20);
 
+                    b.Property<string>("Instagram")
+                        .HasMaxLength(100);
+
                     b.Property<string>("NomeFantasia")
                         .HasMaxLength(50);
 
@@ -113,6 +116,62 @@ namespace SiacWeb.Migrations
                     b.ToTable("Empresa");
                 });
 
+            modelBuilder.Entity("SiacWeb.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Apelido")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("CPF")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("Celular")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("CentroDeCustoId");
+
+                    b.Property<DateTime?>("DataDeNascimento");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Facebook")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Instagram")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("NomeMae")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("NomePai")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("RG")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Telegram")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Whatsapp")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CentroDeCustoId");
+
+                    b.ToTable("Funcionario");
+                });
+
             modelBuilder.Entity("SiacWeb.Models.CentroDeCusto", b =>
                 {
                     b.HasOne("SiacWeb.Models.Empresa", "Empresa")
@@ -122,7 +181,52 @@ namespace SiacWeb.Migrations
 
                     b.OwnsOne("SiacWeb.Models.Comum.Endereco", "Endereco", b1 =>
                         {
-                            b1.Property<int>("CentroDeCustoId")
+                            b1.Property<int>("CentroDeCustoId1")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Bairro")
+                                .HasMaxLength(50);
+
+                            b1.Property<string>("CEP")
+                                .HasMaxLength(10);
+
+                            b1.Property<int>("CentroDeCustoId");
+
+                            b1.Property<string>("Cidade")
+                                .HasMaxLength(50);
+
+                            b1.Property<string>("Logradouro")
+                                .HasMaxLength(150);
+
+                            b1.Property<string>("Telefone")
+                                .HasMaxLength(20);
+
+                            b1.Property<string>("TipoDeLogradouro")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("UF")
+                                .HasMaxLength(2);
+
+                            b1.ToTable("CentroDeCusto");
+
+                            b1.HasOne("SiacWeb.Models.CentroDeCusto")
+                                .WithOne("Endereco")
+                                .HasForeignKey("SiacWeb.Models.Comum.Endereco", "CentroDeCustoId1")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+                });
+
+            modelBuilder.Entity("SiacWeb.Models.Funcionario", b =>
+                {
+                    b.HasOne("SiacWeb.Models.CentroDeCusto", "CentroDeCusto")
+                        .WithMany()
+                        .HasForeignKey("CentroDeCustoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("SiacWeb.Models.Comum.Endereco", "Endereco", b1 =>
+                        {
+                            b1.Property<int>("FuncionarioId")
                                 .ValueGeneratedOnAdd()
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -147,11 +251,11 @@ namespace SiacWeb.Migrations
                             b1.Property<string>("UF")
                                 .HasMaxLength(2);
 
-                            b1.ToTable("CentroDeCusto");
+                            b1.ToTable("Funcionario");
 
-                            b1.HasOne("SiacWeb.Models.CentroDeCusto")
+                            b1.HasOne("SiacWeb.Models.Funcionario")
                                 .WithOne("Endereco")
-                                .HasForeignKey("SiacWeb.Models.Comum.Endereco", "CentroDeCustoId")
+                                .HasForeignKey("SiacWeb.Models.Comum.Endereco", "FuncionarioId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
                 });

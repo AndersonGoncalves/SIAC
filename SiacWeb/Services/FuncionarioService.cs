@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Services.Exceptions;
@@ -8,44 +7,39 @@ using X.PagedList;
 
 namespace SiacWeb.Services
 {
-    public class CentroDeCustoService
+    public class FuncionarioService
     {
         private readonly SiacWebContext _context;
         private readonly int _quantidadePorPagina = 10;
 
-        public CentroDeCustoService(SiacWebContext context)
+        public FuncionarioService(SiacWebContext context)
         {
             _context = context;
         }
 
-        public async Task<CentroDeCusto> FindByIdAsync(int id)
+        public async Task<Funcionario> FindByIdAsync(int id)
         {
-            return await _context.CentroDeCusto.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Funcionario.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<IPagedList<CentroDeCusto>> FindAllAsync(int pagina)
+        public async Task<IPagedList<Funcionario>> FindAllAsync(int pagina)
         {
-            return await _context.CentroDeCusto.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+            return await _context.Funcionario.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
         }
 
-        public async Task<List<CentroDeCusto>> FindAllAsync()
+        public async Task<IPagedList<Funcionario>> FindAsync(int pagina, string consulta)
         {
-            return await _context.CentroDeCusto.OrderBy(x => x.Id).ToListAsync();
-        }
-
-        public async Task<IPagedList<CentroDeCusto>> FindAsync(int pagina, string consulta)
-        {
-            var result = from obj in _context.CentroDeCusto select obj;
+            var result = from obj in _context.Funcionario select obj;
 
             if (consulta.All(char.IsDigit))
                 result = result.Where(x => x.Id == int.Parse(consulta));
             else
-                result = result.Where(x => x.RazaoSocial.Contains(consulta));
+                result = result.Where(x => x.Nome.Contains(consulta));
 
             return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
         }
 
-        public async Task InsertAsync(CentroDeCusto obj)
+        public async Task InsertAsync(Funcionario obj)
         {
             _context.Add(obj);
             await _context.SaveChangesAsync();
@@ -55,8 +49,8 @@ namespace SiacWeb.Services
         {
             try
             {
-                var obj = await _context.CentroDeCusto.FindAsync(id);
-                _context.CentroDeCusto.Remove(obj);
+                var obj = await _context.Funcionario.FindAsync(id);
+                _context.Funcionario.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
@@ -65,9 +59,9 @@ namespace SiacWeb.Services
             }
         }
 
-        public async Task UpdateAsync(CentroDeCusto obj)
+        public async Task UpdateAsync(Funcionario obj)
         {
-            bool TemAlgum = await _context.CentroDeCusto.AnyAsync(x => x.Id == obj.Id);
+            bool TemAlgum = await _context.Funcionario.AnyAsync(x => x.Id == obj.Id);
             if (!TemAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");

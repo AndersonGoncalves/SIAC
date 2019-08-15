@@ -26,6 +26,7 @@ namespace SiacWeb.Models.Comum
         public string CEP { get; set; }
 
         [MaxLength(20, ErrorMessage = "Tamanho máximo {1} caracteres")]
+        [Display(Name = "Telefone Fixo")]
         public string Telefone { get; set; }
     }
 }
