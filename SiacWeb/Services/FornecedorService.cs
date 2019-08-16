@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Comum;
+using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
 
@@ -11,10 +12,12 @@ namespace SiacWeb.Services
     public class FornecedorService
     {
         private readonly SiacWebContext _context;
+        private readonly IUser _user;
 
-        public FornecedorService(SiacWebContext context)
+        public FornecedorService(SiacWebContext context, IUser user)
         {
             _context = context;
+            _user = user;
         }
 
         public async Task<Fornecedor> FindByIdAsync(int id)
@@ -41,6 +44,7 @@ namespace SiacWeb.Services
 
         public async Task InsertAsync(Fornecedor obj)
         {
+            obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
         }

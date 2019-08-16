@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
+using SiacWeb.Comum;
+using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
 
@@ -11,11 +13,12 @@ namespace SiacWeb.Services
     public class CentroDeCustoService
     {
         private readonly SiacWebContext _context;
-        private readonly int _quantidadePorPagina = 10;
+        private readonly IUser _user;
 
-        public CentroDeCustoService(SiacWebContext context)
+        public CentroDeCustoService(SiacWebContext context, IUser user)
         {
             _context = context;
+            _user = user;
         }
 
         public async Task<CentroDeCusto> FindByIdAsync(int id)
@@ -25,7 +28,7 @@ namespace SiacWeb.Services
 
         public async Task<IPagedList<CentroDeCusto>> FindAllAsync(int pagina)
         {
-            return await _context.CentroDeCusto.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+            return await _context.CentroDeCusto.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task<List<CentroDeCusto>> FindAllAsync()
@@ -42,11 +45,12 @@ namespace SiacWeb.Services
             else
                 result = result.Where(x => x.RazaoSocial.Contains(consulta));
 
-            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task InsertAsync(CentroDeCusto obj)
         {
+            obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
         }

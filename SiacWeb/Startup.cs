@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Data;
 using SiacWeb.Services;
+using SiacWeb.Models.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace SiacWeb
@@ -45,6 +46,9 @@ namespace SiacWeb
             services.AddScoped<FornecedorService>();
             services.AddScoped<TransportadoraService>();
             services.AddScoped<AutonomoService>();
+            services.AddScoped<IUser, AspNetUser>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.Configure<IdentityOptions>(options =>
             {

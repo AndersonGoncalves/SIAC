@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Comum;
+using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
 
@@ -11,10 +12,12 @@ namespace SiacWeb.Services
     public class AutonomoService
     {
         private readonly SiacWebContext _context;
+        private readonly IUser _user;
 
-        public AutonomoService(SiacWebContext context)
+        public AutonomoService(SiacWebContext context, IUser user)
         {
             _context = context;
+            _user = user;
         }
 
         public async Task<Autonomo> FindByIdAsync(int id)
@@ -41,7 +44,8 @@ namespace SiacWeb.Services
 
         public async Task InsertAsync(Autonomo obj)
         {
-            _context.Add(obj);
+            obj.Usuario = _user.Name;
+            _context.Add(obj);            
             await _context.SaveChangesAsync();
         }
 
