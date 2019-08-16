@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +80,8 @@ namespace SiacWeb.Services
 
             try
             {
+                obj.DataAlteracao = DateTime.Now;
+                obj.Usuario = _user.Name;
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }

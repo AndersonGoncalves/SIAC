@@ -17,8 +17,8 @@ namespace SiacWeb.Migrations
                     Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
-                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
-                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
                     EmUso = table.Column<int>(nullable: false),
                     Observacao = table.Column<string>(nullable: true),
                     RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
@@ -35,7 +35,7 @@ namespace SiacWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CentroDeCusto",
+                name: "Autonomo",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -43,8 +43,8 @@ namespace SiacWeb.Migrations
                     Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
-                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
-                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
                     EmUso = table.Column<int>(nullable: false),
                     Observacao = table.Column<string>(nullable: true),
                     EmpresaId = table.Column<int>(nullable: false),
@@ -73,11 +73,64 @@ namespace SiacWeb.Migrations
                     Endereco_Cidade = table.Column<string>(maxLength: 50, nullable: true),
                     Endereco_CEP = table.Column<string>(maxLength: 10, nullable: true),
                     Endereco_Telefone = table.Column<string>(maxLength: 20, nullable: true),
-                    Endereco_CentroDeCustoId = table.Column<int>(nullable: false),
                     DadosBancarios_CodigoBanco = table.Column<string>(maxLength: 10, nullable: true),
                     DadosBancarios_Agencia = table.Column<string>(maxLength: 10, nullable: true),
                     DadosBancarios_Conta = table.Column<string>(maxLength: 20, nullable: true),
-                    DadosBancarios_CentroDeCustoId = table.Column<int>(nullable: false)
+                    DadosBancarios_AutonomoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Autonomo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Autonomo_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CentroDeCusto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
+                    EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
+                    EmpresaId = table.Column<int>(nullable: false),
+                    TipoDePessoa = table.Column<int>(nullable: false),
+                    RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: true),
+                    DataDeNascimento = table.Column<DateTime>(nullable: true),
+                    CNPJ = table.Column<string>(maxLength: 14, nullable: true),
+                    IE = table.Column<string>(maxLength: 14, nullable: true),
+                    IM = table.Column<string>(maxLength: 20, nullable: true),
+                    CPF = table.Column<string>(maxLength: 11, nullable: true),
+                    RG = table.Column<string>(maxLength: 20, nullable: true),
+                    Celular = table.Column<string>(maxLength: 20, nullable: true),
+                    Whatsapp = table.Column<string>(maxLength: 20, nullable: true),
+                    Telegram = table.Column<string>(maxLength: 20, nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
+                    Site = table.Column<string>(maxLength: 100, nullable: true),
+                    Facebook = table.Column<string>(maxLength: 100, nullable: true),
+                    Instagram = table.Column<string>(maxLength: 100, nullable: true),
+                    NomeMae = table.Column<string>(maxLength: 80, nullable: true),
+                    NomePai = table.Column<string>(maxLength: 80, nullable: true),
+                    Endereco_TipoDeLogradouro = table.Column<string>(maxLength: 10, nullable: true),
+                    Endereco_Logradouro = table.Column<string>(maxLength: 150, nullable: true),
+                    Endereco_Bairro = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_UF = table.Column<string>(maxLength: 2, nullable: true),
+                    Endereco_Cidade = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_CEP = table.Column<string>(maxLength: 10, nullable: true),
+                    Endereco_Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    DadosBancarios_CodigoBanco = table.Column<string>(maxLength: 10, nullable: true),
+                    DadosBancarios_Agencia = table.Column<string>(maxLength: 10, nullable: true),
+                    DadosBancarios_Conta = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,8 +152,8 @@ namespace SiacWeb.Migrations
                     Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
-                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
-                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
                     EmUso = table.Column<int>(nullable: false),
                     Observacao = table.Column<string>(nullable: true),
                     EmpresaId = table.Column<int>(nullable: false),
@@ -145,6 +198,60 @@ namespace SiacWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Transportadora",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
+                    EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
+                    EmpresaId = table.Column<int>(nullable: false),
+                    TipoDePessoa = table.Column<int>(nullable: false),
+                    RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
+                    NomeFantasia = table.Column<string>(maxLength: 50, nullable: true),
+                    DataDeNascimento = table.Column<DateTime>(nullable: true),
+                    CNPJ = table.Column<string>(maxLength: 14, nullable: true),
+                    IE = table.Column<string>(maxLength: 14, nullable: true),
+                    IM = table.Column<string>(maxLength: 20, nullable: true),
+                    CPF = table.Column<string>(maxLength: 11, nullable: true),
+                    RG = table.Column<string>(maxLength: 20, nullable: true),
+                    Celular = table.Column<string>(maxLength: 20, nullable: true),
+                    Whatsapp = table.Column<string>(maxLength: 20, nullable: true),
+                    Telegram = table.Column<string>(maxLength: 20, nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
+                    Site = table.Column<string>(maxLength: 100, nullable: true),
+                    Facebook = table.Column<string>(maxLength: 100, nullable: true),
+                    Instagram = table.Column<string>(maxLength: 100, nullable: true),
+                    NomeMae = table.Column<string>(maxLength: 80, nullable: true),
+                    NomePai = table.Column<string>(maxLength: 80, nullable: true),
+                    Endereco_TipoDeLogradouro = table.Column<string>(maxLength: 10, nullable: true),
+                    Endereco_Logradouro = table.Column<string>(maxLength: 150, nullable: true),
+                    Endereco_Bairro = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_UF = table.Column<string>(maxLength: 2, nullable: true),
+                    Endereco_Cidade = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_CEP = table.Column<string>(maxLength: 10, nullable: true),
+                    Endereco_Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    DadosBancarios_CodigoBanco = table.Column<string>(maxLength: 10, nullable: true),
+                    DadosBancarios_Agencia = table.Column<string>(maxLength: 10, nullable: true),
+                    DadosBancarios_Conta = table.Column<string>(maxLength: 20, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transportadora", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transportadora_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Funcionario",
                 columns: table => new
                 {
@@ -153,8 +260,8 @@ namespace SiacWeb.Migrations
                     Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
-                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
-                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
                     EmUso = table.Column<int>(nullable: false),
                     Observacao = table.Column<string>(nullable: true),
                     EmpresaId = table.Column<int>(nullable: false),
@@ -202,6 +309,11 @@ namespace SiacWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Autonomo_EmpresaId",
+                table: "Autonomo",
+                column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CentroDeCusto_EmpresaId",
                 table: "CentroDeCusto",
                 column: "EmpresaId");
@@ -220,15 +332,26 @@ namespace SiacWeb.Migrations
                 name: "IX_Funcionario_EmpresaId",
                 table: "Funcionario",
                 column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transportadora_EmpresaId",
+                table: "Transportadora",
+                column: "EmpresaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Autonomo");
+
+            migrationBuilder.DropTable(
                 name: "Fornecedor");
 
             migrationBuilder.DropTable(
                 name: "Funcionario");
+
+            migrationBuilder.DropTable(
+                name: "Transportadora");
 
             migrationBuilder.DropTable(
                 name: "CentroDeCusto");

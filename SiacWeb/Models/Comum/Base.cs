@@ -24,12 +24,10 @@ namespace SiacWeb.Models.Comum
         [Display(Name = "Data de Alteração")]
         public DateTime? DataAlteracao { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(256, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Usuário")]
         public string Usuario { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(256, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Máquina")]
         public string Maquina { get; set; }
@@ -45,8 +43,7 @@ namespace SiacWeb.Models.Comum
             Ativo = SimOuNao.Sim;
             DataCadastro = DateTime.Now;
             EmUso = SimOuNao.Nao;
-            Usuario = "TODO";
-            Maquina = "TODO";
+            //Maquina = "0";
         }
     }
 }
