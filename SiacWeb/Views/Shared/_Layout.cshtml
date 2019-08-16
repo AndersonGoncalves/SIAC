@@ -19,6 +19,7 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,96 +27,111 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 <!--<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SiacWeb</a>-->
+                <!-- :TODO Imagem
+                <div class="navbar-brand">
+                    <div style="display:flex;justify-content:left;align-items:center;">
+                        <img class="img-responsive" src="~/images/LOGO_SIAC_50_2.bmp" width="70" height="70" />
+                    </div>
+                </div>
+                -->
+
             </div>
+
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
 
-                    <!--Menu Compra-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compra</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="" asp-controller="Fornecedores" asp-action="Index">Fornecedor</a></li>
-                            <li><a asp-area="" asp-controller="Transportadoras" asp-action="Index">Transportadora</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="PedidoCompra" asp-action="Index">Pedido de Compra</a></li>
-                            <li><a asp-area="" asp-controller="CotacaoCompra" asp-action="Index">Cotação de Compra</a></li>
-                        </ul>
-                    </li>
+                        <!--Menu Compra-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compra</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a asp-area="" asp-controller="Fornecedores" asp-action="Index">Fornecedor</a></li>
+                                <li><a asp-area="" asp-controller="Transportadoras" asp-action="Index">Transportadora</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="PedidoCompra" asp-action="Index">Pedido de Compra</a></li>
+                                <li><a asp-area="" asp-controller="CotacaoCompra" asp-action="Index">Cotação de Compra</a></li>
+                            </ul>
+                        </li>
 
-                    <!--Menu Venda-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Venda</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="PedidoVenda" asp-action="Index">Pedido de Venda</a></li>
-                            <li><a asp-area="" asp-controller="CotacaoVenda" asp-action="Index">Cotação de Venda</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="ReaberturaPedido" asp-action="Index">Reabertura de Pedido</a></li>
-                            <li><a asp-area="" asp-controller="DevolucaoPedido" asp-action="Index">Devolução de Pedido</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="PesquisaProduto" asp-action="Index">Pesquisa de Produto</a></li>
-                        </ul>
-                    </li>
+                        <!--Menu Venda-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Venda</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="PedidoVenda" asp-action="Index">Pedido de Venda</a></li>
+                                <li><a asp-area="" asp-controller="CotacaoVenda" asp-action="Index">Cotação de Venda</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="ReaberturaPedido" asp-action="Index">Reabertura de Pedido</a></li>
+                                <li><a asp-area="" asp-controller="DevolucaoPedido" asp-action="Index">Devolução de Pedido</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="PesquisaProduto" asp-action="Index">Pesquisa de Produto</a></li>
+                            </ul>
+                        </li>
 
-                    <!--Menu Caixa-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Caixa</a>
-                        <ul class="dropdown-menu" role="menu"></ul>
-                    </li>
+                        <!--Menu Caixa-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Caixa</a>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </li>
 
-                    <!--Menu Financeiro-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Financeiro</a>
-                        <ul class="dropdown-menu" role="menu"></ul>
-                    </li>
+                        <!--Menu Financeiro-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Financeiro</a>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </li>
 
-                    <!--Menu Cobrança-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cobrança</a>
-                        <ul class="dropdown-menu" role="menu"></ul>
-                    </li>
+                        <!--Menu Cobrança-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cobrança</a>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </li>
 
-                    <!--Menu Estoque-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque</a>
-                        <ul class="dropdown-menu" role="menu"></ul>
-                    </li>
+                        <!--Menu Estoque-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque</a>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </li>
 
-                    <!--Menu Gerência-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerência</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="" asp-controller="Empresas" asp-action="Index">Empresa</a></li>
-                            <li><a asp-area="" asp-controller="CentroDeCustos" asp-action="Index">Centro de Custo</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="Funcionarios" asp-action="Index">Funcionário</a></li>
-                            <li><a asp-area="" asp-controller="Autonomos" asp-action="Index">Autônomo</a></li>
-                            <li class="divider"></li>
-                            <li><a asp-area="" asp-controller="Configuracao" asp-action="Index">Configuração</a></li>
-                        </ul>
-                    </li>
+                        <!--Menu Gerência-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerência</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a asp-area="" asp-controller="Empresas" asp-action="Index">Empresa</a></li>
+                                <li><a asp-area="" asp-controller="CentroDeCustos" asp-action="Index">Centro de Custo</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="Funcionarios" asp-action="Index">Funcionário</a></li>
+                                <li><a asp-area="" asp-controller="Autonomos" asp-action="Index">Autônomo</a></li>
+                                <li class="divider"></li>
+                                <li><a asp-area="" asp-controller="Configuracao" asp-action="Index">Configuração</a></li>
+                            </ul>
+                        </li>
 
-                    <!--Menu Ajuda-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ajuda</a>
-                        <ul class="dropdown-menu" role="">
-                            <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
-                        </ul>
-                    </li>
+                        <!--Menu Ajuda-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ajuda</a>
+                            <ul class="dropdown-menu" role="">
+                                <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
+                            </ul>
+                        </li>
 
-                </ul>
+                    </ul>
+                }
                 <partial name="_LoginPartial" />
             </div>
+
         </div>
+
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
-        @RenderBody()        
+        @RenderBody()
         <footer>
             <!--<p>&copy; 2019 - Siac</p>-->
         </footer>
