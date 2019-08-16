@@ -17,5 +17,6 @@ namespace SiacWeb.Models
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<CentroDeCusto> CentroDeCusto { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
+        public DbSet<Fornecedor> Fornecedor { get; set; }
     }
 }

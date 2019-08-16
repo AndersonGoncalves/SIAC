@@ -42,6 +42,7 @@ namespace SiacWeb
             services.AddScoped<EmpresaService>();
             services.AddScoped<CentroDeCustoService>();
             services.AddScoped<FuncionarioService>();
+            services.AddScoped<FornecedorService>();
 
             services.Configure<IdentityOptions>(options =>
             {
