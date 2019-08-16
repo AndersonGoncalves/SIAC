@@ -2,9 +2,9 @@
 
 namespace SiacWeb.Models.ViewModels
 {
-    public class FornecedorFormViewModel
+    public class TransportadoraFormViewModel
     {
-        public Fornecedor Fornecedor { get; set; }
+        public Transportadora Transportadora { get; set; }
         public ICollection<Empresa> Empresas { get; set; } = new List<Empresa>();
     }
 }
