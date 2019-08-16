@@ -25,6 +25,8 @@ namespace SiacWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Ativo");
+
                     b.Property<string>("CNPJ")
                         .HasMaxLength(14);
 
@@ -66,6 +68,8 @@ namespace SiacWeb.Migrations
                     b.Property<string>("NomeFantasia")
                         .HasMaxLength(50);
 
+                    b.Property<string>("Observacao");
+
                     b.Property<string>("RG")
                         .HasMaxLength(20);
 
@@ -101,6 +105,8 @@ namespace SiacWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Ativo");
+
                     b.Property<string>("CEI")
                         .HasMaxLength(12);
 
@@ -128,6 +134,8 @@ namespace SiacWeb.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<string>("Observacao");
+
                     b.Property<string>("RazaoSocial")
                         .IsRequired()
                         .HasMaxLength(80);
@@ -152,6 +160,8 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Apelido")
                         .HasMaxLength(50);
+
+                    b.Property<int>("Ativo");
 
                     b.Property<string>("CPF")
                         .HasMaxLength(11);
@@ -193,6 +203,8 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("NomePai")
                         .HasMaxLength(80);
+
+                    b.Property<string>("Observacao");
 
                     b.Property<string>("RG")
                         .HasMaxLength(20);

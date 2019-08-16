@@ -14,11 +14,13 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
                     Usuario = table.Column<string>(maxLength: 256, nullable: false),
                     Maquina = table.Column<string>(maxLength: 256, nullable: false),
                     EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
                     RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
                     NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
                     Descricao = table.Column<string>(maxLength: 20, nullable: false),
@@ -38,11 +40,13 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
                     Usuario = table.Column<string>(maxLength: 256, nullable: false),
                     Maquina = table.Column<string>(maxLength: 256, nullable: false),
                     EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
                     EmpresaId = table.Column<int>(nullable: false),
                     TipoDePessoa = table.Column<int>(nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
@@ -86,11 +90,13 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     DataAlteracao = table.Column<DateTime>(nullable: true),
                     Usuario = table.Column<string>(maxLength: 256, nullable: false),
                     Maquina = table.Column<string>(maxLength: 256, nullable: false),
                     EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
                     CentroDeCustoId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(maxLength: 80, nullable: false),
                     Apelido = table.Column<string>(maxLength: 50, nullable: true),

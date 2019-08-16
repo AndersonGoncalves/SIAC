@@ -11,6 +11,8 @@ namespace SiacWeb.Models.Comum
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public SimOuNao Ativo { get; set; }
+
         [Required(ErrorMessage = "{0} obrigatório")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -35,10 +37,14 @@ namespace SiacWeb.Models.Comum
         [Display(Name = "Em Uso")]
         public SimOuNao EmUso { get; set; }
 
+        [Display(Name = "Observação")]
+        public string Observacao { get; set; }
+
         public Base()
         {
-            EmUso = SimOuNao.Nao;
+            Ativo = SimOuNao.Sim;
             DataCadastro = DateTime.Now;
+            EmUso = SimOuNao.Nao;
             Usuario = "TODO";
             Maquina = "TODO";
         }
