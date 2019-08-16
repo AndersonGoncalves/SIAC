@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SiacWeb.Models
 {
-    public class Empresa : Identificador
+    public class Empresa : Base
     {
         [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(80, ErrorMessage = "Tamanho máximo {1} caracteres")]

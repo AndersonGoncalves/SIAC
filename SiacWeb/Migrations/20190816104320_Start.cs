@@ -14,6 +14,11 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    EmUso = table.Column<int>(nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
                     NomeFantasia = table.Column<string>(maxLength: 50, nullable: false),
                     Descricao = table.Column<string>(maxLength: 20, nullable: false),
@@ -33,6 +38,11 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    EmUso = table.Column<int>(nullable: false),
                     EmpresaId = table.Column<int>(nullable: false),
                     TipoDePessoa = table.Column<int>(nullable: false),
                     RazaoSocial = table.Column<string>(maxLength: 80, nullable: false),
@@ -76,6 +86,11 @@ namespace SiacWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: false),
+                    EmUso = table.Column<int>(nullable: false),
                     CentroDeCustoId = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(maxLength: 80, nullable: false),
                     Apelido = table.Column<string>(maxLength: 50, nullable: true),
@@ -88,15 +103,16 @@ namespace SiacWeb.Migrations
                     Email = table.Column<string>(maxLength: 100, nullable: true),
                     Facebook = table.Column<string>(maxLength: 100, nullable: true),
                     Instagram = table.Column<string>(maxLength: 100, nullable: true),
-                    NomeMae = table.Column<string>(maxLength: 80, nullable: false),
-                    NomePai = table.Column<string>(maxLength: 80, nullable: false),
+                    NomeMae = table.Column<string>(maxLength: 80, nullable: true),
+                    NomePai = table.Column<string>(maxLength: 80, nullable: true),
                     Endereco_TipoDeLogradouro = table.Column<string>(maxLength: 10, nullable: true),
                     Endereco_Logradouro = table.Column<string>(maxLength: 150, nullable: true),
                     Endereco_Bairro = table.Column<string>(maxLength: 50, nullable: true),
                     Endereco_UF = table.Column<string>(maxLength: 2, nullable: true),
                     Endereco_Cidade = table.Column<string>(maxLength: 50, nullable: true),
                     Endereco_CEP = table.Column<string>(maxLength: 10, nullable: true),
-                    Endereco_Telefone = table.Column<string>(maxLength: 20, nullable: true)
+                    Endereco_Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    Comissao = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

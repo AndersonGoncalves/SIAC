@@ -34,7 +34,13 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Celular")
                         .HasMaxLength(20);
 
+                    b.Property<DateTime?>("DataAlteracao");
+
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<DateTime?>("DataDeNascimento");
+
+                    b.Property<int>("EmUso");
 
                     b.Property<string>("Email")
                         .HasMaxLength(100);
@@ -53,6 +59,10 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Instagram")
                         .HasMaxLength(100);
 
+                    b.Property<string>("Maquina")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
                     b.Property<string>("NomeFantasia")
                         .HasMaxLength(50);
 
@@ -70,6 +80,10 @@ namespace SiacWeb.Migrations
                         .HasMaxLength(20);
 
                     b.Property<int>("TipoDePessoa");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasMaxLength(256);
 
                     b.Property<string>("Whatsapp")
                         .HasMaxLength(20);
@@ -96,9 +110,19 @@ namespace SiacWeb.Migrations
                     b.Property<string>("CnpjBase")
                         .HasMaxLength(8);
 
+                    b.Property<DateTime?>("DataAlteracao");
+
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(20);
+
+                    b.Property<int>("EmUso");
+
+                    b.Property<string>("Maquina")
+                        .IsRequired()
+                        .HasMaxLength(256);
 
                     b.Property<string>("NomeFantasia")
                         .IsRequired()
@@ -110,6 +134,10 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Site")
                         .HasMaxLength(100);
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -133,7 +161,15 @@ namespace SiacWeb.Migrations
 
                     b.Property<int>("CentroDeCustoId");
 
+                    b.Property<double>("Comissao");
+
+                    b.Property<DateTime?>("DataAlteracao");
+
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<DateTime?>("DataDeNascimento");
+
+                    b.Property<int>("EmUso");
 
                     b.Property<string>("Email")
                         .HasMaxLength(100);
@@ -143,6 +179,10 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Instagram")
                         .HasMaxLength(100);
+
+                    b.Property<string>("Maquina")
+                        .IsRequired()
+                        .HasMaxLength(256);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -159,6 +199,10 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Telegram")
                         .HasMaxLength(20);
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasMaxLength(256);
 
                     b.Property<string>("Whatsapp")
                         .HasMaxLength(20);
