@@ -19,5 +19,6 @@ namespace SiacWeb.Models
         public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Transportadora> Transportadora { get; set; }
+        public DbSet<Autonomo> Autonomo { get; set; }
     }
 }

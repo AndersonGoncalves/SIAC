@@ -44,6 +44,7 @@ namespace SiacWeb
             services.AddScoped<FuncionarioService>();
             services.AddScoped<FornecedorService>();
             services.AddScoped<TransportadoraService>();
+            services.AddScoped<AutonomoService>();
 
             services.Configure<IdentityOptions>(options =>
             {
