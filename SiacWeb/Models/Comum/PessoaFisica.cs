@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SiacWeb.Models.Comum
 {
-    public abstract class PessoaFisica : BaseCentroDeCusto
+    public abstract class PessoaFisica : BaseEmpresa
     {
         [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(80, ErrorMessage = "Tamanho máximo {1} caracteres")]
@@ -50,5 +50,7 @@ namespace SiacWeb.Models.Comum
         public string NomePai { get; set; }
 
         public virtual Endereco Endereco { get; set; } = new Endereco();
+
+        public virtual DadosBancarios DadosBancarios { get; set; } = new DadosBancarios();
     }
 }

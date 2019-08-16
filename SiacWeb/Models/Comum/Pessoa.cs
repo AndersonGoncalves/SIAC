@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SiacWeb.Models.Comum
 {
-    public abstract class Pessoa : BaseCentroDeCusto
+    public abstract class Pessoa : BaseEmpresa
     {
         [Required(ErrorMessage = "{0} obrigatório")]
         [Display(Name ="Tipo")]
@@ -70,5 +70,7 @@ namespace SiacWeb.Models.Comum
         public string NomePai { get; set; }
 
         public virtual Endereco Endereco { get; set; } = new Endereco();
+
+        public virtual DadosBancarios DadosBancarios { get; set; } = new DadosBancarios();
     }
 }

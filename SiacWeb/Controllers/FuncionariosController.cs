@@ -14,11 +14,13 @@ namespace SiacWeb.Controllers
     public class FuncionariosController : Controller
     {
         private readonly FuncionarioService _funcionarioService;
+        private readonly EmpresaService _empresaService;
         private readonly CentroDeCustoService _centroDeCustoService;
 
-        public FuncionariosController(FuncionarioService funcionarioService, CentroDeCustoService centroDeCustoService)
+        public FuncionariosController(FuncionarioService funcionarioService, EmpresaService empresaService, CentroDeCustoService centroDeCustoService)
         {
             _funcionarioService = funcionarioService;
+            _empresaService = empresaService;
             _centroDeCustoService = centroDeCustoService;
         }
         public async Task<IActionResult> Index(int? pagina, string consulta)
@@ -39,8 +41,9 @@ namespace SiacWeb.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var centrosDeCustos = await _centroDeCustoService.FindAllAsync();
-            FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { CentroDeCustos = centrosDeCustos };
+            var empresas = await _empresaService.FindAllAsync();
+            var centroDeCustos = await _centroDeCustoService.FindAllAsync();
+            FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { Empresas = empresas, CentrosDeCustos = centroDeCustos };
             return View(viewModel);
         }
 
@@ -110,8 +113,9 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            var centrosDeCustos = await _centroDeCustoService.FindAllAsync();
-            FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { Funcionario = obj, CentroDeCustos = centrosDeCustos };
+            var empresas = await _empresaService.FindAllAsync();
+            var centroDeCustos = await _centroDeCustoService.FindAllAsync();
+            FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { Funcionario = obj, Empresas = empresas, CentrosDeCustos = centroDeCustos };
             return View(viewModel);
         }
 

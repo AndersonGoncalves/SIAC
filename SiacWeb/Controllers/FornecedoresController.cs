@@ -14,12 +14,12 @@ namespace SiacWeb.Controllers
     public class FornecedoresController : Controller
     {
         private readonly FornecedorService _fornecedorService;
-        private readonly CentroDeCustoService _centroDeCustoService;
+        private readonly EmpresaService _empresaService;
 
-        public FornecedoresController(FornecedorService fornecedorService, CentroDeCustoService centroDeCustoService)
+        public FornecedoresController(FornecedorService fornecedorService, EmpresaService empresaService)
         {
             _fornecedorService = fornecedorService;
-            _centroDeCustoService = centroDeCustoService;
+            _empresaService = empresaService;
         }
 
         public async Task<IActionResult> Index(int? pagina, string consulta)
@@ -40,8 +40,8 @@ namespace SiacWeb.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var centrosDeCustos = await _centroDeCustoService.FindAllAsync();
-            FornecedorFormViewModel viewModel = new FornecedorFormViewModel { CentroDeCustos = centrosDeCustos };
+            var empresas = await _empresaService.FindAllAsync();
+            FornecedorFormViewModel viewModel = new FornecedorFormViewModel { Empresas = empresas };
             return View(viewModel);
         }
 
@@ -111,8 +111,8 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            var centrosDeCustos = await _centroDeCustoService.FindAllAsync();
-            FornecedorFormViewModel viewModel = new FornecedorFormViewModel { Fornecedor = obj, CentroDeCustos = centrosDeCustos };
+            var empresas = await _empresaService.FindAllAsync();
+            FornecedorFormViewModel viewModel = new FornecedorFormViewModel { Fornecedor = obj, Empresas = empresas };
             return View(viewModel);
         }
 

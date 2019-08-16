@@ -23,10 +23,10 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.CentroDeCustoId" class="col-lg-2 control-label" for="inputSmall"></label>
+            <label asp-for="Fornecedor.EmpresaId" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
-                <select asp-for="Fornecedor.CentroDeCustoId" asp-items="@(new SelectList(Model.CentroDeCustos,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall" placeholder="Centro de custo"></select>
-                <span asp-validation-for="Fornecedor.CentroDeCustoId" class="text-danger"></span>
+                <select asp-for="Fornecedor.EmpresaId" asp-items="@(new SelectList(Model.Empresas,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall" placeholder="Empresas"></select>
+                <span asp-validation-for="Fornecedor.EmpresaId" class="text-danger"></span>
             </div>
         </div>
 
@@ -195,6 +195,34 @@
             <div class="col-lg-10">
                 <input asp-for="Fornecedor.Endereco.CEP" class="form-control input-sm" id="inputSmall" placeholder="CEP" />
                 <span asp-validation-for="Fornecedor.Endereco.CEP" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group has-success">
+            <label class="col-lg-2 control-label">Dados Bancários</label>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Fornecedor.DadosBancarios.CodigoBanco" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="Fornecedor.DadosBancarios.CodigoBanco" class="form-control input-sm" id="inputSmall" placeholder="Código do Banco" />
+                <span asp-validation-for="Fornecedor.DadosBancarios.CodigoBanco" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Fornecedor.DadosBancarios.Agencia" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="Fornecedor.DadosBancarios.Agencia" class="form-control input-sm" id="inputSmall" placeholder="Número da Agência" />
+                <span asp-validation-for="Fornecedor.DadosBancarios.Agencia" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Fornecedor.DadosBancarios.Conta" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="Fornecedor.DadosBancarios.Conta" class="form-control input-sm" id="inputSmall" placeholder="Número da Conta" />
+                <span asp-validation-for="Fornecedor.DadosBancarios.Conta" class="text-danger"></span>
             </div>
         </div>
 

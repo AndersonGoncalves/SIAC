@@ -10,8 +10,8 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190816114631_Fornecedor")]
-    partial class Fornecedor
+    [Migration("20190816132213_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,6 +69,12 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("NomeFantasia")
                         .HasMaxLength(50);
+
+                    b.Property<string>("NomeMae")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("NomePai")
+                        .HasMaxLength(80);
 
                     b.Property<string>("Observacao");
 
@@ -171,8 +177,6 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Celular")
                         .HasMaxLength(20);
 
-                    b.Property<int>("CentroDeCustoId");
-
                     b.Property<DateTime?>("DataAlteracao");
 
                     b.Property<DateTime>("DataCadastro");
@@ -183,6 +187,8 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(100);
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<string>("Facebook")
                         .HasMaxLength(100);
@@ -235,7 +241,7 @@ namespace SiacWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CentroDeCustoId");
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("Fornecedor");
                 });
@@ -257,7 +263,7 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Celular")
                         .HasMaxLength(20);
 
-                    b.Property<int>("CentroDeCustoId");
+                    b.Property<int?>("CentroDeCustoId");
 
                     b.Property<double>("Comissao");
 
@@ -271,6 +277,8 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(100);
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<string>("Facebook")
                         .HasMaxLength(100);
@@ -311,6 +319,8 @@ namespace SiacWeb.Migrations
 
                     b.HasIndex("CentroDeCustoId");
 
+                    b.HasIndex("EmpresaId");
+
                     b.ToTable("Funcionario");
                 });
 
@@ -320,6 +330,31 @@ namespace SiacWeb.Migrations
                         .WithMany("CentroDeCustos")
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("SiacWeb.Models.Comum.DadosBancarios", "DadosBancarios", b1 =>
+                        {
+                            b1.Property<int>("CentroDeCustoId1")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Agencia")
+                                .HasMaxLength(10);
+
+                            b1.Property<int>("CentroDeCustoId");
+
+                            b1.Property<string>("CodigoBanco")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("Conta")
+                                .HasMaxLength(20);
+
+                            b1.ToTable("CentroDeCusto");
+
+                            b1.HasOne("SiacWeb.Models.CentroDeCusto")
+                                .WithOne("DadosBancarios")
+                                .HasForeignKey("SiacWeb.Models.Comum.DadosBancarios", "CentroDeCustoId1")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
 
                     b.OwnsOne("SiacWeb.Models.Comum.Endereco", "Endereco", b1 =>
                         {
@@ -361,10 +396,33 @@ namespace SiacWeb.Migrations
 
             modelBuilder.Entity("SiacWeb.Models.Fornecedor", b =>
                 {
-                    b.HasOne("SiacWeb.Models.CentroDeCusto", "CentroDeCusto")
+                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
                         .WithMany()
-                        .HasForeignKey("CentroDeCustoId")
+                        .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("SiacWeb.Models.Comum.DadosBancarios", "DadosBancarios", b1 =>
+                        {
+                            b1.Property<int>("FornecedorId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Agencia")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("CodigoBanco")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("Conta")
+                                .HasMaxLength(20);
+
+                            b1.ToTable("Fornecedor");
+
+                            b1.HasOne("SiacWeb.Models.Fornecedor")
+                                .WithOne("DadosBancarios")
+                                .HasForeignKey("SiacWeb.Models.Comum.DadosBancarios", "FornecedorId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
 
                     b.OwnsOne("SiacWeb.Models.Comum.Endereco", "Endereco", b1 =>
                         {
@@ -406,8 +464,35 @@ namespace SiacWeb.Migrations
                 {
                     b.HasOne("SiacWeb.Models.CentroDeCusto", "CentroDeCusto")
                         .WithMany()
-                        .HasForeignKey("CentroDeCustoId")
+                        .HasForeignKey("CentroDeCustoId");
+
+                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("SiacWeb.Models.Comum.DadosBancarios", "DadosBancarios", b1 =>
+                        {
+                            b1.Property<int>("FuncionarioId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Agencia")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("CodigoBanco")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("Conta")
+                                .HasMaxLength(20);
+
+                            b1.ToTable("Funcionario");
+
+                            b1.HasOne("SiacWeb.Models.Funcionario")
+                                .WithOne("DadosBancarios")
+                                .HasForeignKey("SiacWeb.Models.Comum.DadosBancarios", "FuncionarioId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
 
                     b.OwnsOne("SiacWeb.Models.Comum.Endereco", "Endereco", b1 =>
                         {
