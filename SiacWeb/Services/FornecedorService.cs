@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
+using SiacWeb.Comum;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
 
@@ -10,7 +11,6 @@ namespace SiacWeb.Services
     public class FornecedorService
     {
         private readonly SiacWebContext _context;
-        private readonly int _quantidadePorPagina = 10;
 
         public FornecedorService(SiacWebContext context)
         {
@@ -24,7 +24,7 @@ namespace SiacWeb.Services
 
         public async Task<IPagedList<Fornecedor>> FindAllAsync(int pagina)
         {
-            return await _context.Fornecedor.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+            return await _context.Fornecedor.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task<IPagedList<Fornecedor>> FindAsync(int pagina, string consulta)
@@ -36,7 +36,7 @@ namespace SiacWeb.Services
             else
                 result = result.Where(x => x.RazaoSocial.Contains(consulta));
 
-            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, _quantidadePorPagina);
+            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task InsertAsync(Fornecedor obj)
