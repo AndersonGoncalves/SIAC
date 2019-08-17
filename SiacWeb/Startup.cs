@@ -52,10 +52,10 @@ namespace SiacWeb
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = false;// true;
+                options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false; // true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredUniqueChars = 6;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);

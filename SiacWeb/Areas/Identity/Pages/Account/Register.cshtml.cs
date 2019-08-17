@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SiacWeb.Comum;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
@@ -8,25 +8,29 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace SiacWeb.Areas.Identity.Pages.Account
 {
-    
+
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
+            RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -37,6 +41,9 @@ namespace SiacWeb.Areas.Identity.Pages.Account
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public string Role { get; set; }
+
 
         public class InputModel
         {
@@ -55,10 +62,31 @@ namespace SiacWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirmar senha")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "Perfil")]
+            [UIHint("List")]
+            public List<SelectListItem> Roles { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
         {
+            string[] rolesNames = { Perfil.Admin,
+                Perfil.Gerente,
+                Perfil.Vendedor,
+                Perfil.Comprador,
+                Perfil.Cobrador,
+                Perfil.Caixa,
+                Perfil.Financeiro,
+                Perfil.Estoquista };
+            foreach (var item in rolesNames)
+            {
+                var roleExist = await _roleManager.RoleExistsAsync(item);
+                if (!roleExist)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(item));
+                }
+            }
             ReturnUrl = returnUrl;
         }
 
@@ -71,6 +99,16 @@ namespace SiacWeb.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    //Role = Perfil.Admin;
+                    if (Role != null)
+                    {
+                        var applicationRole = await _roleManager.FindByNameAsync(Role);
+                        if (applicationRole != null)
+                        {
+                            await _userManager.AddToRoleAsync(user, applicationRole.Name);
+                        }
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

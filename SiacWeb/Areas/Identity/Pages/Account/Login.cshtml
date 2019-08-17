@@ -32,12 +32,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <a asp-action="Index" class="btn btn-default">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </div>
                     <div class="form-group">
                         <p>
                             <a asp-page="./ForgotPassword">Esqueceu sua senha?</a>
-                        </p>                        
+                        </p>  
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registre-se</a>
+                        </p>
                     </div>
                 </form>
             </section>

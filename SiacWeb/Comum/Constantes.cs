@@ -2,6 +2,6 @@
 {
     public static class Constantes
     {
-        public static readonly int QuantidadeRegistrosPorPagina = 10;
+        public const int QuantidadeRegistrosPorPagina = 10;
     }
 }

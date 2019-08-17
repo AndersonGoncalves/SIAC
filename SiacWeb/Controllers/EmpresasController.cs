@@ -6,6 +6,7 @@ using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
+using SiacWeb.Comum;
 using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers

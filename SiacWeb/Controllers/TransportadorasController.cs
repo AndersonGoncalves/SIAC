@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
 {
+    [Authorize]
     public class TransportadorasController : Controller
     {
         private readonly TransportadoraService _transportadoraService;

@@ -14,13 +14,15 @@ namespace SiacWeb.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<SiacWebIdentityContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("SiacWebContext")));
 
                 services.AddDefaultIdentity<IdentityUser>()
-                    .AddEntityFrameworkStores<SiacWebIdentityContext>();
+                        .AddRoles<IdentityRole>()
+                        .AddEntityFrameworkStores<SiacWebIdentityContext>();
             });
         }
     }
