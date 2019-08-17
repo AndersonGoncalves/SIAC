@@ -47,6 +47,7 @@ namespace SiacWeb
             services.AddScoped<TransportadoraService>();
             services.AddScoped<AutonomoService>();
             services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<RoleService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

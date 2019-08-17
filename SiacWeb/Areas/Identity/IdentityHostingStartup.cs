@@ -22,7 +22,8 @@ namespace SiacWeb.Areas.Identity
 
                 services.AddDefaultIdentity<IdentityUser>()
                         .AddRoles<IdentityRole>()
-                        .AddEntityFrameworkStores<SiacWebIdentityContext>();
+                        .AddEntityFrameworkStores<SiacWebIdentityContext>()
+                        .AddDefaultTokenProviders();
             });
         }
     }

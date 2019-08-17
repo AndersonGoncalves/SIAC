@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Perfis de Usuários";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@(await Html.PartialAsync("_IndexTopPartial"))
+
+<table class="table table-striped">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    <div class="text-right">
+                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id="@item.Id">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@(await Html.PartialAsync("_IndexBottomPartial", Model))
