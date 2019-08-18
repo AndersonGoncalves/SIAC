@@ -11,34 +11,34 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SiacWeb.Services
 {
-    public class RoleService
+    public class UsuarioService
     {
         private readonly SiacWebIdentityContext _context;
 
-        public RoleService(SiacWebIdentityContext context)
+        public UsuarioService(SiacWebIdentityContext context)
         {
             _context = context;
         }
 
-        public async Task<IdentityRole> FindByIdAsync(string id)
+        public async Task<IdentityUser> FindByIdAsync(string id)
         {
-            return await _context.Roles.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<IPagedList<IdentityRole>> FindAllAsync(int pagina)
+        public async Task<IPagedList<IdentityUser>> FindAllAsync(int pagina)
         {
-            return await _context.Roles.OrderBy(obj => obj.Name).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await _context.Users.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<IPagedList<IdentityRole>> FindAsync(int pagina, string consulta)
+        public async Task<IPagedList<IdentityUser>> FindAsync(int pagina, string consulta)
         {
-            var result = from obj in _context.Roles select obj;
-            result = result.Where(x => x.Name.Contains(consulta));
+            var result = from obj in _context.Users select obj;
+            result = result.Where(x => x.UserName.Contains(consulta));
 
-            return await result.OrderBy(x => x.Name).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task InsertAsync(IdentityRole obj)
+        public async Task InsertAsync(IdentityUser obj)
         {
             _context.Add(obj);
             await _context.SaveChangesAsync();
@@ -48,8 +48,8 @@ namespace SiacWeb.Services
         {
             try
             {
-                var obj = await _context.Roles.FindAsync(id);
-                _context.Roles.Remove(obj);
+                var obj = await _context.Users.FindAsync(id);
+                _context.Users.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
@@ -58,9 +58,9 @@ namespace SiacWeb.Services
             }
         }
 
-        public async Task UpdateAsync(IdentityRole obj)
+        public async Task UpdateAsync(IdentityUser obj)
         {
-            bool TemAlgum = await _context.Roles.AnyAsync(x => x.Id == obj.Id);
+            bool TemAlgum = await _context.Users.AnyAsync(x => x.Id == obj.Id);
             if (!TemAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");

@@ -13,13 +13,13 @@ using Microsoft.AspNetCore.Identity;
 namespace SiacWeb.Controllers
 {
     [Authorize]
-    public class RolesController : Controller
+    public class UsuariosController : Controller
     {
-        private readonly RoleService _roleService;
+        private readonly UsuarioService _usuarioService;
 
-        public RolesController(RoleService roleService)
+        public UsuariosController(UsuarioService usuarioService)
         {
-            _roleService = roleService;
+            _usuarioService = usuarioService;
         }
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
@@ -27,12 +27,12 @@ namespace SiacWeb.Controllers
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _roleService.FindAllAsync(page);
+                var List = await _usuarioService.FindAllAsync(page);
                 return View(List);
             }
             else
             {
-                var List = await _roleService.FindAsync(page, consulta);
+                var List = await _usuarioService.FindAsync(page, consulta);
                 return View(List);
             }
         }
@@ -44,13 +44,13 @@ namespace SiacWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IdentityRole role)
+        public async Task<IActionResult> Create(IdentityUser usuario)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            await _roleService.InsertAsync(role);
+            await _usuarioService.InsertAsync(usuario);
             return RedirectToAction(nameof(Index));
         }
 
@@ -59,7 +59,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
-            var obj = await _roleService.FindByIdAsync(id);
+            var obj = await _usuarioService.FindByIdAsync(id);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -72,7 +72,7 @@ namespace SiacWeb.Controllers
         {
             try
             {
-                await _roleService.RemoveAsync(id);
+                await _usuarioService.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (IntegrityException e)
@@ -86,7 +86,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
-            var obj = await _roleService.FindByIdAsync(id);
+            var obj = await _usuarioService.FindByIdAsync(id);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -99,7 +99,7 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
-            var obj = await _roleService.FindByIdAsync(id);
+            var obj = await _usuarioService.FindByIdAsync(id);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
@@ -110,19 +110,19 @@ namespace SiacWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, IdentityRole role)
+        public async Task<IActionResult> Edit(string id, IdentityUser usuario)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            if (id != role.Id)
+            if (id != usuario.Id)
             {
                 return BadRequest();
             }
             try
             {
-                await _roleService.UpdateAsync(role);
+                await _usuarioService.UpdateAsync(usuario);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

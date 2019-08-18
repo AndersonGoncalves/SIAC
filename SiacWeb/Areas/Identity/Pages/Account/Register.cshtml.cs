@@ -72,13 +72,15 @@ namespace SiacWeb.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             string[] rolesNames = { Perfil.Admin,
+                Perfil.Diretor,
                 Perfil.Gerente,
                 Perfil.Vendedor,
                 Perfil.Comprador,
                 Perfil.Cobrador,
                 Perfil.Caixa,
                 Perfil.Financeiro,
-                Perfil.Estoquista };
+                Perfil.Estoquista,
+                Perfil.Supervisor};
             foreach (var item in rolesNames)
             {
                 var roleExist = await _roleManager.RoleExistsAsync(item);
