@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Services;
 using SiacWeb.Models;
+using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
-{
-    [Authorize]
+{    
+    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor)]
     public class CentroDeCustosController : Controller
     {
         private readonly CentroDeCustoService _centroDeCustoService;

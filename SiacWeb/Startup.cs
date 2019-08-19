@@ -33,7 +33,7 @@ namespace SiacWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<SiacWebContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SiacWebContext")));
@@ -77,7 +77,7 @@ namespace SiacWeb
             });
             // Add application services.
             //services.AddTransient<IEmailSender, EmailSender>();
-            services.AddMvc();
+            services.AddMvc();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

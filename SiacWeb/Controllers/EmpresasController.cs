@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor)]
     public class EmpresasController : Controller
     {
         private readonly EmpresaService _empresaService;

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiacWeb", "SiacWeb\SiacWeb.csproj", "{7A9C9FF9-A446-47BF-98A7-3BE25840B4F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiacWeb", "SiacWeb\SiacWeb.csproj", "{90BC3123-3BAB-4D94-A975-099CDA471346}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7A9C9FF9-A446-47BF-98A7-3BE25840B4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A9C9FF9-A446-47BF-98A7-3BE25840B4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A9C9FF9-A446-47BF-98A7-3BE25840B4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A9C9FF9-A446-47BF-98A7-3BE25840B4F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90BC3123-3BAB-4D94-A975-099CDA471346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90BC3123-3BAB-4D94-A975-099CDA471346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90BC3123-3BAB-4D94-A975-099CDA471346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90BC3123-3BAB-4D94-A975-099CDA471346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {412FE600-7772-469F-A7F7-4BC5A3A68A41}
+		SolutionGuid = {EF9A956C-F79C-4D30-BC06-FA9007DF28F5}
 	EndGlobalSection
 EndGlobal
