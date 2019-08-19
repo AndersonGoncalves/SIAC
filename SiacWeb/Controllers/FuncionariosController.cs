@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
 {
-    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Gerente)]
+    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
     public class FuncionariosController : Controller
     {
         private readonly FuncionarioService _funcionarioService;

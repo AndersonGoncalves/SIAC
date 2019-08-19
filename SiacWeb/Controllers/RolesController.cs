@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SiacWeb.Controllers
 {
-    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Gerente)]
+    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
     public class RolesController : Controller
     {
         private readonly RoleService _roleService;

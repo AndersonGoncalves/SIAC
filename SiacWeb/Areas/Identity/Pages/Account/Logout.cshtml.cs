@@ -26,10 +26,15 @@ namespace SiacWeb.Areas.Identity.Pages.Account
         {
         }
 
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        //public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> OnPost(string returnUrl)
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+
+            //Redirecionando sempre para o home quando sair do sistema
+            returnUrl = "/Home";
+
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);
