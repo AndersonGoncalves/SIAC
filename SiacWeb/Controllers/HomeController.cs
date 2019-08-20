@@ -13,14 +13,14 @@ namespace SiacWeb.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "SIAC - Sistema integrado de automação comercial";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Nossos contatos";
 
             return View();
         }
