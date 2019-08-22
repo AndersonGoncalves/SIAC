@@ -62,7 +62,8 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            return View();
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -89,7 +90,8 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            return View();
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -104,7 +106,8 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            return View();
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            return View(viewModel);
         }
 
         [HttpPost]
