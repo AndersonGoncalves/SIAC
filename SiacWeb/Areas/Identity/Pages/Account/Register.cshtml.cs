@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using SiacWeb.Models.Enums;
+using SiacWeb.Models;
 
 namespace SiacWeb.Areas.Identity.Pages.Account
 {
@@ -47,6 +49,12 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            public string Nome { get; set; }
+
+            [Required]
+            public string Sobrenome { get; set; }
+           
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -97,11 +105,12 @@ namespace SiacWeb.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new Usuario { UserName = Input.Email, Email = Input.Email, Nome = Input.Nome, SobreNome = Input.Sobrenome };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    //Role = Perfil.Admin;
+                    Role = Perfil.Admin; //Por enquanto que não tem no sistema a opção de atribuir permissão 
                     if (Role != null)
                     {
                         var applicationRole = await _roleManager.FindByNameAsync(Role);

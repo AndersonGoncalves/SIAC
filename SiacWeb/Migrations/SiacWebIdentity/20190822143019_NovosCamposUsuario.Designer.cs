@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiacWeb.Models;
 
 namespace SiacWeb.Migrations.SiacWebIdentity
 {
     [DbContext(typeof(SiacWebIdentityContext))]
-    partial class SiacWebIdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20190822143019_NovosCamposUsuario")]
+    partial class NovosCamposUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

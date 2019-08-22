@@ -19,37 +19,31 @@ namespace SiacWeb.Services
         {
             _context = context;
         }
-
-        public async Task<IdentityUser> FindByIdAsync(string id)
+        
+        public async Task<Usuario> FindByIdAsync(string id)
         {
-            return await _context.Users.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Usuario.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<IPagedList<IdentityUser>> FindAllAsync(int pagina)
+        public async Task<IPagedList<Usuario>> FindAllAsync(int pagina)
         {
-            return await _context.Users.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await _context.Usuario.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<IPagedList<IdentityUser>> FindAsync(int pagina, string consulta)
+        public async Task<IPagedList<Usuario>> FindAsync(int pagina, string consulta)
         {
-            var result = from obj in _context.Users select obj;
+            var result = from obj in _context.Usuario select obj;
             result = result.Where(x => x.UserName.Contains(consulta));
 
             return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
-        }
-
-        public async Task InsertAsync(IdentityUser obj)
-        {
-            _context.Add(obj);
-            await _context.SaveChangesAsync();
         }
 
         public async Task RemoveAsync(string id)
         {
             try
             {
-                var obj = await _context.Users.FindAsync(id);
-                _context.Users.Remove(obj);
+                var obj = await _context.Usuario.FindAsync(id);
+                _context.Usuario.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
@@ -58,9 +52,9 @@ namespace SiacWeb.Services
             }
         }
 
-        public async Task UpdateAsync(IdentityUser obj)
+        public async Task UpdateAsync(Usuario obj)
         {
-            bool TemAlgum = await _context.Users.AnyAsync(x => x.Id == obj.Id);
+            bool TemAlgum = await _context.Usuario.AnyAsync(x => x.Id == obj.Id);
             if (!TemAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");

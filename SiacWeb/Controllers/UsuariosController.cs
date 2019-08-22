@@ -8,6 +8,7 @@ using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using SiacWeb.Models;
 
 namespace SiacWeb.Controllers
 {
@@ -36,23 +37,6 @@ namespace SiacWeb.Controllers
             }
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IdentityUser usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            await _usuarioService.InsertAsync(usuario);
-            return RedirectToAction(nameof(Index));
-        }
-
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -62,7 +46,7 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
             return View(viewModel);
         }
 
@@ -90,7 +74,7 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
             return View(viewModel);
         }
 
@@ -106,13 +90,13 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { IdentityUser = obj };
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, IdentityUser usuario)
+        public async Task<IActionResult> Edit(string id, Usuario usuario)
         {
             if (!ModelState.IsValid)
             {
