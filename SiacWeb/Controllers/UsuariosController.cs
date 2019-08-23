@@ -17,12 +17,17 @@ namespace SiacWeb.Controllers
     {
         private readonly UsuarioService _usuarioService;
         private readonly RoleService _roleService;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsuariosController(UsuarioService usuarioService, RoleService roleService)
+        public UsuariosController(UsuarioService usuarioService, RoleService roleService, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _usuarioService = usuarioService;
             _roleService = roleService;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
+
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
             int page = pagina ?? 1;
@@ -105,6 +110,34 @@ namespace SiacWeb.Controllers
             var roles = await _roleService.FindAllAsync();
             UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles };
             return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Permissoes(string id, string role)
+        {
+            try
+            {
+                //role = "Gerente"; //TODO
+                var user = await _usuarioService.FindByIdAsync(id);
+                if (role != null)
+                {
+                    var applicationRole = await _roleManager.FindByNameAsync(role);
+                    if (applicationRole != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, applicationRole.Name);
+                    }
+                }
+
+                var obj = await _usuarioService.FindByIdAsync(id);
+                var roles = await _roleService.FindAllAsync();
+                UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles };
+                return View(viewModel);
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
     }
 }
