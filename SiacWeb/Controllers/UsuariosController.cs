@@ -118,11 +118,10 @@ namespace SiacWeb.Controllers
         {
             try
             {
-                //role = "Gerente"; //TODO
                 var user = await _usuarioService.FindByIdAsync(id);
                 if (role != null)
                 {
-                    var applicationRole = await _roleManager.FindByNameAsync(role);
+                    var applicationRole = await _roleManager.FindByIdAsync(role);
                     if (applicationRole != null)
                     {
                         await _userManager.AddToRoleAsync(user, applicationRole.Name);

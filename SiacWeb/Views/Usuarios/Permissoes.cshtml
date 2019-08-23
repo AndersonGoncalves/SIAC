@@ -33,7 +33,7 @@
         <div class="form-group">
 
             <div class="col-lg-2">
-                <select asp-for="Usuario.Id" asp-items="@(new SelectList(Model.Roles, "Id", "Name"))" class="form-control input-sm" id="inputSmall" placeholder="Perfil"></select>
+                <select asp-for="Usuario.Id" asp-items="@(new SelectList(Model.Roles, "Id", "Name"))" name="role" class="form-control input-sm" id="inputSmall" placeholder="Perfil"></select>
                 <span asp-validation-for="Usuario.Id" class="text-danger"></span>
                 <br />
                 <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
