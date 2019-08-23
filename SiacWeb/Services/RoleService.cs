@@ -8,6 +8,7 @@ using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace SiacWeb.Services
 {
@@ -28,6 +29,11 @@ namespace SiacWeb.Services
         public async Task<IPagedList<IdentityRole>> FindAllAsync(int pagina)
         {
             return await _context.Roles.OrderBy(obj => obj.Name).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+        }
+
+        public async Task<List<IdentityRole>> FindAllAsync()
+        {
+            return await _context.Roles.OrderBy(x => x.Id).ToListAsync();
         }
 
         public async Task<IPagedList<IdentityRole>> FindAsync(int pagina, string consulta)

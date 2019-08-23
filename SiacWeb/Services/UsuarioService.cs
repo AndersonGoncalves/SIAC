@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Models;
 using SiacWeb.Comum;
-using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
-using Microsoft.AspNetCore.Identity;
 
 namespace SiacWeb.Services
 {
@@ -49,25 +46,6 @@ namespace SiacWeb.Services
             catch (DbUpdateException e)
             {
                 throw new IntegrityException(e.Message);
-            }
-        }
-
-        public async Task UpdateAsync(Usuario obj)
-        {
-            bool TemAlgum = await _context.Usuario.AnyAsync(x => x.Id == obj.Id);
-            if (!TemAlgum)
-            {
-                throw new NotFoundException("Id não encontrado!");
-            }
-
-            try
-            {
-                _context.Update(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                throw new DbConcurrencyException(e.Message);
             }
         }
     }

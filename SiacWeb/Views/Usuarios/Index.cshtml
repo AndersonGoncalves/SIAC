@@ -44,7 +44,9 @@
 
                 <td>
                     <div class="text-right">
-                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Visualizar</a>
+                        <a asp-action="Permissoes" class="btn btn-warning btn-xs" asp-route-id=@item.Id>Perfil</a>
+                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id=@item.Id>Excluir</a>
                     </div>
                 </td>
             </tr>

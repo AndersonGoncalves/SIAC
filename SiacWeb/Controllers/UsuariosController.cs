@@ -16,10 +16,12 @@ namespace SiacWeb.Controllers
     public class UsuariosController : Controller
     {
         private readonly UsuarioService _usuarioService;
+        private readonly RoleService _roleService;
 
-        public UsuariosController(UsuarioService usuarioService)
+        public UsuariosController(UsuarioService usuarioService, RoleService roleService)
         {
             _usuarioService = usuarioService;
+            _roleService = roleService;
         }
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
@@ -78,7 +80,17 @@ namespace SiacWeb.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> Permissoes(string id)
         {
             if (id == null)
             {
@@ -90,40 +102,8 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Usuario usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            if (id != usuario.Id)
-            {
-                return BadRequest();
-            }
-            try
-            {
-                await _usuarioService.UpdateAsync(usuario);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (ApplicationException e)
-            {
-                return RedirectToAction(nameof(Error), new { message = e.Message });
-            }
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
+            var roles = await _roleService.FindAllAsync();
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles };
             return View(viewModel);
         }
     }
