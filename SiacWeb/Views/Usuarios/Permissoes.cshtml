@@ -22,13 +22,48 @@
                 </dt>
                 <dd>
 
+                    @foreach (var item in Model.Roles)
+                    {
+                        <!--
+                            <label>
+                            <input type="checkbox" name="incluir" checked="true" onclick="javascript:document.getElementById('teste').submit()">
+                        </label>
+                        -->
+
+                        @using (Html.BeginForm("Permissoes", "Usuario"))
+                        {
+                            @if (Model.ExisteRoles(@item.Name))
+                            {
+                                @Html.CheckBox("incluir", true)
+                            }
+                            else
+                            {
+                                @Html.CheckBox("incluir", false)
+                            }
+
+                            <input type="submit" value="@item.Name" name="roleName" />
+                        }
+
+                    }
+
                 </dd>
             </dl>
         </div>
     </div>
 </div>
 
-<form asp-action="PermissoesPost">
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-lg-2">
+            <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
+            <a asp-action="Index" class="btn btn-primary btn-sm">Salvar</a>
+        </div>
+    </div>
+</div>
+
+<!--
+<form asp-action="Permissoes">
     <div class="row">
         <div class="form-group">
 
@@ -43,3 +78,4 @@
         </div>
     </div>
 </form>
+    -->

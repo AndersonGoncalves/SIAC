@@ -48,5 +48,24 @@ namespace SiacWeb.Services
                 throw new IntegrityException(e.Message);
             }
         }
+
+        public async Task RemoveRoleAsync(string roleName)
+        {
+            try
+            {
+                var objRoler = await _context.Roles.FirstOrDefaultAsync(x => x.Name == roleName);
+                var obj = await _context.UserRoles.FirstOrDefaultAsync(x => x.RoleId == objRoler.Id);
+
+                if (obj != null)
+                {
+                    _context.UserRoles.Remove(obj);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
+        }
     }
 }

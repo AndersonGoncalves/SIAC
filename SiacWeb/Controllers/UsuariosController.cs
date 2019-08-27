@@ -108,29 +108,37 @@ namespace SiacWeb.Controllers
             }
 
             var roles = await _roleService.FindAllAsync();
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles };
+
+            var userRoles = await _userManager.GetRolesAsync(obj);
+
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles};
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Permissoes(string id, string role)
-        {
+        public async Task<IActionResult> Permissoes(string id, bool incluir, string roleName)
+        {            
             try
             {
                 var user = await _usuarioService.FindByIdAsync(id);
-                if (role != null)
+                if (incluir)
                 {
-                    var applicationRole = await _roleManager.FindByIdAsync(role);
+                    var applicationRole = await _roleManager.FindByNameAsync(roleName);
                     if (applicationRole != null)
                     {
                         await _userManager.AddToRoleAsync(user, applicationRole.Name);
                     }
                 }
+                else
+                {
+                    await _usuarioService.RemoveRoleAsync(roleName);
+                }
 
-                var obj = await _usuarioService.FindByIdAsync(id);
+                //var obj = await _usuarioService.FindByIdAsync(id);
                 var roles = await _roleService.FindAllAsync();
-                UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles };
+                var userRoles = await _userManager.GetRolesAsync(user);
+                UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = user, Roles = roles, UserRoles = userRoles };
                 return View(viewModel);
             }
             catch (IntegrityException e)
