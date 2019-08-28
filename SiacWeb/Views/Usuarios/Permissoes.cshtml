@@ -1,4 +1,5 @@
-﻿@model SiacWeb.Models.ViewModels.UsuarioFormViewModel
+﻿@using SiacWeb.Comum
+@model SiacWeb.Models.ViewModels.UsuarioFormViewModel
 
 @{
     ViewData["Title"] = "Perfil de Usuário";
@@ -6,76 +7,67 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div class="form-horizontal jumbotron">
-    <div class="row">
-        <div class="col-md-4">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Usuario.Nome):
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Usuario.Nome) @Html.DisplayFor(model => model.Usuario.SobreNome)
-                </dd>
+<form asp-action="Permissoes">
+    <div class="form-horizontal jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Usuario.Nome):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Usuario.Nome) @Html.DisplayFor(model => model.Usuario.SobreNome)
+                    </dd>
 
-                <dt>
-                    Perfil:
-                </dt>
-                <dd>
-
-                    @foreach (var item in Model.Roles)
-                    {
-                        <!--
-                            <label>
-                            <input type="checkbox" name="incluir" checked="true" onclick="javascript:document.getElementById('teste').submit()">
-                        </label>
-                        -->
-
-                        @using (Html.BeginForm("Permissoes", "Usuario"))
+                    <dt>
+                        Perfil:
+                    </dt>
+                    <dd>
+                        @foreach (var item in Model.Roles)
                         {
                             @if (Model.ExisteRoles(@item.Name))
                             {
-                                @Html.CheckBox("incluir", true)
+                                <label>
+                                    @if (@item.Name == Perfil.Admin)
+                                    {
+                                        <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" disabled="disabled" /> @item.Name
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" /> @item.Name
+                                    }
+                                </label>
                             }
                             else
                             {
-                                @Html.CheckBox("incluir", false)
+                                <label>
+                                    @if (@item.Name == Perfil.Admin)
+                                    {
+                                        <input type="checkbox" name="listaRoles" value="@item.Name" disabled="disabled" /> @item.Name
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="listaRoles" value="@item.Name" /> @item.Name
+                                    }
+                                </label>
                             }
-
-                            <input type="submit" value="@item.Name" name="roleName" />
+                            <br />
                         }
 
-                    }
-
-                </dd>
-            </dl>
+                    </dd>
+                </dl>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="row">
-    <div class="form-group">
-        <div class="col-lg-2">
-            <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
-            <a asp-action="Index" class="btn btn-primary btn-sm">Salvar</a>
-        </div>
-    </div>
-</div>
-
-<!--
-<form asp-action="Permissoes">
     <div class="row">
         <div class="form-group">
-
             <div class="col-lg-2">
-                <select asp-for="Usuario.Id" asp-items="@(new SelectList(Model.Roles, "Id", "Name"))" name="role" class="form-control input-sm" id="inputSmall" placeholder="Perfil"></select>
-                <span asp-validation-for="Usuario.Id" class="text-danger"></span>
-                <br />
                 <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+                <input type="submit" value="Salvar" class="btn btn-primary btn-sm" />
             </div>
-
         </div>
     </div>
+
 </form>
-    -->

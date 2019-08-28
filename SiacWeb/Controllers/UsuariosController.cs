@@ -9,6 +9,7 @@ using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using SiacWeb.Models;
+using System.Collections.Generic;
 
 namespace SiacWeb.Controllers
 {
@@ -19,6 +20,9 @@ namespace SiacWeb.Controllers
         private readonly RoleService _roleService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
+        //[BindProperty]
+        //public List<string> ListaRoles { get; set; }
 
         public UsuariosController(UsuarioService usuarioService, RoleService roleService, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -108,38 +112,36 @@ namespace SiacWeb.Controllers
             }
 
             var roles = await _roleService.FindAllAsync();
-
             var userRoles = await _userManager.GetRolesAsync(obj);
-
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles};
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Permissoes(string id, bool incluir, string roleName)
-        {            
+        public async Task<IActionResult> Permissoes(string id, List<string> listaRoles)
+        {
             try
             {
                 var user = await _usuarioService.FindByIdAsync(id);
-                if (incluir)
+
+                //Excluindo todas as roles do usuário
+                var rol = await _roleService.FindAllAsync();
+                foreach (var item in rol)
                 {
-                    var applicationRole = await _roleManager.FindByNameAsync(roleName);
+                    await _userManager.RemoveFromRoleAsync(user, item.Name);
+                }                
+
+                //Adiciona as roles listadas ao usuário
+                foreach (var item in listaRoles)
+                {
+                    var applicationRole = await _roleManager.FindByNameAsync(item);
                     if (applicationRole != null)
                     {
                         await _userManager.AddToRoleAsync(user, applicationRole.Name);
                     }
                 }
-                else
-                {
-                    await _usuarioService.RemoveRoleAsync(roleName);
-                }
-
-                //var obj = await _usuarioService.FindByIdAsync(id);
-                var roles = await _roleService.FindAllAsync();
-                var userRoles = await _userManager.GetRolesAsync(user);
-                UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = user, Roles = roles, UserRoles = userRoles };
-                return View(viewModel);
+                return RedirectToAction(nameof(Index));
             }
             catch (IntegrityException e)
             {
