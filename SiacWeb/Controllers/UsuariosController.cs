@@ -57,7 +57,9 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
+            var roles = await _roleService.FindAllAsync();
+            var userRoles = await _userManager.GetRolesAsync(obj);
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };
             return View(viewModel);
         }
 
@@ -85,7 +87,9 @@ namespace SiacWeb.Controllers
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
-            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj };
+            var roles = await _roleService.FindAllAsync();
+            var userRoles = await _userManager.GetRolesAsync(obj);
+            UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };
             return View(viewModel);
         }
 
@@ -110,7 +114,7 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
-
+            
             var roles = await _roleService.FindAllAsync();
             var userRoles = await _userManager.GetRolesAsync(obj);
             UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };

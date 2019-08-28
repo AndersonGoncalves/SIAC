@@ -17,6 +17,20 @@
                     <dd>
                         @Html.DisplayFor(model => model.Usuario.Nome) @Html.DisplayFor(model => model.Usuario.SobreNome)
                     </dd>
+
+                    <dt>
+                        Perfil:
+                    </dt>
+                    <dd>
+                        @foreach (var item in Model.Roles)
+                        {
+                            @if (Model.ExisteRoles(@item.Name))
+                            {
+                                @Html.DisplayFor(model => item.Name)
+                                <br />
+                            }
+                        }
+                    </dd>
                 </dl>
             </div>
         </div>
