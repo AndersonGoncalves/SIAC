@@ -198,34 +198,6 @@
             </div>
         </div>
 
-        <div class="form-group has-success">
-            <label class="col-lg-2 control-label">Dados Bancários</label>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Cliente.DadosBancarios.CodigoBanco" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
-                <input asp-for="Cliente.DadosBancarios.CodigoBanco" class="form-control input-sm" id="inputSmall" placeholder="Código do Banco" />
-                <span asp-validation-for="Cliente.DadosBancarios.CodigoBanco" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Cliente.DadosBancarios.Agencia" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
-                <input asp-for="Cliente.DadosBancarios.Agencia" class="form-control input-sm" id="inputSmall" placeholder="Número da Agência" />
-                <span asp-validation-for="Cliente.DadosBancarios.Agencia" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Cliente.DadosBancarios.Conta" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
-                <input asp-for="Cliente.DadosBancarios.Conta" class="form-control input-sm" id="inputSmall" placeholder="Número da Conta" />
-                <span asp-validation-for="Cliente.DadosBancarios.Conta" class="text-danger"></span>
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
                 <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
