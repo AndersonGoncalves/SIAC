@@ -37,6 +37,11 @@ namespace SiacWeb.Services
             return await _context.Empresa.OrderBy(x => x.Id).ToListAsync();
         }
 
+        public List<Empresa> ListarEmpresas()
+        {
+            return _context.Empresa.OrderBy(x => x.Id).ToList();
+        }
+
         public async Task<IPagedList<Empresa>> FindAsync(int pagina, string consulta)
         {
             var result = from obj in _context.Empresa select obj;

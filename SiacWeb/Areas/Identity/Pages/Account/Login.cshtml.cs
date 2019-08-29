@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SiacWeb.Models;
+using SiacWeb.Comum;
+using SiacWeb.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace SiacWeb.Areas.Identity.Pages.Account
 {
@@ -16,11 +21,14 @@ namespace SiacWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly EmpresaService _empresaService;
+        public List<SelectListItem> Empresas { get; set; }
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, EmpresaService empresaService)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _empresaService = empresaService;            
         }
 
         [BindProperty]
@@ -46,6 +54,9 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             [Display(Name = "Lembre me?")]
             public bool RememberMe { get; set; }
+
+            [Required]
+            public int Empresa { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -62,6 +73,8 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            Empresas = _empresaService.ListarEmpresas().Select(x => new SelectListItem(x.RazaoSocial, x.Id.ToString())).ToList();
+
             ReturnUrl = returnUrl;
         }
 
@@ -71,6 +84,8 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                Global.EmpresaId = Input.Empresa;
+                
                 // This doesn't count login failures towards account lockout
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
