@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Usuario>
+﻿@using SiacWeb.Comum
+@model IEnumerable<Usuario>
 
 @{
     ViewData["Title"] = "Usuários";
@@ -40,13 +41,16 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome) @Html.DisplayFor(modelItem => item.SobreNome)
-                </td>                
+                </td>
 
                 <td>
                     <div class="text-right">
-                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Visualizar</a>
-                        <a asp-action="Permissoes" class="btn btn-warning btn-xs" asp-route-id=@item.Id>Perfil</a>
-                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id=@item.Id>Excluir</a>
+                        @if (item.Nome != Perfil.Admin)
+                        {
+                            <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Visualizar</a>
+                            <a asp-action="Permissoes" class="btn btn-warning btn-xs" asp-route-id=@item.Id>Perfil</a>
+                            <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id=@item.Id>Excluir</a>
+                        }
                     </div>
                 </td>
             </tr>

@@ -28,27 +28,13 @@
                             @if (Model.ExisteRoles(@item.Name))
                             {
                                 <label>
-                                    @if (@item.Name == Perfil.Admin)
-                                    {
-                                        <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" disabled="disabled" /> @item.Name
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" /> @item.Name
-                                    }
+                                    <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" /> @item.Name
                                 </label>
                             }
                             else
                             {
                                 <label>
-                                    @if (@item.Name == Perfil.Admin)
-                                    {
-                                        <input type="checkbox" name="listaRoles" value="@item.Name" disabled="disabled" /> @item.Name
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" name="listaRoles" value="@item.Name" /> @item.Name
-                                    }
+                                    <input type="checkbox" name="listaRoles" value="@item.Name" /> @item.Name
                                 </label>
                             }
                             <br />

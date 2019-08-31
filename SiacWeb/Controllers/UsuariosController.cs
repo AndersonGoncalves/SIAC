@@ -114,7 +114,7 @@ namespace SiacWeb.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             
-            var roles = await _roleService.FindAllAsync();
+            var roles = await _roleService.RetornaRolesSemAdmin();
             var userRoles = await _userManager.GetRolesAsync(obj);
             UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };
             return View(viewModel);
@@ -129,7 +129,7 @@ namespace SiacWeb.Controllers
                 var user = await _usuarioService.FindByIdAsync(id);
 
                 //Excluindo todas as roles do usuário
-                var rol = await _roleService.FindAllAsync();
+                var rol = await _roleService.RetornaRolesSemAdmin();
                 foreach (var item in rol)
                 {
                     await _userManager.RemoveFromRoleAsync(user, item.Name);

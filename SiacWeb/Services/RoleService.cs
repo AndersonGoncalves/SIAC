@@ -36,6 +36,11 @@ namespace SiacWeb.Services
             return await _context.Roles.OrderBy(x => x.Name).ToListAsync();
         }
 
+        public async Task<List<IdentityRole>> RetornaRolesSemAdmin()
+        {
+            return await _context.Roles.Where(x => x.Name != Perfil.Admin).OrderBy(x => x.Name).ToListAsync();
+        }
+
         public async Task<List<IdentityRole>> ListarTudoMenosAdmin()
         {
             return await _context.Roles.Where(x => x.Name != Perfil.Admin).OrderBy(x => x.Name).ToListAsync();
