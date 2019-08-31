@@ -13,6 +13,7 @@ using SiacWeb.Comum;
 using SiacWeb.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Http;
 
 namespace SiacWeb.Areas.Identity.Pages.Account
 {
@@ -84,8 +85,11 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                Global.EmpresaId = Input.Empresa;
-                
+                //Global.EmpresaId = Input.Empresa;
+
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("empresaId")))
+                  HttpContext.Session.SetString("empresaId", Input.Empresa.ToString());
+
                 // This doesn't count login failures towards account lockout
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true

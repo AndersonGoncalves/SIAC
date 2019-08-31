@@ -8,6 +8,7 @@ using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace SiacWeb.Controllers
 {    
@@ -24,6 +25,8 @@ namespace SiacWeb.Controllers
         }
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
+            var empresaId = HttpContext.Session.GetString("empresaId");
+            
             int page = pagina ?? 1;
             ViewData["Consulta"] = consulta;
             if (consulta == null)
