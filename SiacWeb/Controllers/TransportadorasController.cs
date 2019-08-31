@@ -56,6 +56,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new TransportadoraFormViewModel();
                 return View(viewModel);
             }
+            transportadora.EmpresaId = int.Parse(EmpresaId);
             await _transportadoraService.InsertAsync(transportadora);
             return RedirectToAction(nameof(Index));
         }
@@ -133,6 +134,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                transportadora.EmpresaId = int.Parse(EmpresaId);
                 await _transportadoraService.UpdateAsync(transportadora);
                 return RedirectToAction(nameof(Index));
             }

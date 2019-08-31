@@ -58,6 +58,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new FuncionarioFormViewModel();
                 return View(viewModel);
             }
+            funcionario.EmpresaId = int.Parse(EmpresaId);
             await _funcionarioService.InsertAsync(funcionario);
             return RedirectToAction(nameof(Index));
         }
@@ -136,6 +137,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                funcionario.EmpresaId = int.Parse(EmpresaId);
                 await _funcionarioService.UpdateAsync(funcionario);
                 return RedirectToAction(nameof(Index));
             }

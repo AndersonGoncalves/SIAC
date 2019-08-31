@@ -23,14 +23,6 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.EmpresaId" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
-                <select asp-for="Fornecedor.EmpresaId" asp-items="@(new SelectList(Model.Empresas,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall" placeholder="Empresa"></select>
-                <span asp-validation-for="Fornecedor.EmpresaId" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label asp-for="Fornecedor.RazaoSocial" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
                 <input asp-for="Fornecedor.RazaoSocial" class="form-control input-sm" id="inputSmall" placeholder="Nome" />

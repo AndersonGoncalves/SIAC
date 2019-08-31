@@ -56,6 +56,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new ClienteFormViewModel();
                 return View(viewModel);
             }
+            cliente.EmpresaId = int.Parse(EmpresaId);
             await _clienteService.InsertAsync(cliente);
             return RedirectToAction(nameof(Index));
         }
@@ -133,6 +134,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                cliente.EmpresaId = int.Parse(EmpresaId);
                 await _clienteService.UpdateAsync(cliente);
                 return RedirectToAction(nameof(Index));
             }

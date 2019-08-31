@@ -44,6 +44,8 @@ namespace SiacWeb.Controllers
         {
             var empresas = await _empresaService.FindAllAsync();
             CentroDeCustoFormViewModel viewModel = new CentroDeCustoFormViewModel { Empresas = empresas};
+
+            ViewBag.EmpresaId = EmpresaId;
             return View(viewModel);
         }
 
@@ -56,6 +58,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new CentroDeCustoFormViewModel();
                 return View(viewModel);
             }
+            centroDeCusto.EmpresaId = int.Parse(EmpresaId);
             await _centroDeCustoService.InsertAsync(centroDeCusto);
             return RedirectToAction(nameof(Index));
         }
@@ -133,6 +136,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                centroDeCusto.EmpresaId = int.Parse(EmpresaId);
                 await _centroDeCustoService.UpdateAsync(centroDeCusto);
                 return RedirectToAction(nameof(Index));
             }

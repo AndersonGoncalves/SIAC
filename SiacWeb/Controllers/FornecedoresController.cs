@@ -56,6 +56,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new FornecedorFormViewModel();
                 return View(viewModel);
             }
+            fornecedor.EmpresaId = int.Parse(EmpresaId);
             await _fornecedorService.InsertAsync(fornecedor);
             return RedirectToAction(nameof(Index));
         }
@@ -133,6 +134,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                fornecedor.EmpresaId = int.Parse(EmpresaId);
                 await _fornecedorService.UpdateAsync(fornecedor);
                 return RedirectToAction(nameof(Index));
             }

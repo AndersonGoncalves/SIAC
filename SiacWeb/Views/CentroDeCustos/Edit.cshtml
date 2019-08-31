@@ -25,7 +25,7 @@
         <div class="form-group">
             <label asp-for="CentroDeCusto.EmpresaId" class="col-lg-2 control-label" for="inputSmall"></label>
             <div class="col-lg-10">
-                <select asp-for="CentroDeCusto.EmpresaId" asp-items="@(new SelectList(Model.Empresas,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall" placeholder="Empresa"></select>
+                <select asp-for="CentroDeCusto.EmpresaId" asp-items="@(new SelectList(Model.Empresas,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall" placeholder="Empresa" disabled></select>
                 <span asp-validation-for="CentroDeCusto.EmpresaId" class="text-danger"></span>
             </div>
         </div>

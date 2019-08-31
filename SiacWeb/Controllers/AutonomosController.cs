@@ -54,8 +54,9 @@ namespace SiacWeb.Controllers
             if (!ModelState.IsValid)
             {
                 var viewModel = new AutonomoFormViewModel();
-                return View(viewModel);
+                return  View(viewModel);
             }
+            autonomo.EmpresaId = int.Parse(EmpresaId);
             await _autonomoService.InsertAsync(autonomo);
             return RedirectToAction(nameof(Index));
         }
@@ -133,6 +134,7 @@ namespace SiacWeb.Controllers
             }
             try
             {
+                autonomo.EmpresaId = int.Parse(EmpresaId);
                 await _autonomoService.UpdateAsync(autonomo);
                 return RedirectToAction(nameof(Index));
             }
