@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Comum;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente + ", " + Perfil.Vendedor)]
-    public class ClientesController : Controller
+    public class ClientesController : BaseController
     {
         private readonly ClienteService _clienteService;
         private readonly EmpresaService _empresaService;
@@ -29,12 +30,12 @@ namespace SiacWeb.Controllers
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _clienteService.FindAllAsync(page);
+                var List = await _clienteService.FindAllAsync(page, EmpresaId);
                 return View(List);
             }
             else
             {
-                var List = await _clienteService.FindAsync(page, consulta);
+                var List = await _clienteService.FindAsync(page, EmpresaId, consulta);
                 return View(List);
             }
         }
@@ -64,7 +65,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
-            var obj = await _clienteService.FindByIdAsync(id.Value);
+            var obj = await _clienteService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -92,7 +93,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
-            var obj = await _clienteService.FindByIdAsync(id.Value);
+            var obj = await _clienteService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -106,7 +107,7 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
-            var obj = await _clienteService.FindByIdAsync(id.Value);
+            var obj = await _clienteService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });

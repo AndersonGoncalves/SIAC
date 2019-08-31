@@ -2,17 +2,19 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
-    public class AutonomosController : Controller
+    public class AutonomosController : BaseController
     {
         private readonly AutonomoService _autonomoService;
         private readonly EmpresaService _empresaService;
@@ -28,12 +30,12 @@ namespace SiacWeb.Controllers
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _autonomoService.FindAllAsync(page);
+                var List = await _autonomoService.FindAllAsync(page, EmpresaId);
                 return View(List);
             }
             else
             {
-                var List = await _autonomoService.FindAsync(page, consulta);
+                var List = await _autonomoService.FindAsync(page, EmpresaId, consulta);
                 return View(List);
             }
         }
@@ -63,7 +65,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
-            var obj = await _autonomoService.FindByIdAsync(id.Value);
+            var obj = await _autonomoService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -91,7 +93,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
-            var obj = await _autonomoService.FindByIdAsync(id.Value);
+            var obj = await _autonomoService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -105,7 +107,7 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
-            var obj = await _autonomoService.FindByIdAsync(id.Value);
+            var obj = await _autonomoService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });

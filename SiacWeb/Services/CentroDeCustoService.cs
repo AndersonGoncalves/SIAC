@@ -22,22 +22,22 @@ namespace SiacWeb.Services
             _user = user;
         }
 
-        public async Task<CentroDeCusto> FindByIdAsync(int id)
+        public async Task<CentroDeCusto> FindByIdAsync(string empresaId, int id)
         {
-            return await _context.CentroDeCusto.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.CentroDeCusto.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
         }
 
-        public async Task<IPagedList<CentroDeCusto>> FindAllAsync(int pagina)
+        public async Task<IPagedList<CentroDeCusto>> FindAllAsync(int pagina, string empresaId)
         {
-            return await _context.CentroDeCusto.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await _context.CentroDeCusto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<List<CentroDeCusto>> FindAllAsync()
+        public async Task<List<CentroDeCusto>> FindAllAsync(string empresaId)
         {
-            return await _context.CentroDeCusto.OrderBy(x => x.Id).ToListAsync();
+            return await _context.CentroDeCusto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(x => x.Id).ToListAsync();
         }
 
-        public async Task<IPagedList<CentroDeCusto>> FindAsync(int pagina, string consulta)
+        public async Task<IPagedList<CentroDeCusto>> FindAsync(int pagina, string empresaId, string consulta)
         {
             var result = from obj in _context.CentroDeCusto select obj;
 
@@ -46,7 +46,7 @@ namespace SiacWeb.Services
             else
                 result = result.Where(x => x.RazaoSocial.Contains(consulta));
 
-            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await result.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task InsertAsync(CentroDeCusto obj)

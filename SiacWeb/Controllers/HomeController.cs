@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Models.ViewModels;
 
 namespace SiacWeb.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

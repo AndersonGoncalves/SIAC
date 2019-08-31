@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Models.ViewModels;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor)]
-    public class EmpresasController : Controller
+    public class EmpresasController : BaseController
     {
         private readonly EmpresaService _empresaService;
 

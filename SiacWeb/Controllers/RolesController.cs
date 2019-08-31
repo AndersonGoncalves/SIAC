@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Identity;
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin)]
-    public class RolesController : Controller
+    public class RolesController : BaseController
     {
         private readonly RoleService _roleService;
 

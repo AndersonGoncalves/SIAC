@@ -21,17 +21,17 @@ namespace SiacWeb.Services
             _user = user;
         }
 
-        public async Task<Funcionario> FindByIdAsync(int id)
+        public async Task<Funcionario> FindByIdAsync(string empresaId, int id)
         {
-            return await _context.Funcionario.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Funcionario.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
         }
 
-        public async Task<IPagedList<Funcionario>> FindAllAsync(int pagina)
+        public async Task<IPagedList<Funcionario>> FindAllAsync(int pagina, string empresaId)
         {
-            return await _context.Funcionario.OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await _context.Funcionario.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<IPagedList<Funcionario>> FindAsync(int pagina, string consulta)
+        public async Task<IPagedList<Funcionario>> FindAsync(int pagina, string empresaId, string consulta)
         {
             var result = from obj in _context.Funcionario select obj;
 
@@ -40,7 +40,7 @@ namespace SiacWeb.Services
             else
                 result = result.Where(x => x.Nome.Contains(consulta));
 
-            return await result.OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await result.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
         public async Task InsertAsync(Funcionario obj)

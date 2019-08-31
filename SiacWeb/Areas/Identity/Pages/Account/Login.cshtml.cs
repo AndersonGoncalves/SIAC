@@ -85,10 +85,9 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                //Global.EmpresaId = Input.Empresa;
-
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("empresaId")))
-                  HttpContext.Session.SetString("empresaId", Input.Empresa.ToString());
+                //Setando a empresa logado em session
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString(Constantes.EmpresaId)))
+                  HttpContext.Session.SetString(Constantes.EmpresaId, Input.Empresa.ToString());
 
                 // This doesn't count login failures towards account lockout
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);

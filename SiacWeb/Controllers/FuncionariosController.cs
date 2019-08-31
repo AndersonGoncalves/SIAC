@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Models;
 using SiacWeb.Comum;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
-    public class FuncionariosController : Controller
+    public class FuncionariosController : BaseController
     {
         private readonly FuncionarioService _funcionarioService;
         private readonly EmpresaService _empresaService;
@@ -30,12 +31,12 @@ namespace SiacWeb.Controllers
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _funcionarioService.FindAllAsync(page);
+                var List = await _funcionarioService.FindAllAsync(page, EmpresaId);
                 return View(List);
             }
             else
             {
-                var List = await _funcionarioService.FindAsync(page, consulta);
+                var List = await _funcionarioService.FindAsync(page, EmpresaId, consulta);
                 return View(List);
             }
         }
@@ -43,7 +44,7 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Create()
         {
             var empresas = await _empresaService.FindAllAsync();
-            var centroDeCustos = await _centroDeCustoService.FindAllAsync();
+            var centroDeCustos = await _centroDeCustoService.FindAllAsync(EmpresaId);
             FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { Empresas = empresas, CentrosDeCustos = centroDeCustos };
             return View(viewModel);
         }
@@ -66,7 +67,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
-            var obj = await _funcionarioService.FindByIdAsync(id.Value);
+            var obj = await _funcionarioService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -94,7 +95,7 @@ namespace SiacWeb.Controllers
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
-            var obj = await _funcionarioService.FindByIdAsync(id.Value);
+            var obj = await _funcionarioService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
 
@@ -108,14 +109,14 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
             }
-            var obj = await _funcionarioService.FindByIdAsync(id.Value);
+            var obj = await _funcionarioService.FindByIdAsync(EmpresaId, id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             var empresas = await _empresaService.FindAllAsync();
-            var centroDeCustos = await _centroDeCustoService.FindAllAsync();
+            var centroDeCustos = await _centroDeCustoService.FindAllAsync(EmpresaId);
             FuncionarioFormViewModel viewModel = new FuncionarioFormViewModel { Funcionario = obj, Empresas = empresas, CentrosDeCustos = centroDeCustos };
             return View(viewModel);
         }

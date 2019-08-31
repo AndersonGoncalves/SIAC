@@ -1,20 +1,19 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using SiacWeb.Models;
 using System.Collections.Generic;
 
 namespace SiacWeb.Controllers
 {
     [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
-    public class UsuariosController : Controller
+    public class UsuariosController : BaseController
     {
         private readonly UsuarioService _usuarioService;
         private readonly RoleService _roleService;
