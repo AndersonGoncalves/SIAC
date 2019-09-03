@@ -22,5 +22,6 @@ namespace SiacWeb.Models
         public DbSet<Autonomo> Autonomo { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Auditoria> Auditoria { get; set; }
+        public DbSet<GrupoDeProduto> GrupoDeProduto { get; set; }
     }
 }

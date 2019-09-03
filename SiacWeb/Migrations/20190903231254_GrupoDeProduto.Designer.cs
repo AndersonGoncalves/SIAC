@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiacWeb.Models;
 
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    partial class SiacWebContextModelSnapshot : ModelSnapshot
+    [Migration("20190903231254_GrupoDeProduto")]
+    partial class GrupoDeProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -527,7 +529,6 @@ namespace SiacWeb.Migrations
                     b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<int>("EmUso");

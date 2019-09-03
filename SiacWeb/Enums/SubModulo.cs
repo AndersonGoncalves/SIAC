@@ -32,6 +32,12 @@ namespace SiacWeb.Enums
         Autonomo = 16,
         Auditoria = 17,
         [Display(Name = "Configuração")]
-        Configuracao = 18
+        Configuracao = 18,
+        [Display(Name = "SubGrupo De Produto")]
+        SubGrupoDeProduto = 19,
+        [Display(Name = "Grupo de Produto")]
+        GrupoDeProduto = 20,
+        Produto = 21
+
     }
 }
