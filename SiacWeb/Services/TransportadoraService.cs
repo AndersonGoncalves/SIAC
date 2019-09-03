@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SiacWeb.Services.Comum;
+using SiacWeb.Enums;
 using SiacWeb.Models;
 using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
@@ -10,16 +12,9 @@ using X.PagedList;
 
 namespace SiacWeb.Services
 {
-    public class TransportadoraService
+    public class TransportadoraService : BaseService
     {
-        private readonly SiacWebContext _context;
-        private readonly IUser _user;
-
-        public TransportadoraService(SiacWebContext context, IUser user)
-        {
-            _context = context;
-            _user = user;
-        }
+        public TransportadoraService(SiacWebContext context, IUser user, AuditoriaService auditoriaService) : base(context, user, auditoriaService) { }
 
         public async Task<Transportadora> FindByIdAsync(string empresaId, int id)
         {
@@ -48,20 +43,11 @@ namespace SiacWeb.Services
             obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task RemoveAsync(int id)
-        {
-            try
-            {
-                var obj = await _context.Transportadora.FindAsync(id);
-                _context.Transportadora.Remove(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
+            await Auditoria(obj.EmpresaId,
+                Modulo.Compra,
+                SubModulo.Transportadora,
+                Operacao.Inclusao,
+                "TODO");
         }
 
         public async Task UpdateAsync(Transportadora obj)
@@ -78,10 +64,34 @@ namespace SiacWeb.Services
                 obj.Usuario = _user.Name;
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
+                await Auditoria(obj.EmpresaId,
+                    Modulo.Compra,
+                    SubModulo.Transportadora,
+                    Operacao.Alteracao,
+                    "TODO");
             }
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
+            }
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            try
+            {
+                var obj = await _context.Transportadora.FindAsync(id);
+                _context.Transportadora.Remove(obj);
+                await _context.SaveChangesAsync();
+                await Auditoria(obj.EmpresaId,
+                    Modulo.Compra,
+                    SubModulo.Transportadora,
+                    Operacao.Exclusao,
+                    "TODO");
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
             }
         }
     }

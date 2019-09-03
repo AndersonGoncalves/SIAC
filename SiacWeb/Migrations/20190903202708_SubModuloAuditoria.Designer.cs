@@ -10,8 +10,8 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190902221029_Auditoria")]
-    partial class Auditoria
+    [Migration("20190903202708_SubModuloAuditoria")]
+    partial class SubModuloAuditoria
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,38 @@ namespace SiacWeb.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("SiacWeb.Models.Auditoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Dados")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<string>("Maquina")
+                        .HasMaxLength(256);
+
+                    b.Property<int>("Modulo");
+
+                    b.Property<int>("Operacao");
+
+                    b.Property<int>("SubModulo");
+
+                    b.Property<string>("Usuario")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("Auditoria");
+                });
 
             modelBuilder.Entity("SiacWeb.Models.Autonomo", b =>
                 {
@@ -566,6 +598,14 @@ namespace SiacWeb.Migrations
                     b.HasIndex("EmpresaId");
 
                     b.ToTable("Transportadora");
+                });
+
+            modelBuilder.Entity("SiacWeb.Models.Auditoria", b =>
+                {
+                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SiacWeb.Models.Autonomo", b =>

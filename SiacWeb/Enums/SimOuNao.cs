@@ -1,4 +1,4 @@
-﻿namespace SiacWeb.Models.Enums
+﻿namespace SiacWeb.Enums
 {
     public enum SimOuNao : int
     {

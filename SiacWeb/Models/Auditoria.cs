@@ -1,5 +1,5 @@
 ﻿using System;
-using SiacWeb.Models.Enums;
+using SiacWeb.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,8 +20,8 @@ namespace SiacWeb.Models
 
         [Required(ErrorMessage = "{0} obrigatório")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        [Display(Name = "Data de Cadastro")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
+        [Display(Name = "Data/Hora da Operação")]
         public DateTime DataCadastro { get; set; }
 
         [MaxLength(256, ErrorMessage = "Tamanho máximo {1} caracteres")]
@@ -36,10 +36,19 @@ namespace SiacWeb.Models
         public Modulo Modulo { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        public SubModulo SubModulo { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
         [Display(Name = "Operação")]
         public Operacao Operacao { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
         public string Dados { get; set; }
+
+        public Auditoria()
+        {
+            DataCadastro = DateTime.Now;
+            //Maquina = "0";
+        }
     }
 }

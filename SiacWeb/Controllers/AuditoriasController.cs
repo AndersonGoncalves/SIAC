@@ -1,42 +1,41 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
-using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace SiacWeb.Controllers
 {
-    [Authorize(Roles = Perfil.Admin)]
-    public class RolesController : BaseController
+    [Authorize(Roles = Perfil.Admin + ", " + Perfil.Diretor + ", " + Perfil.Supervisor + ", " + Perfil.Gerente)]
+    public class AuditoriasController : BaseController
     {
-        private readonly RoleService _roleService;
+        private readonly AuditoriaService _auditoriaService;
 
-        public RolesController(RoleService roleService)
+        public AuditoriasController(AuditoriaService auditoriaService)
         {
-            _roleService = roleService;
+            _auditoriaService = auditoriaService;
         }
+
         public async Task<IActionResult> Index(int? pagina, string consulta)
         {
             int page = pagina ?? 1;
             ViewData["Consulta"] = consulta;
             if (consulta == null)
             {
-                var List = await _roleService.FindAllAsync(page);
+                var List = await _auditoriaService.FindAllAsync(page, EmpresaId);
                 return View(List);
             }
             else
             {
-                var List = await _roleService.FindAsync(page, consulta);
+                var List = await _auditoriaService.FindAsync(page, EmpresaId, consulta);
                 return View(List);
             }
         }
-
+        
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

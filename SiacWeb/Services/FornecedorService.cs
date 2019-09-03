@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SiacWeb.Services.Comum;
+using SiacWeb.Enums;
 using SiacWeb.Models;
 using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
@@ -10,16 +12,9 @@ using X.PagedList;
 
 namespace SiacWeb.Services
 {
-    public class FornecedorService
+    public class FornecedorService : BaseService
     {
-        private readonly SiacWebContext _context;
-        private readonly IUser _user;
-
-        public FornecedorService(SiacWebContext context, IUser user)
-        {
-            _context = context;
-            _user = user;
-        }
+        public FornecedorService(SiacWebContext context, IUser user, AuditoriaService auditoriaService) : base(context, user, auditoriaService) { }
 
         public async Task<Fornecedor> FindByIdAsync(string empresaId, int id)
         {
@@ -48,22 +43,13 @@ namespace SiacWeb.Services
             obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
+            await Auditoria(obj.EmpresaId,
+                Modulo.Compra,
+                SubModulo.Fornecedor,
+                Operacao.Inclusao,
+                "TODO");
         }
-
-        public async Task RemoveAsync(int id)
-        {
-            try
-            {
-                var obj = await _context.Fornecedor.FindAsync(id);
-                _context.Fornecedor.Remove(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
+                
         public async Task UpdateAsync(Fornecedor obj)
         {
             bool TemAlgum = await _context.Fornecedor.AnyAsync(x => x.Id == obj.Id);
@@ -78,10 +64,34 @@ namespace SiacWeb.Services
                 obj.Usuario = _user.Name;
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
+                await Auditoria(obj.EmpresaId,
+                    Modulo.Compra,
+                    SubModulo.Fornecedor,
+                    Operacao.Alteracao,
+                    "TODO");
             }
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
+            }
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            try
+            {
+                var obj = await _context.Fornecedor.FindAsync(id);
+                _context.Fornecedor.Remove(obj);
+                await _context.SaveChangesAsync();
+                await Auditoria(obj.EmpresaId,
+                    Modulo.Compra,
+                    SubModulo.Fornecedor,
+                    Operacao.Exclusao,
+                    "TODO");
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
             }
         }
     }

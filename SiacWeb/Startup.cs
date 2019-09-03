@@ -51,6 +51,7 @@ namespace SiacWeb
             services.AddScoped<RoleService>();
             services.AddScoped<UsuarioService>();
             services.AddScoped<ClienteService>();
+            services.AddScoped<AuditoriaService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

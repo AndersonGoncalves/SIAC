@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
-using SiacWeb.Models.Enums;
+using SiacWeb.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

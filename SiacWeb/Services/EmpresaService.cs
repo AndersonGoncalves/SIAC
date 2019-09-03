@@ -3,24 +3,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SiacWeb.Services.Comum;
 using SiacWeb.Models;
 using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
+using SiacWeb.Enums;
 
 namespace SiacWeb.Services
 {
-    public class EmpresaService
+    public class EmpresaService : BaseService
     {
-        private readonly SiacWebContext _context;
-        private readonly IUser _user;
-
-        public EmpresaService(SiacWebContext context, IUser user)
-        {
-            _context = context;
-            _user = user;
-        }
+        public EmpresaService(SiacWebContext context, IUser user, AuditoriaService auditoriaService) : base(context, user, auditoriaService) { }
 
         public async Task<Empresa> FindByIdAsync(int id)
         {
@@ -59,22 +54,13 @@ namespace SiacWeb.Services
             obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
+            await Auditoria(obj.Id,
+                Modulo.Gerencia,
+                SubModulo.Empresa,
+                Operacao.Inclusao,
+                "TODO");
         }
-
-        public async Task RemoveAsync(int id)
-        {
-            try
-            {
-                var obj = await _context.Empresa.FindAsync(id);
-                _context.Empresa.Remove(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
+                
         public async Task UpdateAsync(Empresa obj)
         {
             bool TemAlgum = await _context.Empresa.AnyAsync(x => x.Id == obj.Id);
@@ -89,10 +75,34 @@ namespace SiacWeb.Services
                 obj.Usuario = _user.Name;
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
+                await Auditoria(obj.Id,
+                    Modulo.Gerencia,
+                    SubModulo.Empresa,
+                    Operacao.Alteracao,
+                    "TODO");
             }
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
+            }
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            try
+            {
+                var obj = await _context.Empresa.FindAsync(id);
+                _context.Empresa.Remove(obj);
+                await _context.SaveChangesAsync();
+                await Auditoria(obj.Id,
+                    Modulo.Gerencia,
+                    SubModulo.Empresa,
+                    Operacao.Exclusao,
+                    "TODO");
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
             }
         }
     }

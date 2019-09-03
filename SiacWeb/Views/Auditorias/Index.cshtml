@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SiacWeb.Models.Auditoria>
+
+@{
+    ViewBag.Title = "Auditoria";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="navbar-btn">
+    <div class="navbar-left navbar-left">
+        <div class="form-group">
+            <a asp-controller="Home" class="btn btn-default btn-sm" asp-action="Index">Home</a>
+        </div>
+    </div>
+</div>
+<div class="navbar-form">
+    <form class="navbar-right navbar-right">
+        <div class="input-group">
+            <input type="text" name="consulta" value=@ViewData["Consulta"] class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-success btn-sm">Consultar</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubModulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operacao)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubModulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Operacao)
+                </td>
+
+                <td>
+                    <div class="text-right">
+                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Visualizar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@(await Html.PartialAsync("_IndexBottomPartial", Model))

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using SiacWeb.Models.Enums;
+using SiacWeb.Enums;
 using SiacWeb.Models;
 
 namespace SiacWeb.Areas.Identity.Pages.Account
