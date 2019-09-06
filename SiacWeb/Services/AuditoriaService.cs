@@ -18,6 +18,11 @@ namespace SiacWeb.Services
             _context = context;
         }
 
+        public async Task<Auditoria> FindByIdAsync(string empresaId, int id)
+        {
+            return await _context.Auditoria.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
+        }
+
         public async Task<IPagedList<Auditoria>> FindAllAsync(int pagina, string empresaId)
         {
             return await _context.Auditoria.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderByDescending(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);

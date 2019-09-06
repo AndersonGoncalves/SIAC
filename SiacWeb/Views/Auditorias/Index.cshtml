@@ -51,6 +51,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataCadastro)
@@ -70,7 +71,7 @@
 
                 <td>
                     <div class="text-right">
-                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Visualizar</a>
+                        <button onclick="getTexto()" class="btn btn-success btn-xs" name="Visualizar" id="@item.Id" data-id="@item.Id" data-toggle="modal" data-target="#myModal">Visualizar</button>
                     </div>
                 </td>
             </tr>
@@ -78,5 +79,35 @@
     </tbody>
 </table>
 
+<script type="text/javascript">
+    function getTexto() {
+        var texto = document.getElementById("22");
+        return texto;        
+    }
+</script>
+
 
 @(await Html.PartialAsync("_IndexBottomPartial", Model))
+
+
+<div class="container">
+    
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Auditoria</h4>
+                </div>
+                <div class="modal-body">
+                    <p>@ViewData["Dados"]</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
