@@ -16,15 +16,17 @@
 </div>
 <div class="navbar-form">
     <form class="navbar-right navbar-right">
+
         <div class="input-group">
+
             <input type="text" name="consulta" value=@ViewData["Consulta"] class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
             <span class="input-group-btn">
                 <button type="submit" class="btn btn-success btn-sm">Consultar</button>
             </span>
         </div>
+
     </form>
 </div>
-
 
 <table class="table table-striped">
     <thead>
@@ -71,7 +73,7 @@
 
                 <td>
                     <div class="text-right">
-                        <button onclick="getTexto()" class="btn btn-success btn-xs" name="Visualizar" id="@item.Id" data-id="@item.Id" data-toggle="modal" data-target="#myModal">Visualizar</button>
+                        <button onclick="getId(@item.Id, '@item.Dados')" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal">Visualizar</button>
                     </div>
                 </td>
             </tr>
@@ -80,9 +82,14 @@
 </table>
 
 <script type="text/javascript">
-    function getTexto() {
-        var texto = document.getElementById("22");
-        return texto;        
+    function getId(aId, aDados) {
+        //debugger
+        $('#exampleModal').find('.modal-title').text('Dados da Auditoria')
+        $('#exampleModal').find('.modal-body input').val(aId)
+        $('#exampleModal').find('.modal-body textarea').val(aDados)
+        $('#exampleModal').modal()
+        $('#exampleModal').modal({ keyboard: false })
+        $('#exampleModal').modal('show')
     }
 </script>
 
@@ -90,24 +97,28 @@
 @(await Html.PartialAsync("_IndexBottomPartial", Model))
 
 
-<div class="container">
-    
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"></button>
-                    <h4 class="modal-title">Auditoria</h4>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Código</label>
+                    <input type="text" class="form-control" id="recipient-name" disabled>
                 </div>
-                <div class="modal-body">
-                    <p>@ViewData["Dados"]</p>
+                <div class="form-group">
+                    <label for="message-text" class="control-label">Dados</label>
+                    <textarea class="form-control" id="message-text" disabled></textarea>
                 </div>
+            </div>
+            <form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Fechar</button>
                 </div>
-            </div>
-
+            </form>
         </div>
     </div>
 </div>

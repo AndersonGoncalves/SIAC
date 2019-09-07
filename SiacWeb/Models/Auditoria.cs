@@ -21,7 +21,7 @@ namespace SiacWeb.Models
         [Required(ErrorMessage = "{0} obrigatório")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
-        [Display(Name = "Data/Hora da Operação")]
+        [Display(Name = "Data/Hora")]
         public DateTime DataCadastro { get; set; }
 
         [MaxLength(256, ErrorMessage = "Tamanho máximo {1} caracteres")]
@@ -33,9 +33,11 @@ namespace SiacWeb.Models
         public string Maquina { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "Módulo")]
         public Modulo Modulo { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "SubMódulo")]
         public SubModulo SubModulo { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]

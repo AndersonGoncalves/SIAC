@@ -18,11 +18,9 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -119,10 +117,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque</a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a></li>
+                                    <li><a asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a></li>
                                     <li class="divider"></li>
-                                    <li><a asp-area="" asp-controller="GruposDeProdutos" asp-action="Index">Grupos de Produtos</a></li>
-                                    <li><a asp-area="" asp-controller="SubGruposDeProdutos" asp-action="Index">SubGrupos de Produtos</a></li>
+                                    <li><a asp-area="" asp-controller="GruposDeProdutos" asp-action="Index">Grupo</a></li>
+                                    <li><a asp-area="" asp-controller="SubGruposDeProdutos" asp-action="Index">SubGrupo</a></li>
                                     <li class="divider"></li>
                                     <li><a asp-area="" asp-controller="ClassificacoesFiscais" asp-action="Index">Classificação Fiscal</a></li>
                                     <li><a asp-area="" asp-controller="OperacoesFiscais" asp-action="Index">Operação Fiscal</a></li>
