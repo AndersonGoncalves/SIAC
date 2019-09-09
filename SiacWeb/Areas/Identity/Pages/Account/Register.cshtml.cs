@@ -80,6 +80,8 @@ namespace SiacWeb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            #region Transferido o código para SeedingService
+            /*
             string[] rolesNames = { Perfil.Admin,
                 Perfil.Diretor,
                 Perfil.Gerente,
@@ -98,6 +100,8 @@ namespace SiacWeb.Areas.Identity.Pages.Account
                     await _roleManager.CreateAsync(new IdentityRole(item));
                 }
             }
+            */
+            #endregion
             ReturnUrl = returnUrl;
         }
 
@@ -118,7 +122,7 @@ namespace SiacWeb.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    //Role = Perfil.Admin; //Por enquanto que não tem no sistema a opção de atribuir permissão 
+                    //Role = Perfil.Admin;
                     if (Role != null)
                     {
                         var applicationRole = await _roleManager.FindByNameAsync(Role);

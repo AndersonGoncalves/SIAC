@@ -23,6 +23,11 @@ namespace SiacWeb.Services
             return await _context.Roles.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
+        public IdentityRole FindByName(string name)
+        {
+            return _context.Roles.FirstOrDefault(obj => obj.Name == name);
+        }
+
         public async Task<IPagedList<IdentityRole>> FindAllAsync(int pagina)
         {
             return await _context.Roles.OrderBy(obj => obj.Name).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
