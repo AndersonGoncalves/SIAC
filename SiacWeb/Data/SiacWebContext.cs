@@ -23,5 +23,6 @@ namespace SiacWeb.Models
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Auditoria> Auditoria { get; set; }
         public DbSet<GrupoDeProduto> GrupoDeProduto { get; set; }
+        public DbSet<SubGrupoDeProduto> SubGrupoDeProduto { get; set; }
     }
 }

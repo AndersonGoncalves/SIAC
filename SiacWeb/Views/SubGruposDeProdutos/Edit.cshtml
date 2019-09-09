@@ -1,0 +1,48 @@
+﻿@model SiacWeb.Models.ViewModels.SubGrupoDeProdutoFormViewModel
+
+@{
+    ViewData["Title"] = "SubGrupo de Produto";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" class="form-horizontal jumbotron">
+    <fieldset>
+        <input type="hidden" asp-for="SubGrupoDeProduto.Id">
+
+        <div class="form-group">
+            <label asp-for="SubGrupoDeProduto.Id" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="SubGrupoDeProduto.Id" class="form-control input-sm" id="disabledInput" disabled="" />
+                <span asp-validation-for="SubGrupoDeProduto.Id" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SubGrupoDeProduto.GrupoDeProdutoId" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <select asp-for="SubGrupoDeProduto.GrupoDeProdutoId" asp-items="@(new SelectList(Model.GruposDeProdutos,"Id", "Descricao"))" class="form-control input-sm" id="inputSmall"></select>
+                <span asp-validation-for="SubGrupoDeProduto.GrupoDeProdutoId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SubGrupoDeProduto.Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="SubGrupoDeProduto.Descricao" class="form-control input-sm" id="inputSmall" placeholder="Descrição" />
+                <span asp-validation-for="SubGrupoDeProduto.Descricao" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

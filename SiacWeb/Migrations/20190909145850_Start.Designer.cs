@@ -10,8 +10,8 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190903202708_SubModuloAuditoria")]
-    partial class SubModuloAuditoria
+    [Migration("20190909145850_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -516,6 +516,80 @@ namespace SiacWeb.Migrations
                     b.ToTable("Funcionario");
                 });
 
+            modelBuilder.Entity("SiacWeb.Models.GrupoDeProduto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ativo");
+
+                    b.Property<DateTime?>("DataAlteracao");
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("EmUso");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<string>("Maquina")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Observacao");
+
+                    b.Property<string>("Usuario")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("GrupoDeProduto");
+                });
+
+            modelBuilder.Entity("SiacWeb.Models.SubGrupoDeProduto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ativo");
+
+                    b.Property<DateTime?>("DataAlteracao");
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("EmUso");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<int?>("GrupoDeProdutoId");
+
+                    b.Property<string>("Maquina")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Observacao");
+
+                    b.Property<string>("Usuario")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("GrupoDeProdutoId");
+
+                    b.ToTable("SubGrupoDeProduto");
+                });
+
             modelBuilder.Entity("SiacWeb.Models.Transportadora", b =>
                 {
                     b.Property<int>("Id")
@@ -960,6 +1034,26 @@ namespace SiacWeb.Migrations
                                 .HasForeignKey("SiacWeb.Models.Comum.Endereco", "FuncionarioId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
+                });
+
+            modelBuilder.Entity("SiacWeb.Models.GrupoDeProduto", b =>
+                {
+                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SiacWeb.Models.SubGrupoDeProduto", b =>
+                {
+                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SiacWeb.Models.GrupoDeProduto", "GrupoDeProduto")
+                        .WithMany()
+                        .HasForeignKey("GrupoDeProdutoId");
                 });
 
             modelBuilder.Entity("SiacWeb.Models.Transportadora", b =>

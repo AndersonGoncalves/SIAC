@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SiacWeb.Models.SubGrupoDeProduto>
+
+@{
+    ViewBag.Title = "SubGrupos de Produtos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@(await Html.PartialAsync("_IndexTopPartial"))
+
+<table class="table table-striped">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+
+            <th>
+                SubGrupo
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrupoDeProduto.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+
+                <td>
+                    <div class="text-right">
+                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@(await Html.PartialAsync("_IndexBottomPartial", Model))
