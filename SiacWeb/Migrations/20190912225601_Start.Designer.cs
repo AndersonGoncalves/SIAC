@@ -10,8 +10,8 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190912021224_Produto")]
-    partial class Produto
+    [Migration("20190912225601_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -562,7 +562,7 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Caracteristicas")
                         .HasMaxLength(255);
 
-                    b.Property<decimal>("Comissao");
+                    b.Property<double?>("Comissao");
 
                     b.Property<DateTime?>("DataAlteracao");
 
@@ -583,9 +583,9 @@ namespace SiacWeb.Migrations
 
                     b.Property<int>("EmpresaId");
 
-                    b.Property<decimal>("EstoqueMedio");
+                    b.Property<double?>("EstoqueMedio");
 
-                    b.Property<decimal>("EstoqueMinimo");
+                    b.Property<double?>("EstoqueMinimo");
 
                     b.Property<int?>("FornecedorId");
 
@@ -605,15 +605,15 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Observacao");
 
-                    b.Property<decimal>("PesoLiquido");
+                    b.Property<double?>("PesoLiquido");
 
-                    b.Property<decimal>("PrecoCompra");
+                    b.Property<double>("PrecoCompra");
 
-                    b.Property<decimal>("PrecoCusto");
+                    b.Property<double>("PrecoCusto");
 
-                    b.Property<decimal>("PrecoMinimo");
+                    b.Property<double?>("PrecoMinimo");
 
-                    b.Property<decimal>("PrecoVenda");
+                    b.Property<double>("PrecoVenda");
 
                     b.Property<string>("Referencia")
                         .HasMaxLength(20);
@@ -626,7 +626,7 @@ namespace SiacWeb.Migrations
                     b.Property<string>("Usuario")
                         .HasMaxLength(256);
 
-                    b.Property<decimal>("Volume");
+                    b.Property<double?>("Volume");
 
                     b.HasKey("Id");
 

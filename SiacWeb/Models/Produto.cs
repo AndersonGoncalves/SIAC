@@ -11,16 +11,16 @@ namespace SiacWeb.Models
 
         public Fornecedor Fornecedor { get; set; }
 
-        [Display(Name = "Grupo de Produto")]
+        [Display(Name = "Grupo")]
         public int? GrupoDeProdutoId { get; set; }
 
-        [Display(Name = "Grupo de Produto")]
+        [Display(Name = "Grupo")]
         public GrupoDeProduto GrupoDeProduto { get; set; }
 
-        [Display(Name = "SubGrupo de Produto")]
+        [Display(Name = "SubGrupo")]
         public int? SubGrupoDeProdutoId { get; set; }
 
-        [Display(Name = "SubGrupo de Produto")]
+        [Display(Name = "SubGrupo")]
         public SubGrupoDeProduto SubGrupoDeProduto { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
@@ -29,7 +29,7 @@ namespace SiacWeb.Models
         public string Descricao { get; set; }
 
         [MaxLength(20, ErrorMessage = "Tamanho máximo {1} caracteres")]
-        [Display(Name = "Unidade de Medida")]
+        [Display(Name = "Unid. Medida")]
         public string UnidadeMedida { get; set; }
 
         [MaxLength(20, ErrorMessage = "Tamanho máximo {1} caracteres")]
@@ -47,7 +47,7 @@ namespace SiacWeb.Models
         public string Detalhe { get; set; }
 
         [MaxLength(255, ErrorMessage = "Tamanho máximo {1} caracteres")]
-        [Display(Name = "Caracterìsticas")]
+        [Display(Name = "Características")]
         public string Caracteristicas { get; set; }
 
         [Display(Name = "Última Compra")]
@@ -57,35 +57,45 @@ namespace SiacWeb.Models
         public DateTime? DataUltimaVenda { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Preço de Compra")]
-        public decimal PrecoCompra { get; set; }
+        public double PrecoCompra { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Preço de Custo")]
-        public decimal PrecoCusto { get; set; }
+        public double PrecoCusto { get; set; }
 
         [Display(Name = "Preço de Mínimo")]
-        public decimal PrecoMinimo { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? PrecoMinimo { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Preço de Venda")]
-        public decimal PrecoVenda { get; set; }
+        public double PrecoVenda { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Estoque Mínimo")]
-        public decimal EstoqueMinimo { get; set; }
+        public double? EstoqueMinimo { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Estoque Médio")]
-        public decimal EstoqueMedio { get; set; }
+        public double? EstoqueMedio { get; set; }
 
-        public decimal Volume { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        public double? Volume { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Peso Líquido")]
-        public decimal PesoLiquido { get; set; }
+        public double? PesoLiquido { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         [Display(Name = "Comissão")]
-        public decimal Comissao { get; set; }
+        public double? Comissao { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]
-        public string NCM { get; set; }        
+        public string NCM { get; set; }
     }
+    
 }

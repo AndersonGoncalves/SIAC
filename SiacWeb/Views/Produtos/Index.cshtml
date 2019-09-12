@@ -17,6 +17,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnidadeMedida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caracteristicas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalhe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoVenda)
+            </th>
 
             <th></th>
         </tr>
@@ -24,21 +39,36 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Referencia)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.UnidadeMedida)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Caracteristicas)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Detalhe)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.PrecoVenda)
+            </th>
 
-                <td>
-                    <div class="text-right">
-                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Código de Barras</a>
-                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
-                    </div>
-                </td>
-            </tr>
+            <td>
+                <div class="text-right">
+                    <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Cod. Barras</a>
+                    @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

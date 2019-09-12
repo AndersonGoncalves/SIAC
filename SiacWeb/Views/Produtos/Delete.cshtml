@@ -1,0 +1,67 @@
+﻿@model SiacWeb.Models.ViewModels.ProdutoFormViewModel
+
+@{
+    ViewData["Title"] = "Produto";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Id):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Id)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Descricao):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Descricao)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Referencia):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Referencia)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Caracteristicas):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Caracteristicas)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Detalhe):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Detalhe)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Produto.Marca):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Produto.Marca)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="text-danger">Deseja excluir o registro?</h3>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Produto.Id" />
+    <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+    <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+</form>

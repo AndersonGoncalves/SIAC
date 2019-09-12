@@ -137,6 +137,7 @@ namespace SiacWeb.Controllers
             var viewModel = new ProdutoFormViewModel
             {
                 Empresas = empresas,
+                Produto = obj,
                 Fornecedores = fornecedores,
                 GruposDeProdutos = gruposDeProdutos,
                 SubGruposDeProdutos = subGruposDeProdutos
@@ -158,6 +159,7 @@ namespace SiacWeb.Controllers
                 var viewModel = new ProdutoFormViewModel
                 {
                     Empresas = empresas,
+                    Produto = produto,
                     Fornecedores = fornecedores,
                     GruposDeProdutos = gruposDeProdutos,
                     SubGruposDeProdutos = subGruposDeProdutos
