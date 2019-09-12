@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Enums;
 using SiacWeb.Services.Comum;

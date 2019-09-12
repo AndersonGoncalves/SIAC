@@ -9,6 +9,7 @@ using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
+using System.Collections.Generic;
 
 namespace SiacWeb.Services
 {
@@ -28,6 +29,11 @@ namespace SiacWeb.Services
             return await _context.SubGrupoDeProduto
                 .Include(obj => obj.GrupoDeProduto)
                 .Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+        }
+
+        public async Task<List<SubGrupoDeProduto>> FindAllAsync(string empresaId)
+        {
+            return await _context.SubGrupoDeProduto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToListAsync();
         }
 
         public async Task<IPagedList<SubGrupoDeProduto>> FindAsync(int pagina, string empresaId, string consulta)

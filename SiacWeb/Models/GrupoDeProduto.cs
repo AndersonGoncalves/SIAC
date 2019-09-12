@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using SiacWeb.Models.Comum;
+﻿using SiacWeb.Models.Comum;
+using System.ComponentModel.DataAnnotations;
 
 namespace SiacWeb.Models
 {

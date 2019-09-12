@@ -1,64 +1,59 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using SiacWeb.Services.Comum;
 using SiacWeb.Enums;
+using SiacWeb.Services.Comum;
 using SiacWeb.Models;
 using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
-using System.Collections.Generic;
 
 namespace SiacWeb.Services
 {
-    public class FornecedorService : BaseService
+    public class ProdutoService : BaseService
     {
-        public FornecedorService(SiacWebContext context, IUser user, AuditoriaService auditoriaService) : base(context, user, auditoriaService) { }
+        public ProdutoService(SiacWebContext context, IUser user, AuditoriaService auditoriaService) : base(context, user, auditoriaService) { }
 
-        public async Task<Fornecedor> FindByIdAsync(string empresaId, int id)
+        public async Task<Produto> FindByIdAsync(string empresaId, int id)
         {
-            return await _context.Fornecedor.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
+            return await _context.Produto.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
         }
 
-        public async Task<IPagedList<Fornecedor>> FindAllAsync(int pagina, string empresaId)
+        public async Task<IPagedList<Produto>> FindAllAsync(int pagina, string empresaId)
         {
-            return await _context.Fornecedor.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+            return await _context.Produto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<List<Fornecedor>> FindAllAsync(string empresaId)
+        public async Task<IPagedList<Produto>> FindAsync(int pagina, string empresaId, string consulta)
         {
-            return await _context.Fornecedor.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToListAsync();
-        }
-
-        public async Task<IPagedList<Fornecedor>> FindAsync(int pagina, string empresaId, string consulta)
-        {
-            var result = from obj in _context.Fornecedor select obj;
+            var result = from obj in _context.Produto select obj;
 
             if (consulta.All(char.IsDigit))
                 result = result.Where(x => x.Id == int.Parse(consulta));
             else
-                result = result.Where(x => x.RazaoSocial.Contains(consulta));
+                result = result.Where(x => x.Descricao.Contains(consulta));
 
             return await result.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(x => x.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task InsertAsync(Fornecedor obj)
+        public async Task InsertAsync(Produto obj)
         {
             obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
             await Auditoria(obj.EmpresaId,
-                Modulo.Compra,
-                SubModulo.Fornecedor,
+                Modulo.Estoque,
+                SubModulo.Produto,
                 Operacao.Inclusao,
                 "TODO");
         }
-                
-        public async Task UpdateAsync(Fornecedor obj)
+
+        public async Task UpdateAsync(Produto obj)
         {
-            bool TemAlgum = await _context.Fornecedor.AnyAsync(x => x.Id == obj.Id);
+            bool TemAlgum = await _context.Produto.AnyAsync(x => x.Id == obj.Id);
             if (!TemAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");
@@ -71,8 +66,8 @@ namespace SiacWeb.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
                 await Auditoria(obj.EmpresaId,
-                    Modulo.Compra,
-                    SubModulo.Fornecedor,
+                    Modulo.Estoque,
+                    SubModulo.Produto,
                     Operacao.Alteracao,
                     "TODO");
             }
@@ -86,12 +81,12 @@ namespace SiacWeb.Services
         {
             try
             {
-                var obj = await _context.Fornecedor.FindAsync(id);
-                _context.Fornecedor.Remove(obj);
+                var obj = await _context.Produto.FindAsync(id);
+                _context.Produto.Remove(obj);
                 await _context.SaveChangesAsync();
                 await Auditoria(obj.EmpresaId,
-                    Modulo.Compra,
-                    SubModulo.Fornecedor,
+                    Modulo.Estoque,
+                    SubModulo.Produto,
                     Operacao.Exclusao,
                     "TODO");
             }

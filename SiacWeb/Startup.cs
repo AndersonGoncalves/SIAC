@@ -54,6 +54,7 @@ namespace SiacWeb
             services.AddScoped<AuditoriaService>();
             services.AddScoped<GrupoDeProdutoService>();
             services.AddScoped<SubGrupoDeProdutoService>();
+            services.AddScoped<ProdutoService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
