@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Models;
-using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
-using Microsoft.AspNetCore.Authorization;
 
 namespace SiacWeb.Controllers
 {
@@ -68,7 +66,7 @@ namespace SiacWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new ClienteFormViewModel();
+                var viewModel = new ProdutoFormViewModel();
                 return View(viewModel);
             }
             produto.EmpresaId = int.Parse(EmpresaId);

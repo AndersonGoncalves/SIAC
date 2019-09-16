@@ -25,5 +25,6 @@ namespace SiacWeb.Models
         public DbSet<GrupoDeProduto> GrupoDeProduto { get; set; }
         public DbSet<SubGrupoDeProduto> SubGrupoDeProduto { get; set; }
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<CodigoDeBarra> CodigoDeBarra { get; set; }
     }
 }

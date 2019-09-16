@@ -37,7 +37,8 @@ namespace SiacWeb.Enums
         SubGrupoDeProduto = 19,
         [Display(Name = "Grupo de Produto")]
         GrupoDeProduto = 20,
-        Produto = 21
-
+        Produto = 21,
+        [Display(Name = "Código de Barras")]
+        CodigoDeBarras = 22
     }
 }

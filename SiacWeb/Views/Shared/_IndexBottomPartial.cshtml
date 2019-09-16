@@ -11,7 +11,7 @@
             @{
                 @(
                     (Model as IPagedList).TotalItemCount > Constantes.QuantidadeRegistrosPorPagina ?
-                    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, consulta = ViewData["Consulta"] }))
+                    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, produtoId = ViewBag.produtoId, consulta = ViewData["Consulta"] }))
                     :
                     null
                 );

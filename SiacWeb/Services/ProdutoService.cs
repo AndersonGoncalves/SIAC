@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SiacWeb.Enums;
 using SiacWeb.Services.Comum;
@@ -10,6 +9,7 @@ using SiacWeb.Comum;
 using SiacWeb.Models.Interface;
 using SiacWeb.Services.Exceptions;
 using X.PagedList;
+using System.Collections.Generic;
 
 namespace SiacWeb.Services
 {
@@ -25,6 +25,11 @@ namespace SiacWeb.Services
         public async Task<IPagedList<Produto>> FindAllAsync(int pagina, string empresaId)
         {
             return await _context.Produto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
+        }
+
+        public async Task<List<Produto>> FindAllAsync(string empresaId)
+        {
+            return await _context.Produto.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToListAsync();
         }
 
         public async Task<IPagedList<Produto>> FindAsync(int pagina, string empresaId, string consulta)

@@ -1,0 +1,43 @@
+﻿@model SiacWeb.Models.ViewModels.CodigoDeBarraFormViewModel
+
+@{
+    ViewData["Title"] = "Código de Barras";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Produto: @ViewBag.ProdutoId</h4>
+
+<form asp-action="Edit" asp-controller="CodigosDeBarras" asp-route-produtoId="@ViewBag.ProdutoId" class="form-horizontal jumbotron">
+    <fieldset>
+
+        <input type="hidden" asp-for="CodigoDeBarra.Id" />
+
+        <div class="form-group">
+            <label asp-for="CodigoDeBarra.ProdutoId" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <select asp-for="CodigoDeBarra.ProdutoId" asp-items="@(new SelectList(Model.Produtos,"Id", "Descricao", ViewBag.ProdutoId))" class="form-control input-sm" id="inputSmall" disabled></select>
+                <span asp-validation-for="CodigoDeBarra.ProdutoId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CodigoDeBarra.CodigoBarras" class="col-lg-2 control-label" for="inputSmall"></label>
+            <div class="col-lg-10">
+                <input asp-for="CodigoDeBarra.CodigoBarras" class="form-control input-sm" id="inputSmall" placeholder="Código de Barras" />
+                <span asp-validation-for="CodigoDeBarra.CodigoBarras" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a asp-action="Index" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-default btn-sm">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

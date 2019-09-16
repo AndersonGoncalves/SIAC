@@ -64,7 +64,7 @@
 
             <td>
                 <div class="text-right">
-                    <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id>Cod. Barras</a>
+                    <a asp-controller="CodigosDeBarras" asp-action="Index" asp-route-produtoId="@item.Id" class="btn btn-success btn-xs">Cód. Barras</a>
                     @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
                 </div>
             </td>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SiacWeb.Models.CodigoDeBarra>
+
+@{
+    ViewData["Title"] = "Código de Barras";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Produto: @ViewBag.ProdutoId</h4>
+
+<hr />
+<div class="navbar-btn">
+    <div class="navbar-left navbar-left">
+        <div class="form-group">
+            <a asp-controller="Produtos" asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
+            <a asp-action="Create" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-primary btn-sm">Novo Registro</a>
+        </div>
+    </div>
+</div>
+<div class="navbar-form">
+    <form asp-action="Index" asp-controller="CodigosDeBarras" asp-route-produtoId="@ViewBag.ProdutoId" class="navbar-right navbar-right">
+        <div class="input-group">
+            <input type="text" name="consulta" value=@ViewData["Consulta"] class="form-control input-sm" placeholder="Digite sua pesquisa" style="font-style:italic">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-success btn-sm">Consultar</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoBarras)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoBarras)
+                </td>
+
+                <td>
+                    <div class="text-right">
+                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Visualizar</a>
+                        <a asp-action="Edit" class="btn btn-warning btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Alterar</a>
+                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@(await Html.PartialAsync("_IndexBottomPartial", Model))
