@@ -15,7 +15,6 @@ namespace SiacWeb.Controllers
         private readonly CodigoDeBarraService _codigoDeBarraService;
         private readonly ProdutoService _produtoService;       
 
-
         public CodigosDeBarrasController(CodigoDeBarraService codigoDeBarraService, ProdutoService produtoService)
         {
             _codigoDeBarraService = codigoDeBarraService;
@@ -27,6 +26,16 @@ namespace SiacWeb.Controllers
             int page = pagina ?? 1;
             ViewData["Consulta"] = consulta;
             ViewBag.ProdutoId = produtoId;
+
+            ViewBag.ProdutoDescricao = null;
+            if (produtoId != null)
+            {
+                int objId = produtoId ?? 0;
+                var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, objId);
+                ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+            }
+
+
             if (consulta == null)
             {
                 var List = await _codigoDeBarraService.FindByProdutoIdAsync(page, EmpresaId, produtoId);
@@ -42,6 +51,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Create(int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             var produtos = await _produtoService.FindAllAsync(EmpresaId);
             var viewModel = new CodigoDeBarraFormViewModel
             {
@@ -55,6 +67,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Create(CodigoDeBarra codigoDeBarra, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             if (!ModelState.IsValid)
             {
                 var viewModel = new CodigoDeBarraFormViewModel();
@@ -69,6 +84,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Delete(int? id, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
 
@@ -85,6 +103,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Delete(int id, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             try
             {
                 await _codigoDeBarraService.RemoveAsync(id);
@@ -99,6 +120,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Details(int? id, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id não infomado!" });
 
@@ -113,6 +137,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Edit(int? id, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não informado!" });
@@ -137,6 +164,9 @@ namespace SiacWeb.Controllers
         public async Task<IActionResult> Edit(int id, CodigoDeBarra codigoDeBarra, int produtoId)
         {
             ViewBag.ProdutoId = produtoId;
+            var produtoDescricao = await _produtoService.FindByIdAsync(EmpresaId, produtoId);
+            ViewBag.ProdutoDescricao = produtoDescricao.Descricao;
+
             if (!ModelState.IsValid)
             {
                 var produtos = await _produtoService.FindAllAsync(EmpresaId);
