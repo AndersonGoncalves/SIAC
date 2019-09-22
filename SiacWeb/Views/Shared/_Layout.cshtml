@@ -79,7 +79,7 @@
                                     <li><a asp-area="" asp-controller="ReaberturaPedido" asp-action="Index">Reabertura de Pedido</a></li>
                                     <li><a asp-area="" asp-controller="DevolucaoPedido" asp-action="Index">Devolução de Pedido</a></li>
                                     <li class="divider"></li>
-                                    <li><a asp-area="" asp-controller="PesquisaProduto" asp-action="Index">Pesquisa de Produto</a></li>
+                                    <li><a asp-area="" asp-controller="PesquisaDeEstoques" asp-action="Index">Pesquisa de Estoque</a></li>
                                 </ul>
                             </li>
                         }
@@ -121,6 +121,18 @@
                                     <li class="divider"></li>
                                     <li><a asp-area="" asp-controller="GruposDeProdutos" asp-action="Index">Grupo</a></li>
                                     <li><a asp-area="" asp-controller="SubGruposDeProdutos" asp-action="Index">SubGrupo</a></li>
+                                    <li class="divider"></li>
+                                    <li><a asp-area="" asp-controller="Inventarios" asp-action="Index">Inventário</a></li>
+                                    <li class="divider"></li>
+                                    <li><a asp-area="" asp-controller="Transferencias" asp-action="Index">Transferência</a></li>
+                                    <li><a asp-area="" asp-controller="Recebimentos" asp-action="Index">Recebimento</a></li>
+                                    @if (User.IsInRole(Perfil.Admin) || User.IsInRole(Perfil.Diretor) || User.IsInRole(Perfil.Supervisor) || User.IsInRole(Perfil.Gerente))
+                                    {
+                                        <li class="divider"></li>
+                                        <li><a asp-area="" asp-controller="MovimentoAvulsos" asp-action="Index">Movimento Avulso</a></li>
+                                    }
+                                    <li class="divider"></li>
+                                    <li><a asp-area="" asp-controller="PesquisaDeEstoques" asp-action="Index">Pesquisa de Estoque</a></li>
                                 </ul>
                             </li>
                         }
