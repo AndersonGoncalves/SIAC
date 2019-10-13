@@ -56,6 +56,8 @@ namespace SiacWeb
             services.AddScoped<SubGrupoDeProdutoService>();
             services.AddScoped<ProdutoService>();
             services.AddScoped<CodigoDeBarraService>();
+            services.AddScoped<InventarioService>();
+            services.AddScoped<InventarioItemService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -133,6 +135,13 @@ namespace SiacWeb
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{produtoId?}");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{inventarioId?}");
             });
 
         }

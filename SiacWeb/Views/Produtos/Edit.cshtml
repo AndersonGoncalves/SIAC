@@ -11,156 +11,158 @@
         <input type="hidden" asp-for="Produto.Id" />
 
         <div class="form-group">
-            <label asp-for="Produto.Id" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Id" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-1">
                 <input asp-for="Produto.Id" class="form-control input-sm" id="disabledInput" disabled="" />
                 <span asp-validation-for="Produto.Id" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.GrupoDeProdutoId" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.GrupoDeProdutoId" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <select asp-for="Produto.GrupoDeProdutoId" asp-items="@(new SelectList(Model.GruposDeProdutos,"Id", "Descricao"))" class="form-control input-sm" id="inputSmall"></select>
                 <span asp-validation-for="Produto.GrupoDeProdutoId" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.SubGrupoDeProdutoId" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.SubGrupoDeProdutoId" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <select asp-for="Produto.SubGrupoDeProdutoId" asp-items="@(new SelectList(Model.SubGruposDeProdutos,"Id", "Descricao"))" class="form-control input-sm" id="inputSmall"></select>
                 <span asp-validation-for="Produto.SubGrupoDeProdutoId" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.FornecedorId" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.FornecedorId" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <select asp-for="Produto.FornecedorId" asp-items="@(new SelectList(Model.Fornecedores,"Id", "RazaoSocial"))" class="form-control input-sm" id="inputSmall"></select>
                 <span asp-validation-for="Produto.FornecedorId" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Descricao" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Descricao" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Descricao" class="form-control input-sm" id="inputSmall" placeholder="Descrição" />
                 <span asp-validation-for="Produto.Descricao" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.UnidadeMedida" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.UnidadeMedida" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.UnidadeMedida" class="form-control input-sm" id="inputSmall" placeholder="Unidade de medida" />
                 <span asp-validation-for="Produto.UnidadeMedida" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.NCM" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.NCM" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.NCM" class="form-control input-sm" id="inputSmall" placeholder="NCM" />
                 <span asp-validation-for="Produto.NCM" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Marca" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Marca" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Marca" class="form-control input-sm" id="inputSmall" placeholder="Marca" />
                 <span asp-validation-for="Produto.Marca" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Referencia" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Referencia" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Referencia" class="form-control input-sm" id="inputSmall" placeholder="Referência" />
                 <span asp-validation-for="Produto.Referencia" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Detalhe" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Detalhe" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Detalhe" class="form-control input-sm" id="inputSmall" placeholder="Detalhe" />
                 <span asp-validation-for="Produto.Detalhe" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Caracteristicas" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Caracteristicas" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Caracteristicas" class="form-control input-sm" id="inputSmall" placeholder="Características" />
                 <span asp-validation-for="Produto.Caracteristicas" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.LocalNoEstoque" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.LocalNoEstoque" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.LocalNoEstoque" class="form-control input-sm" id="inputSmall" placeholder="Local no estoque" />
                 <span asp-validation-for="Produto.LocalNoEstoque" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Volume" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Volume" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Volume" class="form-control input-sm" id="inputSmall" placeholder="Volume" />
                 <span asp-validation-for="Produto.Volume" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.PesoLiquido" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.PesoLiquido" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.PesoLiquido" class="form-control input-sm" id="inputSmall" placeholder="Peso líquido" />
                 <span asp-validation-for="Produto.PesoLiquido" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.PrecoCompra" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.PrecoCompra" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.PrecoCompra" class="form-control input-sm" id="inputSmall" placeholder="Preço de compra" />
                 <span asp-validation-for="Produto.PrecoCompra" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.PrecoCusto" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.PrecoCusto" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.PrecoCusto" class="form-control input-sm" id="inputSmall" placeholder="Preço de custo" />
                 <span asp-validation-for="Produto.PrecoCusto" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.PrecoVenda" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.PrecoVenda" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.PrecoVenda" class="form-control input-sm" id="inputSmall" placeholder="Preço de venda" />
                 <span asp-validation-for="Produto.PrecoVenda" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Produto.Observacao" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Produto.Observacao" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Produto.Observacao" class="form-control input-sm" id="inputSmall" placeholder="Observações" />
                 <span asp-validation-for="Produto.Observacao" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+            <div class="text-right">
+                <div class="col-lg-12 control-label">
+                    <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+                </div>
             </div>
         </div>
-    </fieldset>
+</fieldset>
 </form>
 
 @section Scripts {

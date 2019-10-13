@@ -1,14 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
 using SiacWeb.Comum;
-using SiacWeb.Models.ViewModels;
-using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 
 namespace SiacWeb.Controllers
 {
@@ -35,16 +30,6 @@ namespace SiacWeb.Controllers
                 var List = await _roleService.FindAsync(page, consulta);
                 return View(List);
             }
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
-            return View(viewModel);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
@@ -9,7 +8,6 @@ using SiacWeb.Comum;
 using SiacWeb.Models.ViewModels;
 using SiacWeb.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 
 namespace SiacWeb.Controllers
 {    
@@ -144,16 +142,6 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
-            return View(viewModel);
         }
     }
 }

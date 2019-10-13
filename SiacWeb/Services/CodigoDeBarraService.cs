@@ -18,44 +18,39 @@ namespace SiacWeb.Services
 
         public async Task<CodigoDeBarra> FindByIdAsync(string empresaId, int id)
         {
-            return await _context.CodigoDeBarra.FirstOrDefaultAsync(obj => obj.EmpresaId == int.Parse(empresaId) && obj.Id == id);
+            return await _context.CodigoDeBarra
+                .Include(obj => obj.Produto)
+                .FirstOrDefaultAsync(obj => obj.Produto.EmpresaId == int.Parse(empresaId) && obj.Id == id);
         }
-
-        public async Task<IPagedList<CodigoDeBarra>> FindAllAsync(int pagina, string empresaId)
-        {
-            return await _context.CodigoDeBarra.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
-        }
-        
-
 
         public async Task<IPagedList<CodigoDeBarra>> FindByProdutoIdAsync(int pagina, string empresaId, int? produtoId)
         {
             return await _context.CodigoDeBarra
-                .Where(obj => obj.EmpresaId == int.Parse(empresaId))
+                .Include(obj => obj.Produto)
+                .Where(obj => obj.Produto.EmpresaId == int.Parse(empresaId))
                 .Where(obj => obj.ProdutoId == produtoId)
                 .OrderBy(obj => obj.Id)
                 .ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
-        public async Task<IPagedList<CodigoDeBarra>> FindAsync(int pagina, string empresaId, int? produtoId, string consulta)
+        public async Task<IPagedList<CodigoDeBarra>> FindByProdutoIdAsync(int pagina, string empresaId, int? produtoId, string consulta)
         {
             var result = from obj in _context.CodigoDeBarra select obj;
             result = result.Where(x => x.CodigoBarras == consulta);
             return await result
+                .Include(obj => obj.Produto)
                 .Where(obj => obj.ProdutoId == produtoId)
-                .Where(obj => obj.EmpresaId == int.Parse(empresaId))
+                .Where(obj => obj.Produto.EmpresaId == int.Parse(empresaId))
                 .OrderBy(x => x.Id)
                 .ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
-
-
 
         public async Task InsertAsync(CodigoDeBarra obj)
         {
             obj.Usuario = _user.Name;
             _context.Add(obj);
             await _context.SaveChangesAsync();
-            await Auditoria(obj.EmpresaId,
+            await Auditoria(obj.Produto.EmpresaId,
                 Modulo.Estoque,
                 SubModulo.CodigoDeBarras,
                 Operacao.Inclusao,
@@ -76,7 +71,7 @@ namespace SiacWeb.Services
                 obj.Usuario = _user.Name;
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
-                await Auditoria(obj.EmpresaId,
+                await Auditoria(obj.Produto.EmpresaId,
                     Modulo.Estoque,
                     SubModulo.CodigoDeBarras,
                     Operacao.Alteracao,
@@ -95,7 +90,7 @@ namespace SiacWeb.Services
                 var obj = await _context.CodigoDeBarra.FindAsync(id);
                 _context.CodigoDeBarra.Remove(obj);
                 await _context.SaveChangesAsync();
-                await Auditoria(obj.EmpresaId,
+                await Auditoria(obj.Produto.EmpresaId,
                     Modulo.Estoque,
                     SubModulo.CodigoDeBarras,
                     Operacao.Exclusao,

@@ -1,0 +1,45 @@
+﻿@model SiacWeb.Models.ViewModels.InventarioItensFormViewModel
+
+@{
+    ViewData["Title"] = "Inventário";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Código: @Model.Inventario.Id / Descrição: @Model.Inventario.Descricao</h4>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        Produto:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.InventarioItem.Produto.Id) - @Html.DisplayFor(model => model.InventarioItem.Produto.Descricao)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.InventarioItem.QuantidadeInformada):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.InventarioItem.QuantidadeInformada)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+
+        <hr />
+        <div class="text-center">
+            <h3 class="text-danger">Deseja excluir o registro?</h3>
+            <form asp-action="Delete" asp-route-inventarioId="@Model.Inventario.Id">
+                <input type="hidden" asp-for="InventarioItem.Id" />
+                <a asp-action="Create" asp-route-inventarioId="@Model.Inventario.Id" class="btn btn-default btn-sm">Cancelar</a>
+                <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            </form>
+        </div>
+
+    </div>
+</div>

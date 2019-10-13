@@ -9,6 +9,7 @@ namespace SiacWeb.Models
         [Display(Name = "Grupo de Produto")]
         public int? GrupoDeProdutoId { get; set; }
 
+        [ForeignKey("GrupoDeProdutoId")]
         [Display(Name = "Grupo de Produto")]
         public GrupoDeProduto GrupoDeProduto { get; set; }
 

@@ -1,14 +1,16 @@
 ﻿using System;
 using SiacWeb.Models.Comum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SiacWeb.Models
 {
-    public class CodigoDeBarra : BaseEmpresa
+    public class CodigoDeBarra : Base
     {
         [Display(Name = "Produto")]
-        public int? ProdutoId { get; set; }
+        public int ProdutoId { get; set; }
 
+        [ForeignKey("ProdutoId")]
         public Produto Produto { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]

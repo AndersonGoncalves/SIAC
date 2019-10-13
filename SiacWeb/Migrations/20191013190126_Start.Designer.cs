@@ -10,8 +10,8 @@ using SiacWeb.Models;
 namespace SiacWeb.Migrations
 {
     [DbContext(typeof(SiacWebContext))]
-    [Migration("20190922143053_Inventario")]
-    partial class Inventario
+    [Migration("20191013190126_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,7 @@ namespace SiacWeb.Migrations
                     b.Property<int>("SubModulo");
 
                     b.Property<string>("Usuario")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -323,21 +324,17 @@ namespace SiacWeb.Migrations
 
                     b.Property<int>("EmUso");
 
-                    b.Property<int>("EmpresaId");
-
                     b.Property<string>("Maquina")
                         .HasMaxLength(256);
 
                     b.Property<string>("Observacao");
 
-                    b.Property<int?>("ProdutoId");
+                    b.Property<int>("ProdutoId");
 
                     b.Property<string>("Usuario")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("ProdutoId");
 
@@ -606,9 +603,11 @@ namespace SiacWeb.Migrations
 
                     b.Property<DateTime?>("DataProcessamento");
 
-                    b.Property<int>("EmUso");
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<int?>("EmpresaId");
+                    b.Property<int>("EmUso");
 
                     b.Property<int?>("FuncionarioId");
 
@@ -617,14 +616,14 @@ namespace SiacWeb.Migrations
 
                     b.Property<string>("Observacao");
 
+                    b.Property<int>("Status");
+
                     b.Property<string>("Usuario")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("CentroDeCustoId");
-
-                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("FuncionarioId");
 
@@ -639,22 +638,24 @@ namespace SiacWeb.Migrations
 
                     b.Property<int>("Ativo");
 
-                    b.Property<int>("CentroDeCustoId");
-
                     b.Property<DateTime?>("DataAlteracao");
 
                     b.Property<DateTime>("DataCadastro");
 
                     b.Property<int>("EmUso");
 
-                    b.Property<int?>("EmpresaId");
-
-                    b.Property<int?>("InventarioId");
+                    b.Property<int>("InventarioId");
 
                     b.Property<string>("Maquina")
                         .HasMaxLength(256);
 
                     b.Property<string>("Observacao");
+
+                    b.Property<double>("PrecoCompra");
+
+                    b.Property<double>("PrecoCusto");
+
+                    b.Property<double>("PrecoVenda");
 
                     b.Property<int?>("ProdutoId");
 
@@ -666,10 +667,6 @@ namespace SiacWeb.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CentroDeCustoId");
-
-                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("InventarioId");
 
@@ -1111,14 +1108,10 @@ namespace SiacWeb.Migrations
 
             modelBuilder.Entity("SiacWeb.Models.CodigoDeBarra", b =>
                 {
-                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("SiacWeb.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId");
+                        .WithMany("CodigoDeBarras")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SiacWeb.Models.Fornecedor", b =>
@@ -1280,10 +1273,6 @@ namespace SiacWeb.Migrations
                         .HasForeignKey("CentroDeCustoId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId");
-
                     b.HasOne("SiacWeb.Models.Funcionario", "Funcionario")
                         .WithMany()
                         .HasForeignKey("FuncionarioId");
@@ -1291,18 +1280,10 @@ namespace SiacWeb.Migrations
 
             modelBuilder.Entity("SiacWeb.Models.InventarioItem", b =>
                 {
-                    b.HasOne("SiacWeb.Models.CentroDeCusto", "CentroDeCusto")
-                        .WithMany()
-                        .HasForeignKey("CentroDeCustoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SiacWeb.Models.Empresa", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId");
-
                     b.HasOne("SiacWeb.Models.Inventario", "Inventario")
-                        .WithMany()
-                        .HasForeignKey("InventarioId");
+                        .WithMany("InventarioItens")
+                        .HasForeignKey("InventarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SiacWeb.Models.Produto", "Produto")
                         .WithMany()

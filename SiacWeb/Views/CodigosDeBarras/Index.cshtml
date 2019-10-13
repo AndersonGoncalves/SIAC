@@ -12,7 +12,7 @@
     <div class="navbar-left navbar-left">
         <div class="form-group">
             <a asp-controller="Produtos" asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
-            <a asp-action="Create" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-primary btn-sm">Novo Registro</a>
+            <a asp-action="Create" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-primary btn-sm">Novo</a>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
     </form>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
     <thead>
         <tr class="active">
             <th>
@@ -47,9 +47,15 @@
 
                 <td>
                     <div class="text-right">
-                        <a asp-action="Details" class="btn btn-success btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Visualizar</a>
-                        <a asp-action="Edit" class="btn btn-warning btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Alterar</a>
-                        <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">Excluir</a>
+                        <a asp-action="Details" class="btn btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">
+                            <img class="img-responsive" src="~/images/VisualizarSuccess.png" />
+                        </a>
+                        <a asp-action="Edit" class="btn btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">
+                            <img class="img-responsive" src="~/images/AlterarWarning.png" />
+                        </a>
+                        <a asp-action="Delete" class="btn btn-xs" asp-route-id=@item.Id asp-route-produtoId="@ViewBag.ProdutoId">
+                            <img class="img-responsive" src="~/images/ExcluirDanger.png" />
+                        </a>
                     </div>
                 </td>
             </tr>

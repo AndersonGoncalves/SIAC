@@ -27,6 +27,14 @@ namespace SiacWeb.Services
             return await _context.Funcionario.Where(obj => obj.EmpresaId == int.Parse(empresaId)).OrderBy(obj => obj.Id).ToPagedListAsync(pagina, Constantes.QuantidadeRegistrosPorPagina);
         }
 
+        public async Task<List<Funcionario>> FindAllAsync(string empresaId)
+        {
+            return await _context.Funcionario
+                .Where(obj => obj.EmpresaId == int.Parse(empresaId))
+                .OrderBy(obj => obj.Id)
+                .ToListAsync();
+        }
+
         public async Task<IPagedList<Funcionario>> FindAsync(int pagina, string empresaId, string consulta)
         {
             var result = from obj in _context.Funcionario select obj;

@@ -35,15 +35,5 @@ namespace SiacWeb.Controllers
                 return View(List);
             }
         }
-        
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
-            return View(viewModel);
-        }
     }
 }

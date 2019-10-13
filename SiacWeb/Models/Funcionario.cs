@@ -1,5 +1,6 @@
 ﻿using SiacWeb.Models.Comum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SiacWeb.Models
 {
@@ -8,6 +9,7 @@ namespace SiacWeb.Models
         [Display(Name = "Lotação")]
         public int? CentroDeCustoId { get; set; }
 
+        [ForeignKey("CentroDeCustoId")]
         public CentroDeCusto CentroDeCusto { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]

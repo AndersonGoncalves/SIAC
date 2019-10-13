@@ -10,221 +10,207 @@
     <fieldset>
         <input type="hidden" asp-for="Fornecedor.Id" />
 
-        <div class="form-group has-success">
-            <label class="col-lg-2 control-label">Dados Cadastrais</label>
-        </div>
-
         <div class="form-group">
-            <label asp-for="Fornecedor.Id" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Id" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-1">
                 <input asp-for="Fornecedor.Id" class="form-control input-sm" id="disabledInput" disabled="" />
                 <span asp-validation-for="Fornecedor.Id" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.RazaoSocial" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.RazaoSocial" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.RazaoSocial" class="form-control input-sm" id="inputSmall" placeholder="Nome" />
                 <span asp-validation-for="Fornecedor.RazaoSocial" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.CNPJ" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.CNPJ" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.CNPJ" class="form-control input-sm" id="inputSmall" placeholder="CNPJ" />
                 <span asp-validation-for="Fornecedor.CNPJ" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.IE" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.IE" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.IE" class="form-control input-sm" id="inputSmall" placeholder="Inscrição Estadual" />
                 <span asp-validation-for="Fornecedor.IE" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.IM" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.IM" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.IM" class="form-control input-sm" id="inputSmall" placeholder="Inscrição Municipal" />
                 <span asp-validation-for="Fornecedor.IM" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.CPF" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.CPF" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.CPF" class="form-control input-sm" id="inputSmall" placeholder="CPF" />
                 <span asp-validation-for="Fornecedor.CPF" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.RG" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.RG" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.RG" class="form-control input-sm" id="inputSmall" placeholder="Número de identidade" />
                 <span asp-validation-for="Fornecedor.RG" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-group has-success">
-            <label class="col-lg-2 control-label">Contato</label>
-        </div>
-
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.Telefone" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.Telefone" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.Telefone" class="form-control input-sm" id="inputSmall" placeholder="Telefone Fixo" />
                 <span asp-validation-for="Fornecedor.Endereco.Telefone" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Celular" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Celular" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Celular" class="form-control input-sm" id="inputSmall" placeholder="Celular" />
                 <span asp-validation-for="Fornecedor.Celular" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Whatsapp" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Whatsapp" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Whatsapp" class="form-control input-sm" id="inputSmall" placeholder="Whatsapp" />
                 <span asp-validation-for="Fornecedor.Whatsapp" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Telegram" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Telegram" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Telegram" class="form-control input-sm" id="inputSmall" placeholder="Telegram" />
                 <span asp-validation-for="Fornecedor.Telegram" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Email" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Email" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Email" class="form-control input-sm" id="inputSmall" placeholder="Email" />
                 <span asp-validation-for="Fornecedor.Email" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Facebook" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Facebook" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Facebook" class="form-control input-sm" id="inputSmall" placeholder="Facebook" />
                 <span asp-validation-for="Fornecedor.Facebook" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Instagram" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Instagram" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Instagram" class="form-control input-sm" id="inputSmall" placeholder="Instagram" />
                 <span asp-validation-for="Fornecedor.Instagram" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Site" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Site" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Site" class="form-control input-sm" id="inputSmall" placeholder="Site" />
                 <span asp-validation-for="Fornecedor.Site" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-group has-success">
-            <label class="col-lg-2 control-label">Endereço</label>
-        </div>
-
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.TipoDeLogradouro" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.TipoDeLogradouro" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.TipoDeLogradouro" class="form-control input-sm" id="inputSmall" placeholder="Tipo de Logradouro" />
                 <span asp-validation-for="Fornecedor.Endereco.TipoDeLogradouro" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.Logradouro" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.Logradouro" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.Logradouro" class="form-control input-sm" id="inputSmall" placeholder="Logradouro" />
                 <span asp-validation-for="Fornecedor.Endereco.Logradouro" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.Bairro" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.Bairro" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.Bairro" class="form-control input-sm" id="inputSmall" placeholder="Bairro" />
                 <span asp-validation-for="Fornecedor.Endereco.Bairro" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.UF" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.UF" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.UF" class="form-control input-sm" id="inputSmall" placeholder="UF" />
                 <span asp-validation-for="Fornecedor.Endereco.UF" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.Cidade" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.Cidade" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.Cidade" class="form-control input-sm" id="inputSmall" placeholder="Cidade" />
                 <span asp-validation-for="Fornecedor.Endereco.Cidade" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.Endereco.CEP" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.Endereco.CEP" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.Endereco.CEP" class="form-control input-sm" id="inputSmall" placeholder="CEP" />
                 <span asp-validation-for="Fornecedor.Endereco.CEP" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-group has-success">
-            <label class="col-lg-2 control-label">Dados Bancários</label>
-        </div>
-
         <div class="form-group">
-            <label asp-for="Fornecedor.DadosBancarios.CodigoBanco" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.DadosBancarios.CodigoBanco" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.DadosBancarios.CodigoBanco" class="form-control input-sm" id="inputSmall" placeholder="Código do Banco" />
                 <span asp-validation-for="Fornecedor.DadosBancarios.CodigoBanco" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.DadosBancarios.Agencia" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.DadosBancarios.Agencia" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.DadosBancarios.Agencia" class="form-control input-sm" id="inputSmall" placeholder="Número da Agência" />
                 <span asp-validation-for="Fornecedor.DadosBancarios.Agencia" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Fornecedor.DadosBancarios.Conta" class="col-lg-2 control-label" for="inputSmall"></label>
-            <div class="col-lg-10">
+            <label asp-for="Fornecedor.DadosBancarios.Conta" class="col-lg-12" for="inputSmall"></label>
+            <div class="col-lg-12">
                 <input asp-for="Fornecedor.DadosBancarios.Conta" class="form-control input-sm" id="inputSmall" placeholder="Número da Conta" />
                 <span asp-validation-for="Fornecedor.DadosBancarios.Conta" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+            <div class="text-right">
+                <div class="col-lg-12 control-label">
+                    <a asp-action="Index" class="btn btn-default btn-sm">Cancelar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-sm">
+                </div>
             </div>
         </div>
-    </fieldset>
+</fieldset>
 </form>
 
 @section Scripts {

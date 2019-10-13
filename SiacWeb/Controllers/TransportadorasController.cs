@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
@@ -142,16 +141,6 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
-            return View(viewModel);
         }
     }
 }

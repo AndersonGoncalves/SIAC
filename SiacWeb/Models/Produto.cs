@@ -1,6 +1,8 @@
 ﻿using System;
 using SiacWeb.Models.Comum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace SiacWeb.Models
 {
@@ -9,17 +11,20 @@ namespace SiacWeb.Models
         [Display(Name = "Fornecedor")]
         public int? FornecedorId { get; set; }
 
+        [ForeignKey("FornecedorId")]
         public Fornecedor Fornecedor { get; set; }
 
         [Display(Name = "Grupo")]
         public int? GrupoDeProdutoId { get; set; }
 
+        [ForeignKey("GrupoDeProdutoId")]
         [Display(Name = "Grupo")]
         public GrupoDeProduto GrupoDeProduto { get; set; }
 
         [Display(Name = "SubGrupo")]
         public int? SubGrupoDeProdutoId { get; set; }
 
+        [ForeignKey("SubGrupoDeProdutoId")]
         [Display(Name = "SubGrupo")]
         public SubGrupoDeProduto SubGrupoDeProduto { get; set; }
 
@@ -96,6 +101,7 @@ namespace SiacWeb.Models
 
         [Required(ErrorMessage = "{0} obrigatório")]
         public string NCM { get; set; }
-    }
-    
+
+        public ICollection<CodigoDeBarra> CodigoDeBarras { get; set; } = new List<CodigoDeBarra>();
+    }    
 }

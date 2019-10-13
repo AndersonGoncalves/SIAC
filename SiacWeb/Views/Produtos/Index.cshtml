@@ -8,7 +8,7 @@
 
 @(await Html.PartialAsync("_IndexTopPartial"))
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
     <thead>
         <tr class="active">
             <th>
@@ -29,7 +29,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Detalhe)
             </th>
-            <th>
+            <th class="text-right">
                 @Html.DisplayNameFor(model => model.PrecoVenda)
             </th>
 
@@ -39,43 +39,38 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.Referencia)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.UnidadeMedida)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Caracteristicas)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Detalhe)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.PrecoVenda)
-            </th>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Referencia)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.UnidadeMedida)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Caracteristicas)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Detalhe)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayFor(modelItem => item.PrecoVenda)
+                </th>
 
-            <td>
-                <div class="text-right">
-                    <a asp-controller="CodigosDeBarras" asp-action="Index" asp-route-produtoId="@item.Id" class="btn btn-xs">
-                        <span style="vertical-align: top; border: 1px solid #e5e5e5; border-radius: 2px; display: inline-block; width: 26px; height: 19px;" context-menu="downloadThumbnail24">
-                            <svg style="width:24px; height:24px;" viewBox="0 0 24 29">
-                                <path fill="#6F6F6F" ng-attr-d="{{icon.data}}" d="M2,6H4V18H2V6M5,6H6V18H5V6M7,6H10V18H7V6M11,6H12V18H11V6M14,6H16V18H14V6M17,6H20V18H17V6M21,6H22V18H21V6Z"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
-                </div>
-            </td>
-        </tr>
+                <td>
+                    <div class="text-right">
+                        <a asp-controller="CodigosDeBarras" asp-action="Index" asp-route-produtoId="@item.Id" class="btn btn-xs">
+                            <img class="img-responsive" src="~/images/CodigoDeBarra.png" />
+                        </a>
+                        @(await Html.PartialAsync("_IndexGridPartial", @ViewData["Id"] = @item.Id))
+                    </div>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -2,15 +2,12 @@
 using SiacWeb.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SiacWeb.Models.Comum;
 
 namespace SiacWeb.Models
 {
-    public class Auditoria
+    public class Auditoria : Identificador
     {
-        [Display(Name = "Código")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "{0} obrigatório")]
         [Display(Name = "Empresa")]
         public int EmpresaId { get; set; }
@@ -24,6 +21,7 @@ namespace SiacWeb.Models
         [Display(Name = "Data/Hora")]
         public DateTime DataCadastro { get; set; }
 
+        [Required(ErrorMessage = "{0} obrigatório")]
         [MaxLength(256, ErrorMessage = "Tamanho máximo {1} caracteres")]
         [Display(Name = "Usuário")]
         public string Usuario { get; set; }

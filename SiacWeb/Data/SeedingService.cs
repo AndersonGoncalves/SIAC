@@ -90,7 +90,8 @@ namespace SiacWeb.Data
                     RazaoSocial = "Teste Ltda",
                     NomeFantasia = "Teste",
                     Descricao = "Empresa para testes",
-                    CnpjBase = "00000000"
+                    CnpjBase = "00000000",
+                    Usuario = "anndersonn.gonncalves@gmail.com"
                 };
                 _context.AddRange(empresaTeste);
 
@@ -100,7 +101,8 @@ namespace SiacWeb.Data
                     RazaoSocial = "CNC Teste Ltda",
                     NomeFantasia = "CNC Teste",
                     CNPJ = "00000000000101",
-                    Empresa = empresaTeste
+                    Empresa = empresaTeste,
+                    Usuario = "anndersonn.gonncalves@gmail.com"
                 };
                 _context.AddRange(centroDeCustoTeste);
 

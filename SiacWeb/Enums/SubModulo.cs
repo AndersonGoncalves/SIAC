@@ -39,6 +39,8 @@ namespace SiacWeb.Enums
         GrupoDeProduto = 20,
         Produto = 21,
         [Display(Name = "Código de Barras")]
-        CodigoDeBarras = 22
+        CodigoDeBarras = 22,
+        [Display(Name = "Inventário")]
+        Inventario = 23
     }
 }

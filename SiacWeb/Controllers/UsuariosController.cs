@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiacWeb.Controllers.Comum;
 using SiacWeb.Services;
@@ -89,16 +88,6 @@ namespace SiacWeb.Controllers
             var roles = await _roleService.FindAllAsync();
             var userRoles = await _userManager.GetRolesAsync(obj);
             UsuarioFormViewModel viewModel = new UsuarioFormViewModel { Usuario = obj, Roles = roles, UserRoles = userRoles };
-            return View(viewModel);
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
             return View(viewModel);
         }
 

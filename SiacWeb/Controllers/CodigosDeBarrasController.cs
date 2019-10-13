@@ -43,7 +43,7 @@ namespace SiacWeb.Controllers
             }
             else
             {
-                var List = await _codigoDeBarraService.FindAsync(page, EmpresaId, produtoId, consulta);
+                var List = await _codigoDeBarraService.FindByProdutoIdAsync(page, EmpresaId, produtoId, consulta);
                 return View(List);
             }
         }
@@ -75,7 +75,6 @@ namespace SiacWeb.Controllers
                 var viewModel = new CodigoDeBarraFormViewModel();
                 return View(viewModel);
             }
-            codigoDeBarra.EmpresaId = int.Parse(EmpresaId);
             codigoDeBarra.ProdutoId = produtoId;
             await _codigoDeBarraService.InsertAsync(codigoDeBarra);
             return RedirectToAction(nameof(Index), new { produtoId });
@@ -183,7 +182,6 @@ namespace SiacWeb.Controllers
             }
             try
             {
-                codigoDeBarra.EmpresaId = int.Parse(EmpresaId);
                 codigoDeBarra.ProdutoId = produtoId;
                 await _codigoDeBarraService.UpdateAsync(codigoDeBarra);
                 return RedirectToAction(nameof(Index), new { produtoId });
@@ -192,16 +190,6 @@ namespace SiacWeb.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-        }
-
-        public IActionResult Error(string message)
-        {
-            var viewModel = new ErrorViewModel
-            {
-                Message = message,
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            };
-            return View(viewModel);
         }
     }
 }

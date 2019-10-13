@@ -22,12 +22,16 @@
                 </dl>
             </div>
         </div>
+
+        <hr />
+        <div class="text-center">
+            <h3 class="text-danger">Deseja excluir o registro?</h3>
+            <form asp-action="Delete" asp-controller="CodigosDeBarras" asp-route-produtoId="@ViewBag.ProdutoId">
+                <input type="hidden" asp-for="CodigoDeBarra.Id" />
+                <a asp-action="Index" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-default btn-sm">Cancelar</a>
+                <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            </form>
+        </div>
+
     </div>
 </div>
-
-<h3 class="text-danger">Deseja excluir o registro?</h3>
-<form asp-action="Delete" asp-controller="CodigosDeBarras" asp-route-produtoId="@ViewBag.ProdutoId">
-    <input type="hidden" asp-for="CodigoDeBarra.Id" />
-    <a asp-action="Index" asp-route-produtoId="@ViewBag.ProdutoId" class="btn btn-default btn-sm">Cancelar</a>
-    <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
-</form>

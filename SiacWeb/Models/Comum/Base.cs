@@ -1,16 +1,11 @@
 ﻿using System;
 using SiacWeb.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SiacWeb.Models.Comum
 {
-    public abstract class Base
+    public abstract class Base : Identificador
     {
-        [Display(Name = "Código")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         public SimOuNao Ativo { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]

@@ -7,52 +7,64 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Permissoes">
-    <div class="form-horizontal jumbotron">
-        <div class="row">
-            <div class="col-md-4">
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Usuario.Nome):
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Usuario.Nome) @Html.DisplayFor(model => model.Usuario.SobreNome)
-                    </dd>
+<form asp-action="Permissoes" class="form-horizontal jumbotron">
+    <fieldset>
 
-                    <dt>
-                        Perfil:
-                    </dt>
-                    <dd>
-                        @foreach (var item in Model.Roles)
+        <div class="col-lg-10">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Usuario.Nome):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Usuario.Nome) @Html.DisplayFor(model => model.Usuario.SobreNome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Usuario.Email):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Usuario.Email)
+                </dd>
+
+                <dt>
+                    Perfil:
+                </dt>
+                <dd>
+                    @foreach (var item in Model.Roles)
+                    {
+                        @if (Model.ExisteRoles(@item.Name))
                         {
-                            @if (Model.ExisteRoles(@item.Name))
-                            {
-                                <label>
-                                    <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" /> @item.Name
-                                </label>
-                            }
-                            else
-                            {
-                                <label>
-                                    <input type="checkbox" name="listaRoles" value="@item.Name" /> @item.Name
-                                </label>
-                            }
-                            <br />
+                            <label>
+                                <input type="checkbox" name="listaRoles" value="@item.Name" checked="checked" /> @item.Name
+                            </label>
                         }
-                    </dd>
-                </dl>
-            </div>
+                        else
+                        {
+                            <label>
+                                <input type="checkbox" name="listaRoles" value="@item.Name" /> @item.Name
+                            </label>
+                        }
+                        <br />
+                    }
+                </dd>
+            </dl>
         </div>
-    </div>
 
 
-    <div class="row">
         <div class="form-group">
-            <div class="col-lg-2">
-                <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-sm" />
+            <div class="text-right">
+                <div class="col-lg-12 control-label">
+                    <a asp-action="Index" class="btn btn-default btn-sm">Voltar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-sm" />
+                </div>
             </div>
         </div>
-    </div>
+
+    </fieldset>
+
+
+
+
+
 
 </form>

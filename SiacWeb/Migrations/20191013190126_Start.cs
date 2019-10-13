@@ -42,7 +42,7 @@ namespace SiacWeb.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EmpresaId = table.Column<int>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
-                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: false),
                     Maquina = table.Column<string>(maxLength: 256, nullable: true),
                     Modulo = table.Column<int>(nullable: false),
                     SubModulo = table.Column<int>(nullable: false),
@@ -449,6 +449,42 @@ namespace SiacWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
+                    EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
+                    CentroDeCustoId = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(maxLength: 100, nullable: false),
+                    DataProcessamento = table.Column<DateTime>(nullable: true),
+                    FuncionarioId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inventario_CentroDeCusto_CentroDeCustoId",
+                        column: x => x.CentroDeCustoId,
+                        principalTable: "CentroDeCusto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventario_Funcionario_FuncionarioId",
+                        column: x => x.FuncionarioId,
+                        principalTable: "Funcionario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Produto",
                 columns: table => new
                 {
@@ -514,6 +550,71 @@ namespace SiacWeb.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CodigoDeBarra",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
+                    EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
+                    ProdutoId = table.Column<int>(nullable: false),
+                    CodigoBarras = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CodigoDeBarra", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CodigoDeBarra_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InventarioItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ativo = table.Column<int>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    DataAlteracao = table.Column<DateTime>(nullable: true),
+                    Usuario = table.Column<string>(maxLength: 256, nullable: true),
+                    Maquina = table.Column<string>(maxLength: 256, nullable: true),
+                    EmUso = table.Column<int>(nullable: false),
+                    Observacao = table.Column<string>(nullable: true),
+                    InventarioId = table.Column<int>(nullable: false),
+                    ProdutoId = table.Column<int>(nullable: true),
+                    QuantidadeSistema = table.Column<double>(nullable: false),
+                    QuantidadeInformada = table.Column<double>(nullable: false),
+                    PrecoCompra = table.Column<double>(nullable: false),
+                    PrecoCusto = table.Column<double>(nullable: false),
+                    PrecoVenda = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InventarioItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InventarioItem_Inventario_InventarioId",
+                        column: x => x.InventarioId,
+                        principalTable: "Inventario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InventarioItem_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Auditoria_EmpresaId",
                 table: "Auditoria",
@@ -535,6 +636,11 @@ namespace SiacWeb.Migrations
                 column: "EmpresaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CodigoDeBarra_ProdutoId",
+                table: "CodigoDeBarra",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Fornecedor_EmpresaId",
                 table: "Fornecedor",
                 column: "EmpresaId");
@@ -553,6 +659,26 @@ namespace SiacWeb.Migrations
                 name: "IX_GrupoDeProduto_EmpresaId",
                 table: "GrupoDeProduto",
                 column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventario_CentroDeCustoId",
+                table: "Inventario",
+                column: "CentroDeCustoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventario_FuncionarioId",
+                table: "Inventario",
+                column: "FuncionarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventarioItem_InventarioId",
+                table: "InventarioItem",
+                column: "InventarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventarioItem_ProdutoId",
+                table: "InventarioItem",
+                column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produto_EmpresaId",
@@ -602,22 +728,31 @@ namespace SiacWeb.Migrations
                 name: "Cliente");
 
             migrationBuilder.DropTable(
-                name: "Funcionario");
+                name: "CodigoDeBarra");
 
             migrationBuilder.DropTable(
-                name: "Produto");
+                name: "InventarioItem");
 
             migrationBuilder.DropTable(
                 name: "Transportadora");
 
             migrationBuilder.DropTable(
-                name: "CentroDeCusto");
+                name: "Inventario");
+
+            migrationBuilder.DropTable(
+                name: "Produto");
+
+            migrationBuilder.DropTable(
+                name: "Funcionario");
 
             migrationBuilder.DropTable(
                 name: "Fornecedor");
 
             migrationBuilder.DropTable(
                 name: "SubGrupoDeProduto");
+
+            migrationBuilder.DropTable(
+                name: "CentroDeCusto");
 
             migrationBuilder.DropTable(
                 name: "GrupoDeProduto");
